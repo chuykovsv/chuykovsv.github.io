@@ -1,0 +1,32 @@
+{
+    "name": "mat2",
+    "shader": "sh1",
+    "depthtest": true,
+    "depthwrite": true,
+    "cullFace": 1,
+    "blend": 0,
+    "uniform": {
+        "color": {
+            "type": "Vec3",
+            "value": {
+                "x": 0.0,
+                "y": 0.05,
+                "z": 0.1
+            }
+        },
+        "tex": {
+            "type": "Texture",
+            "value": {
+                "texture": "rock",
+                "layer": 0
+            }
+        },
+        "texn": {
+            "type": "Texture",
+            "value": {
+                "texture": "normale",
+                "layer": 1
+            }
+        }
+    }
+}

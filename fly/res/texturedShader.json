@@ -1,0 +1,5 @@
+{
+    "name": "texturedShader",
+    "vs": "precision highp float; uniform mat4 PM; uniform mat4 WM; uniform mat4 OM; attribute vec3 position; attribute vec3 normal; attribute vec2 uv; varying vec3 vNor; varying float vDepth; varying vec2 vUv; void main() { vUv = uv; vNor = normalize(mat3(OM) * normal); vec4 pos = WM * OM * vec4(position, 1.0); vDepth = pos.z; gl_Position = PM * pos; }",
+    "fs": "precision highp float; uniform sampler2D tex; varying vec3 vNor; varying vec2 vUv; varying float vDepth; void main() { vec3 light = normalize(vec3(-1, 1, -1)); vec3 color = texture2D(tex, vUv).rgb; vec3 fragColor = mix(color * max(0.2, dot(vNor, light)), vec3(0.7, 0.65, 0.6), min(1.0, vDepth * 0.001)); gl_FragColor = vec4(fragColor, 1.0); }"
+}

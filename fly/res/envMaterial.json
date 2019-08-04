@@ -1,0 +1,17 @@
+{
+    "name": "envMaterial",
+    "shader": "envShader",
+    "depthtest": false,
+    "depthwrite": false,
+    "cullFace": 0,
+    "blend": 0,
+    "uniform": {
+        "tex": {
+            "type": "Texture",
+            "value": {
+                "texture": "env",
+                "layer": 0
+            }
+        }
+    }
+}

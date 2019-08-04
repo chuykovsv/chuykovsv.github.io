@@ -1,0 +1,17 @@
+{
+    "name": "texturedLambertAnim",
+    "shader": "texturedShaderAnim",
+    "depthtest": true,
+    "depthwrite": true,
+    "cullFace": 1,
+    "blend": 0,
+    "uniform": {
+        "tex": {
+            "type": "Texture",
+            "value": {
+                "texture": "minibug",
+                "layer": 0
+            }
+        }
+    }
+}

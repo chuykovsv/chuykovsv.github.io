@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang='ru'>
+	<head>
+		<title>PROTOTYPE</title>
+		<meta charset='UTF-8' />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+		<link rel='icon' href='#' />
+		<link rel='stylesheet' href='style.css' />
+		<script src='./app.js' async></script>
+	</head>
+	<body>
+		<div id='app'>
+			<canvas id='app-gl'></canvas>
+			<div id='app-ui'>
+				<div id='app-ui-bg'>
+					<div id='app-ui-main'>
+						<div id='app-ui-fly'>FLY</div>
+						<div class='app-ui-button' id='app-ui-start'>LOADING...</div>
+						<div class='app-ui-button' id='app-ui-controls'>CONTROLS</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()</script>
+</html>

@@ -1,0 +1,24 @@
+{
+    "name": "texturedLambertNM",
+    "shader": "texturedShaderNM",
+    "depthtest": true,
+    "depthwrite": true,
+    "cullFace": 1,
+    "blend": 0,
+    "uniform": {
+        "tex": {
+            "type": "Texture",
+            "value": {
+                "texture": "stone",
+                "layer": 0
+            }
+        },
+        "tnm": {
+            "type": "Texture",
+            "value": {
+                "texture": "dnm",
+                "layer": 1
+            }
+        }
+    }
+}

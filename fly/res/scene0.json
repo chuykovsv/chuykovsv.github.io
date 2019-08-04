@@ -1,0 +1,264 @@
+{
+    "res": [
+        {
+            "loader": "RawShaderLoader",
+            "conf": "./res/texturedShaderNM.json"
+        },
+        {
+            "loader": "RawShaderLoader",
+            "conf": "./res/texturedShader.json"
+        },
+        {
+            "loader": "RawShaderLoader",
+            "conf": "./res/coloredShader.json"
+        },
+        {
+            "loader": "RawShaderLoader",
+            "conf": "./res/envShader.json"
+        },
+        {
+            "loader": "RawShaderLoader",
+            "conf": "./res/texturedShaderAnim.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/texturedLambertNM.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/texturedLambert.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/texturedLambertAnim.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/coloredLambert.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/envMaterial.json"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/nm.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/dnm.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/stone.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/env.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/minibug.jpg"
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "nm",
+                "image": "nm"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "dnm",
+                "image": "dnm"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": "./res/stoneTex.json"
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": "./res/minibug_tex.json"
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": "./res/envTex.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/box.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/stone.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/mdl1.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/xyPlane.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/xzPlane.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/sphere.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/airplane.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/ground.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/minibug.json"
+        },
+        {
+            "loader": "SkeletonLoader",
+            "conf": "./res/skeleton.json"
+        },
+        {
+            "loader": "SkeletonLoader",
+            "conf": "./res/minibug_sk.json"
+        },
+        {
+            "loader": "AnimationLoader",
+            "conf": "./res/idle.json"
+        },
+        {
+            "loader": "AnimationLoader",
+            "conf": "./res/minibug_an.json"
+        }
+    ],
+    "ent": [
+        {
+            "owner": null,
+            "name": "player",
+            "tags": [],
+            "enable": true,
+            "comp": [
+                {
+                    "type": "Transform",
+                    "conf": {
+                        "scale": { "x": 1, "y": 1, "z": 1 },
+                        "position": { "x": 0, "y": 6, "z": 0 },
+                        "orientation": { "x": 0, "y": 0, "z": 0, "w": 1 }
+                    }
+                },
+                {
+                    "type": "Camera",
+                    "conf": {
+                        "near": 0.2,
+                        "far": 2000
+                    }
+                },
+                {
+                    "type": "OrbitControl",
+                    "conf": {
+                        "distance": 20,
+                        "afrozen": true,
+                        "pfrozen": true,
+                        "dfrozen": true
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "xyPlane",
+                        "material": "envMaterial"
+                    },
+                    "enable": false
+                }
+            ]
+        },
+        {
+            "owner": null,
+            "name": "airplane",
+            "tags": ["airplane"],
+            "comp": [
+                {
+                    "type": "Transform",
+                    "conf": {
+                        "scale": { "x": 1, "y": 1, "z": 1 },
+                        "position": { "x": 0, "y": 2, "z": 0 },
+                        "orientation": { "x": 0, "y": 0, "z": 0, "w": 1 }
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "sphere",
+                        "material": "texturedLambertNM"
+                    }
+                },
+                {
+                    "type": "STrigger",
+                    "conf": {
+                        "radius": 1
+                    }
+                }
+            ]
+        },
+        {
+            "owner": null,
+            "name": "ground1",
+            "tags": ["plane"],
+            "comp": [
+                {
+                    "type": "Transform",
+                    "conf": {
+                        "scale": { "x": 1, "y": 1, "z": 1 },
+                        "position": { "x": 0, "y": 0, "z": 0 },
+                        "orientation": { "x": 0, "y": 0, "z": 0, "w": 1 }
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "ground",
+                        "material": "texturedLambertNM"
+                    }
+                },
+                {
+                    "type": "Movement",
+                    "conf": {}
+                }
+            ]
+        },
+        {
+            "owner": null,
+            "name": "ground2",
+            "tags": ["plane"],
+            "comp": [
+                {
+                    "type": "Transform",
+                    "conf": {
+                        "scale": { "x": 1, "y": 1, "z": 1 },
+                        "position": { "x": 0, "y": 0, "z": 1000 },
+                        "orientation": { "x": 0, "y": 0, "z": 0, "w": 1 }
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "ground",
+                        "material": "texturedLambertNM"
+                    }
+                },
+                {
+                    "type": "Movement",
+                    "conf": {}
+                }
+            ]
+        }
+    ]
+}
