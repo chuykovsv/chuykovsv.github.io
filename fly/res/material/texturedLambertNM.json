@@ -9,7 +9,7 @@
         "tex": {
             "type": "Texture",
             "value": {
-                "texture": "stone",
+                "texture": "sand",
                 "layer": 0
             }
         },
