@@ -40,10 +40,52 @@ body, canvas {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
+	top: 0px;
+	left: 0px;
 	width: 100%;
 	height: 100%;
 	background: #3F3F4F;
 	background: radial-gradient(#5F5F6F, #3F3F4F);
+}
+
+#app-ui-sc {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+#app-ui-score {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 2vh; 
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 7vh;
+	text-shadow: 0px 0px 1vh rgba(19, 10, 0, 0.5);
+	color: rgb(255, 217, 111);
+	text-align: center;
+	font: lighter 7vh 'Arial';
+}
+
+#app-ui-mul {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 4vh; 
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 5vh;
+	text-shadow: 0px 0px 1vh rgba(19, 10, 0, 0.5);
+	color: rgb(255, 81, 13);
+	text-align: right;
+	font: lighter 5vh 'Arial';
 }
 
 #app-ui-main {
@@ -69,6 +111,19 @@ body, canvas {
 	text-align: center;
 	color: white;
 	font: lighter 15vh 'Arial';
+}
+
+#app-ui-result {
+	position: absolute;
+	margin: 0px 0px 0px -0.5vh;
+	padding: 0px;
+	top: 28vh;
+	left: 0vh;
+	width: 40vh;
+	height: 2vh;
+	text-align: center;
+	color: white;
+	font: lighter 2vh 'Arial';
 }
 
 #app-ui-start {
