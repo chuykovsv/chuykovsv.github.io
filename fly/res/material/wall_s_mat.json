@@ -1,0 +1,31 @@
+{
+    "name": "wall_s_mat",
+    "shader": "pbrShader",
+    "depthtest": true,
+    "depthwrite": true,
+    "cullFace": 1,
+    "blend": 0,
+    "uniform": {
+        "amap": {
+            "type": "Texture",
+            "value": {
+                "texture": "wall_s_a",
+                "layer": 0
+            }
+        },
+        "nmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "wall_s_n",
+                "layer": 1
+            }
+        },
+        "pmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "wall_s_p",
+                "layer": 2
+            }
+        }
+    }
+}

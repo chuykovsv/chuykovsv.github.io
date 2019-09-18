@@ -2,7 +2,11 @@
     "res": [
         {
             "loader": "RawShaderLoader",
-            "conf": "./res/material/texturedShaderNM.json"
+            "conf": "./res/material/pbrShader.json"
+        },
+        {
+            "loader": "RawShaderLoader",
+            "conf": "./res/material/lightShader.json"
         },
         {
             "loader": "RawShaderLoader",
@@ -10,19 +14,123 @@
         },
         {
             "loader": "MaterialLoader",
-            "conf": "./res/material/texturedLambertNM.json"
-        },
-        {
-            "loader": "MaterialLoader",
             "conf": "./res/material/envMaterial.json"
         },
         {
-            "loader": "ImageLoader",
-            "conf": "./res/img/dnm.jpg"
+            "loader": "MaterialLoader",
+            "conf": "./res/material/light_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/gold_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/silver_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/sand_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/wall_w_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/wall_wg_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/wall_s_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/wall_sg_mat.json"
         },
         {
             "loader": "ImageLoader",
-            "conf": "./res/img/sand.jpg"
+            "conf": "./res/img/gold_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/gold_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/gold_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/silver_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/silver_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/silver_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/sand_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/sand_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/sand_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_w_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_w_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_w_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_wg_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_wg_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_wg_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_s_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_s_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_s_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_sg_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_sg_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/wall_sg_p.jpg"
         },
         {
             "loader": "ImageLoader",
@@ -31,15 +139,148 @@
         {
             "loader": "Texture2DLoader",
             "conf": {
-                "name": "dnm",
-                "image": "dnm"
+                "name": "gold_a",
+                "image": "gold_a"
             }
         },
         {
             "loader": "Texture2DLoader",
             "conf": {
-                "name": "sand",
-                "image": "sand"
+                "name": "gold_n",
+                "image": "gold_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "gold_p",
+                "image": "gold_p"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "silver_a",
+                "image": "silver_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "silver_n",
+                "image": "silver_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "silver_p",
+                "image": "silver_p"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "sand_a",
+                "image": "sand_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "sand_n",
+                "image": "sand_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "sand_p",
+                "image": "sand_p"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_w_a",
+                "image": "wall_w_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_w_n",
+                "image": "wall_w_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_w_p",
+                "image": "wall_w_p"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_wg_a",
+                "image": "wall_wg_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_wg_n",
+                "image": "wall_wg_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_wg_p",
+                "image": "wall_wg_p"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_s_a",
+                "image": "wall_s_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_s_n",
+                "image": "wall_s_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_s_p",
+                "image": "wall_s_p"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_sg_a",
+                "image": "wall_sg_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_sg_n",
+                "image": "wall_sg_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "wall_sg_p",
+                "image": "wall_sg_p"
             }
         },
         {
@@ -55,27 +296,223 @@
         },
         {
             "loader": "GeometryLoader",
-            "conf": "./res/geometry/ground.json"
+            "conf": "./res/geometry/ground_gold.json"
         },
         {
             "loader": "GeometryLoader",
-            "conf": "./res/geometry/pillar.json"
+            "conf": "./res/geometry/ground_sand.json"
         },
         {
             "loader": "GeometryLoader",
-            "conf": "./res/geometry/pyramid.json"
+            "conf": "./res/geometry/ground_wall_w.json"
         },
         {
             "loader": "GeometryLoader",
-            "conf": "./res/geometry/rail.json"
+            "conf": "./res/geometry/ground_wall_wg.json"
         },
         {
             "loader": "GeometryLoader",
-            "conf": "./res/geometry/sphere.json"
+            "conf": "./res/geometry/ground_wall_s.json"
         },
         {
             "loader": "GeometryLoader",
-            "conf": "./res/geometry/train.json"
+            "conf": "./res/geometry/ground_wall_sg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar1_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar1_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar1_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar1_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar2_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar2_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar2_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar3_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar3_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar4_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar4_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar4_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar4_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar5_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar5_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar5_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pillar5_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column1_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column1_wall_s.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column1_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column1_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column2_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column2_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column2_wall_s.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column2_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column2_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column3_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column3_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column3_wall_s.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column3_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/column3_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/tunnel1_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/tunnel1_wall_s.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/tunnel1_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/tunnel2_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/tunnel2_wall_s.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/tunnel2_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/tunnel2_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pyramid_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/pyramid_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/gate_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/gate_light.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/gate_wall_s.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/gate_wall_sg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/gate_wall_w.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/gate_wall_wg.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/sphere_gold.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/sphere_silver.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/sphere_light.json"
         },
         {
             "loader": "GeometryLoader",
@@ -100,8 +537,8 @@
                 {
                     "type": "Camera",
                     "conf": {
-                        "near": 0.2,
-                        "far": 2000
+                        "near": 3,
+                        "far": 3000
                     }
                 },
                 {
@@ -140,7 +577,7 @@
                     "type": "Mesh",
                     "conf": {
                         "geometry": "AIRPLANE",
-                        "material": "texturedLambertNM"
+                        "material": "wall_w_mat"
                     }
                 },
                 {
@@ -167,8 +604,43 @@
                 {
                     "type": "Mesh",
                     "conf": {
-                        "geometry": "GROUND",
-                        "material": "texturedLambertNM"
+                        "geometry": "GROUND_GOLD",
+                        "material": "gold_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_SAND",
+                        "material": "sand_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_W",
+                        "material": "wall_w_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_WG",
+                        "material": "wall_wg_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_S",
+                        "material": "wall_s_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_SG",
+                        "material": "wall_sg_mat"
                     }
                 },
                 {
@@ -193,8 +665,43 @@
                 {
                     "type": "Mesh",
                     "conf": {
-                        "geometry": "GROUND",
-                        "material": "texturedLambertNM"
+                        "geometry": "GROUND_GOLD",
+                        "material": "gold_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_SAND",
+                        "material": "sand_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_W",
+                        "material": "wall_w_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_WG",
+                        "material": "wall_wg_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_S",
+                        "material": "wall_s_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_SG",
+                        "material": "wall_sg_mat"
                     }
                 },
                 {
@@ -219,8 +726,104 @@
                 {
                     "type": "Mesh",
                     "conf": {
-                        "geometry": "GROUND",
-                        "material": "texturedLambertNM"
+                        "geometry": "GROUND_GOLD",
+                        "material": "gold_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_SAND",
+                        "material": "sand_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_W",
+                        "material": "wall_w_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_WG",
+                        "material": "wall_wg_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_S",
+                        "material": "wall_s_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_SG",
+                        "material": "wall_sg_mat"
+                    }
+                },
+                {
+                    "type": "Movement",
+                    "conf": {}
+                }
+            ]
+        },
+        {
+            "owner": null,
+            "name": "ground4",
+            "tags": ["plane"],
+            "comp": [
+                {
+                    "type": "Transform",
+                    "conf": {
+                        "scale": { "x": 1, "y": 1, "z": 1 },
+                        "position": { "x": 0, "y": 0, "z": 3000 },
+                        "orientation": { "x": 0, "y": 0, "z": 0, "w": 1 }
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_GOLD",
+                        "material": "gold_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_SAND",
+                        "material": "sand_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_W",
+                        "material": "wall_w_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_WG",
+                        "material": "wall_wg_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_S",
+                        "material": "wall_s_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "GROUND_WALL_SG",
+                        "material": "wall_sg_mat"
                     }
                 },
                 {

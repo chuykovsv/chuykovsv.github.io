@@ -1,0 +1,32 @@
+{
+    "name": "wall_w_mat",
+    "shader": "pbrShader",
+    "depthtest": true,
+    "depthwrite": true,
+    "cullFace": 1,
+    "blend": 0,
+    "batch": true,
+    "uniform": {
+        "amap": {
+            "type": "Texture",
+            "value": {
+                "texture": "wall_w_a",
+                "layer": 0
+            }
+        },
+        "nmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "wall_w_n",
+                "layer": 1
+            }
+        },
+        "pmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "wall_w_p",
+                "layer": 2
+            }
+        }
+    }
+}

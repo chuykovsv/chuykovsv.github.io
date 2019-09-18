@@ -1,0 +1,31 @@
+{
+    "name": "gold_mat",
+    "shader": "pbrShader",
+    "depthtest": true,
+    "depthwrite": true,
+    "cullFace": 1,
+    "blend": 0,
+    "uniform": {
+        "amap": {
+            "type": "Texture",
+            "value": {
+                "texture": "gold_a",
+                "layer": 0
+            }
+        },
+        "nmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "gold_n",
+                "layer": 1
+            }
+        },
+        "pmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "gold_p",
+                "layer": 2
+            }
+        }
+    }
+}
