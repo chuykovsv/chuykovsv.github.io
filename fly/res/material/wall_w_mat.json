@@ -1,6 +1,6 @@
 {
     "name": "wall_w_mat",
-    "shader": "pbrShader",
+    "shader": "pbriShader",
     "depthtest": true,
     "depthwrite": true,
     "cullFace": 1,

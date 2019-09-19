@@ -6,7 +6,15 @@
         },
         {
             "loader": "RawShaderLoader",
+            "conf": "./res/material/pbriShader.json"
+        },
+        {
+            "loader": "RawShaderLoader",
             "conf": "./res/material/lightShader.json"
+        },
+        {
+            "loader": "RawShaderLoader",
+            "conf": "./res/material/lightiShader.json"
         },
         {
             "loader": "RawShaderLoader",

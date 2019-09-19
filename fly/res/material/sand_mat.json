@@ -1,10 +1,11 @@
 {
     "name": "sand_mat",
-    "shader": "pbrShader",
+    "shader": "pbriShader",
     "depthtest": true,
     "depthwrite": true,
     "cullFace": 1,
     "blend": 0,
+    "batch": true,
     "uniform": {
         "amap": {
             "type": "Texture",

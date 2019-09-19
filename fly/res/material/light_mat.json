@@ -1,9 +1,10 @@
 {
     "name": "light_mat",
-    "shader": "lightShader",
+    "shader": "lightiShader",
     "depthtest": true,
     "depthwrite": true,
     "cullFace": 1,
     "blend": 0,
+    "batch": true,
     "uniform": {}
 }
