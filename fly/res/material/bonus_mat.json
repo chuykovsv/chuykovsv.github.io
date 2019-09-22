@@ -1,5 +1,5 @@
 {
-    "name": "light_mat",
+    "name": "bonus_mat",
     "shader": "lightiShader",
     "depthtest": true,
     "depthwrite": true,
@@ -9,7 +9,7 @@
     "uniform": {
         "color": {
             "type": "Vec3",
-            "value": { "x": 0.5, "y": 0.87, "z": 1.0 }
+            "value": { "x": 1.0, "y": 0.0, "z": 0.0 }
         }
     }
 }

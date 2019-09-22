@@ -30,6 +30,10 @@
         },
         {
             "loader": "MaterialLoader",
+            "conf": "./res/material/bonus_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
             "conf": "./res/material/gold_mat.json"
         },
         {
@@ -301,6 +305,22 @@
         {
             "loader": "GeometryLoader",
             "conf": "./res/geometry/airplane.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/bonus_light.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/bonus_sp.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/bonus_st.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/bonus_bm.json"
         },
         {
             "loader": "GeometryLoader",
@@ -589,7 +609,7 @@
                     }
                 },
                 {
-                    "type": "STrigger",
+                    "type": "BTrigger",
                     "conf": {
                         "radius": 1
                     }

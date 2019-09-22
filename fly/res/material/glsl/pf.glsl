@@ -82,8 +82,8 @@ void main() {
     float NL = dot(N, L);
     float NH = dot(N, H);
 
-    vec3 diff = albedo * (1.0 - M) * getIBL(N, NL) * AO;
-    vec3 spec = getHDR(N);
+    vec3 diff = albedo * (1.0 - M) * getIBL(N, NL) * AO * vec3(0.99, 1.0, 0.8);
+    vec3 spec = getHDR(reflect(-V, N));
 
     NV = max(0.0001, NV);
     NL = max(0.0001, NL);
@@ -91,10 +91,10 @@ void main() {
     float D = GGX_D(NH, R2);
     vec3 specl = vec3(0.5) * G * D * 0.25 / NV;
 
-    vec3 fragColor = diff * K + spec * F * 0.5 + specl;
+    vec3 fragColor = diff * K + spec * F + specl;
+    fragColor = pow(fragColor, vec3(0.8));
 
     fragColor = mix(fragColor, vec3(1.0), min(1.0, vDepth * vDepth));
 
-    fragColor = pow(fragColor, vec3(1.0 / 2.2));
     gl_FragColor = vec4(fragColor, 1.0);
 }

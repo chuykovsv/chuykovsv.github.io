@@ -2,6 +2,8 @@
 
 precision highp float;
 
+uniform vec3 color;
+
 varying vec3 vCam;
 varying vec3 vPos;
 varying vec3 vNor;
@@ -44,7 +46,7 @@ void main() {
     float AO = 1.0;
     float R2 = R * R;
 
-    vec3 albedo = vec3(0.38, 0.78, 0.88);
+    vec3 albedo = color;
 
     vec3 F0 = mix(vec3(0.04), albedo, M);
     vec3 F = F0 + (vec3(1.0) - F0) * pow(1.0 - abs(dot(V, N)), 5.0);
