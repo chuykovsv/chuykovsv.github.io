@@ -1,0 +1,38 @@
+{
+    "name": "ship1_mat",
+    "shader": "pbreShader",
+    "depthtest": true,
+    "depthwrite": true,
+    "cullFace": 1,
+    "blend": 0,
+    "uniform": {
+        "amap": {
+            "type": "Texture",
+            "value": {
+                "texture": "ship1_a",
+                "layer": 0
+            }
+        },
+        "nmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "ship1_n",
+                "layer": 1
+            }
+        },
+        "pmap": {
+            "type": "Texture",
+            "value": {
+                "texture": "ship1_p",
+                "layer": 2
+            }
+        },
+        "emap": {
+            "type": "Texture",
+            "value": {
+                "texture": "ship1_e",
+                "layer": 3
+            }
+        }
+    }
+}

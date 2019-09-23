@@ -10,6 +10,10 @@
         },
         {
             "loader": "RawShaderLoader",
+            "conf": "./res/material/pbreShader.json"
+        },
+        {
+            "loader": "RawShaderLoader",
             "conf": "./res/material/lightShader.json"
         },
         {
@@ -23,6 +27,14 @@
         {
             "loader": "MaterialLoader",
             "conf": "./res/material/envMaterial.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/ship1_mat.json"
+        },
+        {
+            "loader": "MaterialLoader",
+            "conf": "./res/material/ship2_mat.json"
         },
         {
             "loader": "MaterialLoader",
@@ -147,6 +159,83 @@
         {
             "loader": "ImageLoader",
             "conf": "./res/img/env.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/ship1_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/ship1_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/ship1_n.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/ship1_e.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/ship2_a.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/ship2_p.jpg"
+        },
+        {
+            "loader": "ImageLoader",
+            "conf": "./res/img/ship2_n.jpg"
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "ship1_a",
+                "image": "ship1_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "ship1_n",
+                "image": "ship1_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "ship1_p",
+                "image": "ship1_p"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "ship1_e",
+                "image": "ship1_e"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "ship2_a",
+                "image": "ship2_a"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "ship2_n",
+                "image": "ship2_n"
+            }
+        },
+        {
+            "loader": "Texture2DLoader",
+            "conf": {
+                "name": "ship2_p",
+                "image": "ship2_p"
+            }
         },
         {
             "loader": "Texture2DLoader",
@@ -304,7 +393,11 @@
         },
         {
             "loader": "GeometryLoader",
-            "conf": "./res/geometry/airplane.json"
+            "conf": "./res/geometry/ship1.json"
+        },
+        {
+            "loader": "GeometryLoader",
+            "conf": "./res/geometry/ship2.json"
         },
         {
             "loader": "GeometryLoader",
@@ -604,14 +697,22 @@
                 {
                     "type": "Mesh",
                     "conf": {
-                        "geometry": "AIRPLANE",
-                        "material": "wall_w_mat"
+                        "geometry": "SHIP1",
+                        "material": "ship1_mat"
+                    }
+                },
+                {
+                    "type": "Mesh",
+                    "conf": {
+                        "geometry": "SHIP2",
+                        "material": "ship2_mat"
                     }
                 },
                 {
                     "type": "BTrigger",
                     "conf": {
-                        "radius": 1
+                        "radius": 1.8,
+                        "offset": { "x": 0, "y": 0, "z": 0.8 }
                     }
                 }
             ]
