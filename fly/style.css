@@ -7,31 +7,17 @@ body, canvas {
 	height: 100%;
 }
 
-.app-ui-button {
-	position: absolute;
-	margin: 0px 0px 0px -0.5vh;
-	padding: 2vh 0px;
-	width: 40vh;
-	height: 2vh;
-	border-left: 0.5vh rgb(175, 126, 35) solid;
-	box-shadow: inset 0px 0px 0.2vh 0.2vh rgba(0, 0, 0, 0.05);
-	background: rgba(0, 0, 0, 0.05);
-	text-align: center;
-	color: white;
-	font: lighter 2vh 'Arial';
-}
-
 .app-ui-bn {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	left: 0px;
-	width: 100%;
-	height: 4vh;
+	left: 50%;
+	width: 8vh;
+	height: 3vh;
 	text-shadow: 0px 0px 1vh rgba(19, 10, 0, 0.5);
-	color: rgb(255, 81, 13);
-	text-align: right;
-	font: lighter 4vh 'Arial';
+	color: #ff510d;
+	text-align: center;
+	font: lighter 3vh 'Arial';
 }
 
 #app {
@@ -71,6 +57,18 @@ body, canvas {
 	height: 100%;
 }
 
+#app-ui-hr {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 10vh;
+	left: 50%;
+	margin-left: -15vh;
+	width: 30vh;
+	border: 0.3vh solid #FFFFFF;
+	box-shadow: 0px 0px 1vh rgba(19, 10, 0, 0.5);
+}
+
 #app-ui-score {
 	position: absolute;
 	margin: 0px;
@@ -87,57 +85,76 @@ body, canvas {
 }
 
 #app-ui-scr {
-	top: 0vh;
+	top: 7vh;
+	margin-left: 8vh;
 }
 #app-ui-bm {
-	top: 4vh;
+	top: 11vh;
+	margin-left: -13vh;
 }
 #app-ui-sp {
-	top: 8vh;
+	top: 11vh;
+	margin-left: -4vh;
 }
 #app-ui-st {
-	top: 12vh;
+	top: 11vh;
+	margin-left: 5vh;
 }
 
 #app-ui-main {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-top: -40vh;
-	margin-left: -20vh;
+	margin-top: -45vmin;
+	margin-left: -45vmin;
 	padding: 0px;
-	width: 40vh;
-	height: 80vh;
-	background: rgba(255, 255, 255, 0.01);
+	width: 90vmin;
+	height: 90vmin;
 }
 
 #app-ui-fly {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	top: 10vh;
-	width: 40vh;
-	height: 15vh;
-	text-shadow: 0px 0px 1vh rgba(255, 136, 0, 0.5);
+	top: 34vmin;
+	left: 0px;
+	width: 90vmin;
+	height: 15vmin;
+	text-shadow: 0px 0px 1vh rgba(255, 102, 0, 0.5);
 	text-align: center;
 	color: white;
-	font: lighter 15vh 'Arial';
+	font: lighter 15vmin 'Arial';
+}
+
+#app-ui-start {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 49vmin;
+	left: 0px;
+	width: 90vmin;
+	height: 4vmin;
+	text-shadow: 0px 0px 1vh rgba(255, 102, 0, 0.5);
+	text-align: center;
+	color: white;
+	font: lighter 4vmin 'Arial';
 }
 
 #app-ui-result {
 	position: absolute;
-	margin: 0px 0px 0px -0.5vh;
+	margin: 0px;
 	padding: 0px;
-	top: 28vh;
-	left: 0vh;
-	width: 40vh;
-	height: 2vh;
+	top: 54vmin;
+	left: 0px;
+	width: 90vmin;
+	height: 3vmin;
+	text-shadow: 0px 0px 1vh rgba(255, 102, 0, 0.5);
 	text-align: center;
 	color: white;
-	font: lighter 2vh 'Arial';
+	font: lighter 3vmin 'Arial';
 }
 
-#app-ui-start {
-	top: 35vh;
-	left: 0vh;
+#app-ui-load {
+	width: 90vmin;
+	height: 90vmin;
 }
