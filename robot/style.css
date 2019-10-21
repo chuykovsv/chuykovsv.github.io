@@ -1,0 +1,140 @@
+body {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	user-select: none;
+	width: 100%;
+	height: 100%;
+}
+
+#app {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 20px;
+	left: 20px;
+	width: 912px;
+	height: 512px;
+}
+
+#app-img {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	width: 512px;
+	height: 512px;
+}
+
+#app-ui {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 0px;
+	left: 512px;
+	width: 400px;
+	height: 62px;
+}
+
+#app-steps {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 62px;
+	left: 512px;
+	width: 400px;
+	height: 450px;
+}
+
+#app-robot {
+	position: absolute;
+	margin: 0px;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	width: 64px;
+	height: 64px;
+}
+
+#app-ui-start {
+	position: absolute;
+	margin: 1px;
+	padding: 0px;
+	top: 0px;
+	left: 0px;
+	width: 78px;
+	height: 60px;
+	background: rgb(144, 179, 49);
+	border-radius: 5px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+#app-ui-left {
+	position: absolute;
+	margin: 1px;
+	padding: 0px;
+	top: 0px;
+	left: 80px;
+	width: 78px;
+	height: 60px;
+	background: rgb(99, 160, 189);
+	border-radius: 5px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+#app-ui-right {
+	position: absolute;
+	margin: 1px;
+	padding: 0px;
+	top: 0px;
+	left: 160px;
+	width: 78px;
+	height: 60px;
+	background: rgb(99, 160, 189);
+	border-radius: 5px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+#app-ui-up {
+	position: absolute;
+	margin: 1px;
+	padding: 0px;
+	top: 0px;
+	left: 240px;
+	width: 78px;
+	height: 60px;
+	background: rgb(99, 160, 189);
+	border-radius: 5px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+#app-ui-down {
+	position: absolute;
+	margin: 1px;
+	padding: 0px;
+	top: 0px;
+	left: 320px;
+	width: 78px;
+	height: 60px;
+	background: rgb(99, 160, 189);
+	border-radius: 5px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.app-steps-step {
+	position: relative;
+	margin: 1px;
+	padding: 0px;
+	width: 300px;
+	height: 20px;
+	background: rgb(99, 160, 189);
+	border-radius: 5px;
+	text-align: center;
+	color: #FFFFFF;
+}
