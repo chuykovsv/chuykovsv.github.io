@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<div id='app'>
-			<img src='./bg.png' alt='' />
+			<img id='app-img' src='./bg.png' alt='' />
 			<div id='app-ui'>
 				<div id='app-ui-start'>START</div>
 				<div id='app-ui-left'>LEFT</div>
@@ -18,7 +18,29 @@
 				<div id='app-ui-up'>UP</div>
 				<div id='app-ui-down'>DOWN</div>
 			</div>
-			<div id='app-steps'></div>
+			<div id='app-steps'>
+				<div class='app-steps-step' style='background: #FFDFAF;'>
+					MEMORY
+					<div class='app-steps-step' style='background: #FFCF5F;'>R0: -</div>
+					<div class='app-steps-step' style='background: #FFCF5F;'>R1: -</div>
+				</div>
+				<div class='app-steps-step'>
+					FUNCTION: main
+					<div class='app-steps-step' style='background: #FF7FFF;'>label: first</div>
+					<div class='app-steps-step' style='background: #7F7FFF;'>left</div>
+					<div class='app-steps-step' style='background: #7F7FFF;'>left</div>
+					<div class='app-steps-step' style='background: #7F7FFF;'>up</div>
+					<div class='app-steps-step' style='background: #9FFF6F;'>mov: R0, 12</div>
+					<div class='app-steps-step' style='background: #9FFF6F;'>add: R0, 5</div>
+					<div class='app-steps-step' style='background: #FF7FFF;'>call: inc</div>
+					<div class='app-steps-step' style='background: #FF7FFF;'>jmp: first : R0 &gt 0</div>
+					<div class='app-steps-step' style='background: #7F7FFF;'>right</div>
+				</div>
+				<div class='app-steps-step'>
+					FUNCTION: inc
+					<div class='app-steps-step' style='background: #9FFF6F;'>sub: R0, 1</div>
+				</div>
+			</div>
 			<img id='app-robot' src='./robot.png' alt='' />
 		</div>
 	</body>

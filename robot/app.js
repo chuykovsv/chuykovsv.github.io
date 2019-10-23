@@ -1,13 +1,13 @@
 const robot = document.getElementById('app-robot');
 const uiSteps = document.getElementById('app-steps');
-const pos = { x: 256, y: 256 };
+const pos = { x: 4, y: 4 };
 let start = false;
 
 const steps = [];
 let stepIt = 0;
 
-robot.style.top = pos.y + 'px';
-robot.style.left = pos.x + 'px';
+robot.style.top = pos.y * 8 + 2 + 'vh';
+robot.style.left = pos.x * 8 + 2 + 'vh';
 
 document.getElementById('app-ui-start').addEventListener('click', startFunc);
 document.getElementById('app-ui-left').addEventListener('click', () => {
@@ -47,37 +47,37 @@ function loop() {
 
     switch(step) {
         case 'left':
-            pos.x -= 64;
+            pos.x--;
             break;
         case 'right':
-            pos.x += 64;
+            pos.x++;
             break;
         case 'up':
-            pos.y -= 64;
+            pos.y--;
             break;
         case 'down':
-            pos.y += 64;
+            pos.y++;
             break;
         default: break;
     }
 
     if (pos.x < 0) pos.x = 0;
-    if (pos.x > 448) pos.x = 448;
+    if (pos.x > 7) pos.x = 7;
     if (pos.y < 0) pos.y = 0;
-    if (pos.y > 448) pos.y = 448;
+    if (pos.y > 7) pos.y = 7;
 
-    robot.style.top = pos.y + 'px';
-    robot.style.left = pos.x + 'px';
+    robot.style.top = pos.y * 8 + 2 + 'vh';
+    robot.style.left = pos.x * 8 + 2 + 'vh';
 
-    setTimeout(loop, 400);
+    setTimeout(loop, 200);
 }
 
 function startFunc() {
     start = true;
     stepIt = 0;
-    pos.x = 256;
-    pos.y = 256;
-    robot.style.top = pos.y + 'px';
-    robot.style.left = pos.x + 'px';
-    setTimeout(loop, 400);
+    pos.x = 4;
+    pos.y = 4;
+    robot.style.top = pos.y * 8 + 2 + 'vh';
+    robot.style.left = pos.x * 8 + 2 + 'vh';
+    setTimeout(loop, 200);
 }

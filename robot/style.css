@@ -11,64 +11,77 @@ body {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	top: 20px;
-	left: 20px;
-	width: 912px;
-	height: 512px;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-image: linear-gradient(#e0aa7d, #c5c8eb), url('./bg.jpg');
+	background-blend-mode: screen;
 }
 
 #app-img {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	top: 0px;
-	left: 0px;
-	width: 512px;
-	height: 512px;
+	top: 2vh;
+	left: 2vh;
+	width: 64vh;
+	height: 64vh;
+	border: 0.3vh solid rgb(87, 54, 33);
+	border-radius: 10px;
 }
 
 #app-ui {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	top: 0px;
-	left: 512px;
-	width: 400px;
-	height: 62px;
+	top: 68vh;
+	left: 2vh;
+	width: 64vh;
+	height: 20vh;
+	background: rgb(174, 182, 130);
+	border: 0.3vh solid rgb(87, 54, 33);
+	border-radius: 10px;
 }
 
 #app-steps {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	top: 62px;
-	left: 512px;
-	width: 400px;
-	height: 450px;
+	top: 2vh;
+	left: 68vh;
+	right: 2vh;
+	height: 96vh;
+	background: rgb(213, 249, 255);
+	border: 0.3vh solid rgb(87, 54, 33);
+	border-radius: 10px;
+	overflow: auto;
 }
 
 #app-robot {
 	position: absolute;
 	margin: 0px;
 	padding: 0px;
-	top: 0px;
-	left: 0px;
-	width: 64px;
-	height: 64px;
+	top: 0vh;
+	left: 0vh;
+	width: 8vh;
+	height: 8vh;
 }
 
 #app-ui-start {
 	position: absolute;
 	margin: 1px;
-	padding: 0px;
+	padding: 20px 0px;
 	top: 0px;
 	left: 0px;
-	width: 78px;
-	height: 60px;
+	width: 60px;
+	height: 20px;
 	background: rgb(144, 179, 49);
-	border-radius: 5px;
+	border: 2px solid rgb(75, 80, 57);
+	border-radius: 30px;
 	text-align: center;
 	color: #FFFFFF;
+	box-shadow: inset 0vh 0vh 1vh rgba(0, 0, 0, 0.37);
 }
 
 #app-ui-left {
@@ -129,12 +142,15 @@ body {
 
 .app-steps-step {
 	position: relative;
-	margin: 1px;
-	padding: 0px;
-	width: 300px;
-	height: 20px;
-	background: rgb(99, 160, 189);
-	border-radius: 5px;
-	text-align: center;
-	color: #FFFFFF;
+	margin: 0.5vh;
+	padding: 0.5vh;
+	width: auto;
+	height: auto;
+	background: rgb(179, 217, 235);
+	border: 0.1vh solid black;
+	border-radius: 1vh;
+	text-align: left;
+	font: bold 1.5vh Arial;
+	color: rgb(0, 0, 0);
+	box-shadow: inset 0vh 0vh 1vh rgba(0, 0, 0, 0.9);
 }
