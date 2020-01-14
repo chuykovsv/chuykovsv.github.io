@@ -46,7 +46,8 @@ class App {
         this.camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
         this.camera.position.set(0, 0, 10);
         this.renderer = new THREE.WebGLRenderer({
-            canvas: document.getElementById('app')
+            canvas: document.getElementById('app'),
+            antialias: true
         });
         this.renderer.setClearColor(new THREE.Color(0.3, 0.3, 0.3), 1);
         this.renderer.setSize(window.innerWidth, window.innerHeight);
