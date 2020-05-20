@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='ru'>
+	<head>
+		<title>Beeline Game</title>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0' />
+		<link rel='icon' href='#' />
+		<link rel='stylesheet' href='style.css' />
+		<script src='scripts/app.js'></script>
+	</head>
+	<body>
+		<canvas id='canvas' class='screen'></canvas>
+		<div id='ui' class='screen'>
+			<div id='ui-loading' class='screen yellow-bg'>
+				<img id='ui-loading-image' src='./assets/screen-loading.png' />
+				<div id='ui-loading-text'>Loading...</div>
+			</div>
+			<div id='ui-village' class='screen'>
+				<div id='ui-village-menu' class='button square-button'></div>
+				<div id='ui-village-build' class='button square-button'></div>
+			</div>
+			<div id='ui-build' class='screen yellow-bg'>Build
+				<div id='ui-build-close' class='button round-button'></div>
+			</div>
+			<div id='ui-menu' class='screen yellow-bg'>Menu
+				<div id='ui-menu-close' class='button round-button'></div>
+			</div>
+		</div>
+		<script>
+			const Game = app.Game;
+			const game = new Game();
+			window.game = game; // TODO debugging
+		</script>
+		<script> // TODO FPS
+			(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//mrdoob.github.io/stats.js/build/stats.min.js';document.head.appendChild(script);})()
+		</script>
+	</body>
+</html>
