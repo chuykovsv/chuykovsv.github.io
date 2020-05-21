@@ -11,6 +11,7 @@
         "h2": "./assets/mdl/h2/h2.gltf",
         "h3": "./assets/mdl/h3/h3.gltf",
         "h4": "./assets/mdl/h4/h4.gltf",
-        "h7": "./assets/mdl/h7/h7.gltf"
+        "h7": "./assets/mdl/h7/h7.gltf",
+        "bg": "./assets/mdl/bg/bg.gltf"
     }
 }
