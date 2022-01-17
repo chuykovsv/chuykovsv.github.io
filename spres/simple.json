@@ -1,0 +1,276 @@
+{
+    "width": 1200,
+    "height": 800,
+    "background": "#eee",
+    "defs": [
+        {
+            "id": "helmet-image",
+            "type": "image",
+            "attributes": [
+                { "type": "href", "value": "./helmet.png" },
+                { "type": "width", "value": "672" },
+                { "type": "height", "value": "856" }
+            ]
+        },
+        {
+            "id": "materials-image",
+            "type": "image",
+            "attributes": [
+                { "type": "href", "value": "./materials.png" },
+                { "type": "width", "value": "672" },
+                { "type": "height", "value": "856" }
+            ]
+        },
+        {
+            "id": "background-gradient",
+            "type": "radialGradient",
+            "attributes": [
+                { "type": "r", "value": "1" },
+                { "type": "cx", "value": "0.75" },
+                { "type": "cy", "value": "0.25" },
+                { "type": "inner", "value": "<stop offset='0' stop-color='#5c184a'/><stop offset='100' stop-color='#00082f'/>" }
+            ]
+        },
+        {
+            "id": "background-rect",
+            "type": "rect",
+            "attributes": [
+                { "type": "x", "value": "0" },
+                { "type": "y", "value": "0" },
+                { "type": "width", "value": "1200" },
+                { "type": "height", "value": "800" }
+            ]
+        },
+        {
+            "id": "wgt-logo",
+            "type": "path",
+            "attributes": [
+                { "type": "d", "value": "M31.5262 32.3037C29.2417 32.3037 27.1095 30.7799 26.5003 28.6466L21.6267 13.4085L16.6009 28.6466C15.9917 30.7799 14.1641 32.1514 11.575 32.3037C9.29054 32.3037 7.15836 30.6276 6.54916 28.4942L0.15261 4.26565C-0.151987 3.50375 0.000311524 2.58946 0.457208 1.67517C0.914105 0.91327 1.6756 0.303746 2.58939 0.151365C3.50319 -0.00101581 4.41698 0.151365 5.17847 0.608508C5.93997 1.06565 6.54916 1.82756 6.70146 2.74184L11.7273 21.1799L16.4486 6.2466C17.2101 3.96089 19.19 2.58946 21.4745 2.58946C23.7589 2.58946 25.8911 4.11327 26.348 6.2466L31.0693 21.1799L36.552 2.43708C36.7043 1.52279 37.4658 0.760889 38.3796 0.303746C39.1411 -0.153397 40.0549 -0.153397 40.8164 0.151365C41.5779 0.303746 42.3394 0.91327 42.7963 1.82756C43.2532 2.58946 43.2532 3.50375 42.9486 4.41803L36.2474 28.3418C35.7905 30.6276 33.963 31.999 31.5262 32.3037Z M90.0093 32.3047C88.1817 32.3047 86.5064 30.7808 86.5064 28.7999V12.6475C86.5064 10.8189 88.0294 9.14275 90.0093 9.14275C91.8369 9.14275 93.5121 10.6666 93.5121 12.6475V28.6475C93.5121 30.6285 91.9892 32.3047 90.0093 32.3047Z M102.65 -0.000105262C104.478 -0.000105262 106.001 1.21894 106.001 3.19989C106.001 5.18085 104.326 6.70466 102.498 6.70466H59.2452C54.0671 6.70466 50.2596 10.5142 50.2596 15.6951C50.2596 21.0285 54.2194 25.2951 59.2452 25.2951C62.4435 25.2951 64.2711 24.5332 65.0326 24.0761V19.1999H59.3975C57.4176 19.1999 55.8946 17.6761 55.8946 15.6951C55.8946 13.7142 57.5699 12.1904 59.3975 12.1904H68.5354C70.5153 12.1904 72.0383 13.8666 72.0383 15.6951V24.6856C72.0383 29.7142 65.6418 32.3047 59.3975 32.3047C50.5642 32.3047 43.5584 24.9904 43.5584 15.8475C43.5584 6.85704 50.4119 -0.000105262 59.3975 -0.000105262H102.65Z" }
+            ]
+        },
+        {
+            "id": "wgt-description",
+            "type": "text",
+            "attributes": [
+                { "type": "white-space", "value": "pre" },
+                { "type": "inner", "value": "<tspan x='0' dy='1.3em'>ТЕХНОЛОГИИ WEB-3D</tspan><tspan x='0' dy='1.3em'>ДЛЯ CAD &nbsp/&nbsp PLM  &nbsp/&nbsp BIM</tspan>" },
+                { "type": "font-size", "value": "11" },
+                { "type": "font-family", "value": "Avenir, Helvetica, sans-serif" }
+            ]
+        },
+        {
+            "id": "pointer",
+            "type": "path",
+            "attributes": [
+                { "type": "d", "value": "M0 -300 V-10 L10 0 L0 10 V300" }
+            ]
+        },
+        {
+            "id": "vertical-line",
+            "type": "path",
+            "attributes": [
+                { "type": "d", "value": "M0 -100 V100" }
+            ]
+        },
+        {
+            "id": "list",
+            "type": "text",
+            "attributes": [
+                { "type": "inner", "value": "<tspan x='0' dy='0.5em'>Обзор</tspan><tspan x='0' dy='2em'>Возможности</tspan><tspan x='0' dy='2em'>Демо</tspan><tspan x='0' dy='2em'>Вопросы</tspan>" },
+                { "type": "font-size", "value": "20" },
+                { "type": "font-family", "value": "Avenir, Helvetica, sans-serif" }
+            ]
+        },
+        {
+            "id": "materials-title",
+            "type": "text",
+            "attributes": [
+                { "type": "inner", "value": "Удобство разработки" },
+                { "type": "font-size", "value": "32" },
+                { "type": "font-weight", "value": "bold" },
+                { "type": "font-family", "value": "Avenir, Helvetica, sans-serif" }
+            ]
+        },
+        {
+            "id": "materials-text",
+            "type": "text",
+            "attributes": [
+                { "type": "inner", "value": "<tspan x='0' dy='1.2em'>Автоматический выбор наиболее</tspan><tspan x='0' dy='1.2em'>производительного графического API на стороне</tspan><tspan x='0' dy='1.2em'>клиента (WebGL1, WebGL2, скоро и WebGPU)</tspan><tspan x='0' dy='2.4em'>Удобное, хорошо задокументированное API</tspan><tspan x='0' dy='1.2em'>интеграции в ваше приложение</tspan><tspan x='0' dy='2.4em'>Поддержка Entity Component System архитектуры</tspan><tspan x='0' dy='2.4em'>Поддержка glTF / GLB форматов</tspan><tspan x='0' dy='2.4em'>Набор процедурной геометрии для быстрого</tspan><tspan x='0' dy='1.2em'>прототипирования</tspan>" },
+                { "type": "font-size", "value": "18" },
+                { "type": "font-family", "value": "Avenir, Helvetica, sans-serif" }
+            ]
+        },
+
+        {
+            "id": "engine-title",
+            "type": "text",
+            "attributes": [
+                { "type": "inner", "value": "ENGINE" },
+                { "type": "font-size", "value": "56" },
+                { "type": "font-weight", "value": "bold" },
+                { "type": "font-family", "value": "Avenir, Helvetica, sans-serif" }
+            ]
+        },
+        {
+            "id": "engine-text",
+            "type": "text",
+            "attributes": [
+                { "type": "inner", "value": "<tspan x='0' dy='1.2em'>ГРАФИЧЕСКАЯ БИБЛИОТЕКА</tspan><tspan x='0' dy='1.2em'>С УПОРОМ НА ПРОИЗВОДИТЕЛЬНОСТЬ</tspan>" },
+                { "type": "font-size", "value": "18" },
+                { "type": "font-family", "value": "Avenir, Helvetica, sans-serif" }
+            ]
+        }
+    ],
+    "layers": [
+        {
+            "id": "static-layer",
+            "moveSpeed": { "x": 0, "y": 0 }
+        },
+        {
+            "id": "layer0",
+            "moveX": "x",
+            "moveY": "x",
+            "moveSpeed": { "x": -3, "y": 2 }
+        },
+        {
+            "id": "layer1",
+            "moveX": "x",
+            "moveY": "x",
+            "moveSpeed": { "x": 3, "y": -2 }
+        },
+        {
+            "id": "list-layer",
+            "moveX": "y",
+            "moveY": "x",
+            "moveSpeed": { "x": 0, "y": 0.1 }
+        }
+    ],
+    "cameras": [
+        {
+            "id": "main-camera",
+            "position": { "x": 0, "y": 0 }
+        }
+    ],
+    "shapes": [
+        {
+            "id": "background-rect-shape",
+            "def": "background-rect",
+            "layer": "static-layer",
+            "position": { "x": -600, "y": -400 },
+            "fill": "url(#background-gradient)"
+        },
+        {
+            "id": "wgt-logo-shape",
+            "def": "wgt-logo",
+            "layer": "static-layer",
+            "position": { "x": -590, "y": -390 },
+            "scale": { "x": 0.85, "y": 0.85 },
+            "fill": "rgba(230, 230, 230, 1)"
+        },
+        {
+            "id": "wgt-description-shape",
+            "def": "wgt-description",
+            "layer": "static-layer",
+            "position": { "x": -590, "y": -360 },
+            "scale": { "x": 0.75, "y": 0.75 },
+            "fill": "rgba(230, 230, 230, 1)"
+        },
+        {
+            "id": "pointer-shape",
+            "def": "pointer",
+            "layer": "static-layer",
+            "position": { "x": -590.5, "y": 0 },
+            "stroke": "rgba(230, 230, 230, 0.8)",
+            "fill": "transparent"
+        },
+
+        {
+            "id": "list-shape",
+            "def": "list",
+            "layer": "list-layer",
+            "position": { "x": -570, "y": 0 },
+            "scale": { "x": 0.75, "y": 1 },
+            "skew": { "x": 0, "y": -0.2 },
+            "fill": "rgba(230, 230, 230, 1)"
+        },
+
+        {
+            "id": "helmet-image-shape",
+            "def": "helmet-image",
+            "layer": "layer1",
+            "position": { "x": 550, "y": -350 },
+            "scale": { "x": -0.8, "y": 0.8 }
+        },
+        {
+            "id": "materials-image-shape",
+            "def": "materials-image",
+            "layer": "layer1",
+            "position": { "x": 1280, "y": -1150 },
+            "scale": { "x": 0.8, "y": 0.8 }
+        },
+
+        {
+            "id": "engine-title-shape",
+            "def": "engine-title",
+            "layer": "layer0",
+            "position": { "x": -400, "y": -200 },
+            "fill": "rgba(230, 230, 230, 1)"
+        },
+        {
+            "id": "engine-text-shape",
+            "def": "engine-text",
+            "layer": "layer0",
+            "position": { "x": -370, "y": -150 },
+            "fill": "rgba(230, 230, 230, 1)"
+        },
+        {
+            "id": "engine-line-shape",
+            "def": "vertical-line",
+            "layer": "layer0",
+            "position": { "x": -400.5, "y": 0 },
+            "scale": { "x": 1, "y": 1.4 },
+            "stroke": "rgba(230, 230, 230, 0.5)",
+            "fill": "transparent"
+        },
+
+        {
+            "id": "materials-title-shape",
+            "def": "materials-title",
+            "layer": "layer0",
+            "position": { "x": -1600, "y": 600 },
+            "fill": "rgba(230, 230, 230, 1)"
+        },
+        {
+            "id": "materials-text-shape",
+            "def": "materials-text",
+            "layer": "layer0",
+            "position": { "x": -1570, "y": 650 },
+            "fill": "rgba(230, 230, 230, 1)"
+        },
+        {
+            "id": "materials-line-shape",
+            "def": "vertical-line",
+            "layer": "layer0",
+            "position": { "x": -1600.5, "y": 800 },
+            "scale": { "x": 1, "y": 1.4 },
+            "stroke": "rgba(230, 230, 230, 0.5)",
+            "fill": "transparent"
+        }
+    ],
+    "actions": [
+        {
+            "id": "0",
+            "node": "main-camera",
+            "position": { "x": 400, "y": 0 },
+            "time": 0.5,
+            "next": "1"
+        },
+        {
+            "id": "1",
+            "node": "main-camera",
+            "position": { "x": 0, "y": 0 },
+            "time": 0.5,
+            "next": "0"
+        }
+    ]
+}

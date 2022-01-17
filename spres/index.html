@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang='ru'>
+	<head>
+		<title>SPRES</title>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0' />
+		<link rel='icon' href='#' />
+		<link rel='stylesheet' href='style.css' />
+		<div id="image-holder"></div>
+		<script src='scripts/app.js'></script>
+	</head>
+	<body>
+		<script>
+			window.viewer = new appLibrary.Viewer();
+			const urlSearchParams = new URLSearchParams(window.location.search);
+			const params = Object.fromEntries(urlSearchParams.entries());
+			console.log(params)
+			if (params.url !== undefined) { viewer.load(params.url); }
+		</script>
+	</body>
+</html>
