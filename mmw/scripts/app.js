@@ -50814,23 +50814,22 @@ var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || 
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _Game_instances, _a, _Game_scene, _Game_camera, _Game_renderer, _Game_raycaster, _Game_time, _Game_width, _Game_height, _Game_x, _Game_y, _Game_xAngle, _Game_yAngle, _Game_move, _Game_players, _Game_activePlayer, _Game_raycastObjects, _Game_playAudio, _Game_roomModel, _Game_diskModel, _Game_resData, _Game_render, _Game_update, _Game_pointerOverHandler, _Game_pointerMoveHandler, _Game_keyDownHandler, _Game_keyUpHandler, _Game_clickHandler, _Game_tempCreateScene, _Game_loadRes;
+var _Game_instances, _a, _Game_scene, _Game_camera, _Game_renderer, _Game_raycaster, _Game_time, _Game_width, _Game_height, _Game_xAngle, _Game_yAngle, _Game_move, _Game_players, _Game_activePlayer, _Game_raycastObjects, _Game_playAudio, _Game_moveControl, _Game_moveControlCtx, _Game_cameraControl, _Game_cameraControlCtx, _Game_server, _Game_serverIsOpened, _Game_roomModel, _Game_diskModel, _Game_resData, _Game_render, _Game_update, _Game_mouseMoveHandler, _Game_keyDownHandler, _Game_keyUpHandler, _Game_clickHandler, _Game_addControls, _Game_tempCreateScene, _Game_loadRes;
 
 
 
 
+const CAMERA_DISTANCE = 1.8;
 class Game {
-    constructor() {
+    constructor(server = null) {
         _Game_instances.add(this);
         _Game_scene.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.Scene());
         _Game_camera.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000));
         _Game_renderer.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.WebGLRenderer({ antialias: true }));
         _Game_raycaster.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.Raycaster());
         _Game_time.set(this, 0);
-        _Game_width.set(this, window.innerWidth);
-        _Game_height.set(this, window.innerHeight);
-        _Game_x.set(this, 0);
-        _Game_y.set(this, 0);
+        _Game_width.set(this, window.innerWidth * window.devicePixelRatio);
+        _Game_height.set(this, window.innerHeight * window.devicePixelRatio);
         _Game_xAngle.set(this, 0);
         _Game_yAngle.set(this, 0);
         _Game_move.set(this, false);
@@ -50838,24 +50837,24 @@ class Game {
         _Game_activePlayer.set(this, null);
         _Game_raycastObjects.set(this, []);
         _Game_playAudio.set(this, null);
+        _Game_moveControl.set(this, void 0);
+        _Game_moveControlCtx.set(this, void 0);
+        _Game_cameraControl.set(this, void 0);
+        _Game_cameraControlCtx.set(this, void 0);
+        _Game_server.set(this, null);
+        _Game_serverIsOpened.set(this, false);
         _Game_render.set(this, (time) => {
             __classPrivateFieldGet(this, _Game_instances, "m", _Game_update).call(this, (time - __classPrivateFieldGet(this, _Game_time, "f")) * 0.001);
             __classPrivateFieldSet(this, _Game_time, time, "f");
             __classPrivateFieldGet(this, _Game_renderer, "f").render(__classPrivateFieldGet(this, _Game_scene, "f"), __classPrivateFieldGet(this, _Game_camera, "f"));
             requestAnimationFrame(__classPrivateFieldGet(this, _Game_render, "f"));
         });
-        _Game_pointerOverHandler.set(this, (e) => {
-            __classPrivateFieldSet(this, _Game_x, e.clientX, "f");
-            __classPrivateFieldSet(this, _Game_y, e.clientY, "f");
-        });
-        _Game_pointerMoveHandler.set(this, (e) => {
-            if (e.pointerType === 'mouse' && (e.buttons & 1) !== 0 || e.pointerType === 'touch') {
-                __classPrivateFieldSet(this, _Game_yAngle, __classPrivateFieldGet(this, _Game_yAngle, "f") + (e.clientX - __classPrivateFieldGet(this, _Game_x, "f")) * 0.01, "f");
-                __classPrivateFieldSet(this, _Game_xAngle, __classPrivateFieldGet(this, _Game_xAngle, "f") + (e.clientY - __classPrivateFieldGet(this, _Game_y, "f")) * 0.01, "f");
+        _Game_mouseMoveHandler.set(this, (e) => {
+            if ((e.buttons & 1) !== 0) {
+                __classPrivateFieldSet(this, _Game_yAngle, __classPrivateFieldGet(this, _Game_yAngle, "f") - e.movementX * 0.01, "f");
+                __classPrivateFieldSet(this, _Game_xAngle, __classPrivateFieldGet(this, _Game_xAngle, "f") - e.movementY * 0.01, "f");
                 __classPrivateFieldSet(this, _Game_xAngle, Math.min(0.5, Math.max(-Math.PI * 0.5, __classPrivateFieldGet(this, _Game_xAngle, "f"))), "f");
             }
-            __classPrivateFieldSet(this, _Game_x, e.clientX, "f");
-            __classPrivateFieldSet(this, _Game_y, e.clientY, "f");
         });
         _Game_keyDownHandler.set(this, (e) => {
             if (e.code === 'KeyW' || e.code === 'ArrowUp') {
@@ -50895,8 +50894,10 @@ class Game {
                 }
             }
         });
-        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"));
+        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"), false);
         document.body.appendChild(__classPrivateFieldGet(this, _Game_renderer, "f").domElement);
+        __classPrivateFieldGet(this, _Game_renderer, "f").domElement.style.width = '100%';
+        __classPrivateFieldGet(this, _Game_renderer, "f").domElement.style.height = '100%';
         __classPrivateFieldGet(this, _Game_renderer, "f").outputEncoding = three__WEBPACK_IMPORTED_MODULE_3__.sRGBEncoding;
         __classPrivateFieldGet(this, _Game_renderer, "f").toneMapping = three__WEBPACK_IMPORTED_MODULE_3__.ACESFilmicToneMapping;
         __classPrivateFieldGet(this, _Game_renderer, "f").toneMappingExposure = 0.1;
@@ -50907,16 +50908,37 @@ class Game {
         });
         __classPrivateFieldGet(this, _Game_scene, "f").add(__classPrivateFieldGet(Game, _a, "f", _Game_roomModel));
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_tempCreateScene).call(this);
-        document.body.addEventListener('pointerover', __classPrivateFieldGet(this, _Game_pointerOverHandler, "f"));
-        document.body.addEventListener('pointermove', __classPrivateFieldGet(this, _Game_pointerMoveHandler, "f"));
+        document.body.addEventListener('mousemove', __classPrivateFieldGet(this, _Game_mouseMoveHandler, "f"));
         document.body.addEventListener('keydown', __classPrivateFieldGet(this, _Game_keyDownHandler, "f"));
         document.body.addEventListener('keyup', __classPrivateFieldGet(this, _Game_keyUpHandler, "f"));
         document.body.addEventListener('click', __classPrivateFieldGet(this, _Game_clickHandler, "f"));
+        __classPrivateFieldGet(this, _Game_instances, "m", _Game_addControls).call(this);
+        if (navigator.maxTouchPoints > 0) {
+            __classPrivateFieldGet(this, _Game_moveControl, "f").style.display = 'block';
+            __classPrivateFieldGet(this, _Game_cameraControl, "f").style.display = 'block';
+        }
         __classPrivateFieldGet(this, _Game_instances, "m", _Game_loadRes).call(this);
+        if (server !== null) {
+            __classPrivateFieldSet(this, _Game_server, new WebSocket(server), "f");
+            __classPrivateFieldGet(this, _Game_server, "f").addEventListener('open', () => {
+                __classPrivateFieldSet(this, _Game_serverIsOpened, true, "f");
+            });
+            __classPrivateFieldGet(this, _Game_server, "f").addEventListener('close', () => {
+                __classPrivateFieldSet(this, _Game_serverIsOpened, false, "f");
+            });
+            __classPrivateFieldGet(this, _Game_server, "f").addEventListener('message', (message) => {
+                const json = JSON.parse(message.data);
+                if (json[0].angle === 1000 && __classPrivateFieldGet(this, _Game_activePlayer, "f") !== null) {
+                    __classPrivateFieldGet(this, _Game_activePlayer, "f").playerId = json[0].id;
+                    console.info('ActivePlayerID:', json[0].id);
+                }
+            });
+        }
         __classPrivateFieldSet(this, _Game_time, performance.now(), "f");
         requestAnimationFrame(__classPrivateFieldGet(this, _Game_render, "f"));
     }
-    static async create() {
+    static async create(server = null) {
+        document.oncontextmenu = () => false;
         const response = await fetch('./res/res.json');
         if (response.ok === false) {
             throw new Error('Fatal error.');
@@ -50925,7 +50947,7 @@ class Game {
         await _player__WEBPACK_IMPORTED_MODULE_2__.Player.init();
         __classPrivateFieldSet(Game, _a, await Game.loadGLTF('./res/room/room.gltf'), "f", _Game_roomModel);
         __classPrivateFieldSet(Game, _a, await Game.loadGLTF('./res/disk/model.gltf'), "f", _Game_diskModel);
-        return new Game();
+        return new Game(server);
     }
     static async loadGLTF(url) {
         return new Promise(resolve => {
@@ -50936,11 +50958,13 @@ class Game {
         });
     }
 }
-_a = Game, _Game_scene = new WeakMap(), _Game_camera = new WeakMap(), _Game_renderer = new WeakMap(), _Game_raycaster = new WeakMap(), _Game_time = new WeakMap(), _Game_width = new WeakMap(), _Game_height = new WeakMap(), _Game_x = new WeakMap(), _Game_y = new WeakMap(), _Game_xAngle = new WeakMap(), _Game_yAngle = new WeakMap(), _Game_move = new WeakMap(), _Game_players = new WeakMap(), _Game_activePlayer = new WeakMap(), _Game_raycastObjects = new WeakMap(), _Game_playAudio = new WeakMap(), _Game_render = new WeakMap(), _Game_pointerOverHandler = new WeakMap(), _Game_pointerMoveHandler = new WeakMap(), _Game_keyDownHandler = new WeakMap(), _Game_keyUpHandler = new WeakMap(), _Game_clickHandler = new WeakMap(), _Game_instances = new WeakSet(), _Game_update = function _Game_update(dt) {
-    if (__classPrivateFieldGet(this, _Game_width, "f") !== window.innerWidth || __classPrivateFieldGet(this, _Game_height, "f") !== window.innerHeight) {
-        __classPrivateFieldSet(this, _Game_width, window.innerWidth, "f");
-        __classPrivateFieldSet(this, _Game_height, window.innerHeight, "f");
-        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"));
+_a = Game, _Game_scene = new WeakMap(), _Game_camera = new WeakMap(), _Game_renderer = new WeakMap(), _Game_raycaster = new WeakMap(), _Game_time = new WeakMap(), _Game_width = new WeakMap(), _Game_height = new WeakMap(), _Game_xAngle = new WeakMap(), _Game_yAngle = new WeakMap(), _Game_move = new WeakMap(), _Game_players = new WeakMap(), _Game_activePlayer = new WeakMap(), _Game_raycastObjects = new WeakMap(), _Game_playAudio = new WeakMap(), _Game_moveControl = new WeakMap(), _Game_moveControlCtx = new WeakMap(), _Game_cameraControl = new WeakMap(), _Game_cameraControlCtx = new WeakMap(), _Game_server = new WeakMap(), _Game_serverIsOpened = new WeakMap(), _Game_render = new WeakMap(), _Game_mouseMoveHandler = new WeakMap(), _Game_keyDownHandler = new WeakMap(), _Game_keyUpHandler = new WeakMap(), _Game_clickHandler = new WeakMap(), _Game_instances = new WeakSet(), _Game_update = function _Game_update(dt) {
+    var _b;
+    const pr = window.devicePixelRatio;
+    if (__classPrivateFieldGet(this, _Game_width, "f") !== window.innerWidth * pr || __classPrivateFieldGet(this, _Game_height, "f") !== window.innerHeight * pr) {
+        __classPrivateFieldSet(this, _Game_width, window.innerWidth * pr, "f");
+        __classPrivateFieldSet(this, _Game_height, window.innerHeight * pr, "f");
+        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"), false);
         __classPrivateFieldGet(this, _Game_camera, "f").aspect = __classPrivateFieldGet(this, _Game_width, "f") / __classPrivateFieldGet(this, _Game_height, "f");
         __classPrivateFieldGet(this, _Game_camera, "f").updateProjectionMatrix();
     }
@@ -50948,7 +50972,7 @@ _a = Game, _Game_scene = new WeakMap(), _Game_camera = new WeakMap(), _Game_rend
     __classPrivateFieldGet(this, _Game_camera, "f").rotateY(__classPrivateFieldGet(this, _Game_yAngle, "f"));
     __classPrivateFieldGet(this, _Game_camera, "f").rotateX(__classPrivateFieldGet(this, _Game_xAngle, "f"));
     const position = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
-    const direction = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3(0, 0, 2);
+    const direction = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3(0, 0, CAMERA_DISTANCE);
     direction.applyQuaternion(__classPrivateFieldGet(this, _Game_camera, "f").quaternion);
     if (__classPrivateFieldGet(this, _Game_activePlayer, "f") !== null) {
         __classPrivateFieldGet(this, _Game_activePlayer, "f").rotation.set(0, 0, 0);
@@ -50962,6 +50986,59 @@ _a = Game, _Game_scene = new WeakMap(), _Game_camera = new WeakMap(), _Game_rend
     position.add(direction);
     position.y += 1.7;
     __classPrivateFieldGet(this, _Game_camera, "f").position.copy(position);
+    if (__classPrivateFieldGet(this, _Game_serverIsOpened, "f") && __classPrivateFieldGet(this, _Game_activePlayer, "f") !== null) {
+        (_b = __classPrivateFieldGet(this, _Game_server, "f")) === null || _b === void 0 ? void 0 : _b.send(JSON.stringify({
+            id: __classPrivateFieldGet(this, _Game_activePlayer, "f").palyerId,
+            angle: __classPrivateFieldGet(this, _Game_activePlayer, "f").angle,
+            xPosition: __classPrivateFieldGet(this, _Game_activePlayer, "f").position.x,
+            yPosition: __classPrivateFieldGet(this, _Game_activePlayer, "f").position.z,
+            isWalking: __classPrivateFieldGet(this, _Game_activePlayer, "f").move
+        }));
+    }
+}, _Game_addControls = function _Game_addControls() {
+    __classPrivateFieldSet(this, _Game_moveControl, document.createElement('canvas'), "f");
+    __classPrivateFieldGet(this, _Game_moveControl, "f").id = 'move-control';
+    __classPrivateFieldGet(this, _Game_moveControl, "f").width = 512;
+    __classPrivateFieldGet(this, _Game_moveControl, "f").height = 512;
+    __classPrivateFieldGet(this, _Game_moveControl, "f").draggable = false;
+    const mCtx = __classPrivateFieldGet(this, _Game_moveControl, "f").getContext('2d');
+    if (mCtx === null) {
+        throw new Error('Fatal error.');
+    }
+    __classPrivateFieldSet(this, _Game_moveControlCtx, mCtx, "f");
+    document.body.appendChild(__classPrivateFieldGet(this, _Game_moveControl, "f"));
+    mCtx.fillStyle = '#FFFFFF80';
+    mCtx.strokeStyle = '#FFFFFF';
+    mCtx.lineWidth = 10;
+    mCtx.beginPath();
+    mCtx.ellipse(256, 256, 250, 250, 0, 0, Math.PI * 2);
+    mCtx.fill();
+    mCtx.stroke();
+    __classPrivateFieldGet(this, _Game_moveControl, "f").addEventListener('pointerenter', () => { __classPrivateFieldSet(this, _Game_move, true, "f"); });
+    __classPrivateFieldGet(this, _Game_moveControl, "f").addEventListener('pointerout', () => { __classPrivateFieldSet(this, _Game_move, false, "f"); });
+    __classPrivateFieldSet(this, _Game_cameraControl, document.createElement('canvas'), "f");
+    __classPrivateFieldGet(this, _Game_cameraControl, "f").id = 'camera-control';
+    __classPrivateFieldGet(this, _Game_cameraControl, "f").width = 512;
+    __classPrivateFieldGet(this, _Game_cameraControl, "f").height = 512;
+    __classPrivateFieldGet(this, _Game_cameraControl, "f").draggable = false;
+    const cCtx = __classPrivateFieldGet(this, _Game_cameraControl, "f").getContext('2d');
+    if (cCtx === null) {
+        throw new Error('Fatal error.');
+    }
+    __classPrivateFieldSet(this, _Game_cameraControlCtx, cCtx, "f");
+    document.body.appendChild(__classPrivateFieldGet(this, _Game_cameraControl, "f"));
+    cCtx.fillStyle = '#FFFFFF80';
+    cCtx.strokeStyle = '#FFFFFF';
+    cCtx.lineWidth = 10;
+    cCtx.beginPath();
+    cCtx.ellipse(256, 256, 250, 250, 0, 0, Math.PI * 2);
+    cCtx.fill();
+    cCtx.stroke();
+    __classPrivateFieldGet(this, _Game_cameraControl, "f").addEventListener('pointermove', (e) => {
+        __classPrivateFieldSet(this, _Game_yAngle, __classPrivateFieldGet(this, _Game_yAngle, "f") - e.movementX * 0.01, "f");
+        __classPrivateFieldSet(this, _Game_xAngle, __classPrivateFieldGet(this, _Game_xAngle, "f") - e.movementY * 0.01, "f");
+        __classPrivateFieldSet(this, _Game_xAngle, Math.min(0.5, Math.max(-Math.PI * 0.5, __classPrivateFieldGet(this, _Game_xAngle, "f"))), "f");
+    });
 }, _Game_tempCreateScene = function _Game_tempCreateScene() {
     const player = new _player__WEBPACK_IMPORTED_MODULE_2__.Player();
     __classPrivateFieldGet(this, _Game_scene, "f").add(player);
@@ -51080,13 +51157,14 @@ var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || 
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _a, _Player_mixer, _Player_idleAction, _Player_walkingAction, _Player_walking, _Player_walkingFlag, _Player_model, _Player_animations;
+var _a, _Player_id, _Player_mixer, _Player_idleAction, _Player_walkingAction, _Player_walking, _Player_walkingFlag, _Player_model, _Player_animations;
 
 
 
 class Player extends three__WEBPACK_IMPORTED_MODULE_2__.Object3D {
     constructor() {
         super();
+        _Player_id.set(this, 0);
         _Player_mixer.set(this, void 0);
         _Player_idleAction.set(this, void 0);
         _Player_walkingAction.set(this, void 0);
@@ -51099,6 +51177,11 @@ class Player extends three__WEBPACK_IMPORTED_MODULE_2__.Object3D {
         __classPrivateFieldSet(this, _Player_walkingAction, __classPrivateFieldGet(this, _Player_mixer, "f").clipAction(__classPrivateFieldGet(Player, _a, "f", _Player_animations)[1]), "f");
         __classPrivateFieldGet(this, _Player_idleAction, "f").play();
     }
+    get angle() {
+        return Math.atan2(this.quaternion.w, this.quaternion.y);
+    }
+    get palyerId() { return __classPrivateFieldGet(this, _Player_id, "f"); }
+    set playerId(value) { __classPrivateFieldSet(this, _Player_id, value, "f"); }
     get move() { return __classPrivateFieldGet(this, _Player_walking, "f"); }
     set move(value) {
         if (__classPrivateFieldGet(this, _Player_walking, "f") !== value) {
@@ -51145,7 +51228,7 @@ class Player extends three__WEBPACK_IMPORTED_MODULE_2__.Object3D {
         });
     }
 }
-_a = Player, _Player_mixer = new WeakMap(), _Player_idleAction = new WeakMap(), _Player_walkingAction = new WeakMap(), _Player_walking = new WeakMap(), _Player_walkingFlag = new WeakMap();
+_a = Player, _Player_id = new WeakMap(), _Player_mixer = new WeakMap(), _Player_idleAction = new WeakMap(), _Player_walkingAction = new WeakMap(), _Player_walking = new WeakMap(), _Player_walkingFlag = new WeakMap();
 _Player_model = { value: void 0 };
 _Player_animations = { value: void 0 };
 
@@ -56600,7 +56683,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ "./src/game.ts");
 
 window.onload = () => {
-    _game__WEBPACK_IMPORTED_MODULE_0__.Game.create();
+    const url = new URL(window.location.href);
+    const server = url.searchParams.get('server');
+    _game__WEBPACK_IMPORTED_MODULE_0__.Game.create(server);
 };
 
 })();
