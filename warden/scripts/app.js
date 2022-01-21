@@ -50789,6 +50789,296 @@ if ( typeof window !== 'undefined' ) {
 
 /***/ }),
 
+/***/ "./src/card.ts":
+/*!*********************!*\
+  !*** ./src/card.ts ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CardAnimation": () => (/* binding */ CardAnimation),
+/* harmony export */   "Card": () => (/* binding */ Card)
+/* harmony export */ });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _Card_instances, _a, _Card_time, _Card_duration, _Card_progress, _Card_animation, _Card_initPosition, _Card_initOrder, _Card_ctx, _Card_canvas, _Card_name, _Card_price, _Card_health, _Card_damage, _Card_priceType, _Card_hunger, _Card_maxHunger, _Card_imps, _Card_mesh, _Card_material, _Card_imCorn, _Card_imBlood, _Card_imPaper, _Card_imHungerFull, _Card_imHungerEmpty, _Card_imImpAdd, _Card_imImpCorn, _Card_imGrass, _Card_imMouse, _Card_imFerret, _Card_geometry, _Card_data, _Card_updateCanvas;
+
+var CardAnimation;
+(function (CardAnimation) {
+    CardAnimation[CardAnimation["NONE"] = 0] = "NONE";
+    CardAnimation[CardAnimation["ATTACK"] = 1] = "ATTACK";
+    CardAnimation[CardAnimation["DEATH"] = 2] = "DEATH";
+})(CardAnimation || (CardAnimation = {}));
+async function loadImage(url) {
+    return new Promise(resolve => {
+        const image = new Image();
+        image.addEventListener('load', () => {
+            resolve(image);
+        });
+        image.src = url;
+    });
+}
+var CardPriceType;
+(function (CardPriceType) {
+    CardPriceType[CardPriceType["NONE"] = 0] = "NONE";
+    CardPriceType[CardPriceType["BLOOD"] = 1] = "BLOOD";
+    CardPriceType[CardPriceType["CORN"] = 2] = "CORN";
+})(CardPriceType || (CardPriceType = {}));
+var CardImp;
+(function (CardImp) {
+    CardImp[CardImp["ADD"] = 0] = "ADD";
+    CardImp[CardImp["CORN"] = 1] = "CORN";
+})(CardImp || (CardImp = {}));
+class Card {
+    constructor(name, position, order = true) {
+        _Card_instances.add(this);
+        _Card_time.set(this, 0);
+        _Card_duration.set(this, 1);
+        _Card_progress.set(this, 1);
+        _Card_animation.set(this, CardAnimation.NONE);
+        _Card_initPosition.set(this, new three__WEBPACK_IMPORTED_MODULE_0__.Vector3());
+        _Card_initOrder.set(this, 0);
+        _Card_ctx.set(this, void 0);
+        _Card_canvas.set(this, void 0);
+        _Card_name.set(this, void 0);
+        _Card_price.set(this, void 0);
+        _Card_health.set(this, void 0);
+        _Card_damage.set(this, void 0);
+        _Card_priceType.set(this, void 0);
+        _Card_hunger.set(this, void 0);
+        _Card_maxHunger.set(this, void 0);
+        _Card_imps.set(this, void 0);
+        _Card_mesh.set(this, void 0);
+        _Card_material.set(this, void 0);
+        __classPrivateFieldGet(this, _Card_initPosition, "f").copy(position);
+        __classPrivateFieldSet(this, _Card_initOrder, order ? 1 : -1, "f");
+        const data = __classPrivateFieldGet(Card, _a, "f", _Card_data).get(name);
+        if (data === undefined) {
+            throw new Error('Fatal error.');
+        }
+        __classPrivateFieldSet(this, _Card_name, data.name, "f");
+        __classPrivateFieldSet(this, _Card_price, data.price, "f");
+        __classPrivateFieldSet(this, _Card_health, data.health, "f");
+        __classPrivateFieldSet(this, _Card_damage, data.damage, "f");
+        __classPrivateFieldSet(this, _Card_priceType, data.priceType, "f");
+        __classPrivateFieldSet(this, _Card_hunger, data.hunger, "f");
+        __classPrivateFieldSet(this, _Card_maxHunger, data.hunger, "f");
+        __classPrivateFieldSet(this, _Card_imps, data.imps, "f");
+        __classPrivateFieldSet(this, _Card_canvas, document.createElement('canvas'), "f");
+        __classPrivateFieldGet(this, _Card_canvas, "f").width = 1024;
+        __classPrivateFieldGet(this, _Card_canvas, "f").height = 1024;
+        const ctx = __classPrivateFieldGet(this, _Card_canvas, "f").getContext('2d');
+        if (ctx === null) {
+            throw new Error('Fatal error.');
+        }
+        __classPrivateFieldSet(this, _Card_ctx, ctx, "f");
+        __classPrivateFieldSet(this, _Card_material, new three__WEBPACK_IMPORTED_MODULE_0__.MeshStandardMaterial({
+            map: new three__WEBPACK_IMPORTED_MODULE_0__.CanvasTexture(__classPrivateFieldGet(this, _Card_canvas, "f")),
+            blending: three__WEBPACK_IMPORTED_MODULE_0__.NormalBlending,
+            transparent: true
+        }), "f");
+        __classPrivateFieldSet(this, _Card_mesh, new three__WEBPACK_IMPORTED_MODULE_0__.Mesh(__classPrivateFieldGet(Card, _a, "f", _Card_geometry), __classPrivateFieldGet(this, _Card_material, "f")), "f");
+        __classPrivateFieldGet(this, _Card_mesh, "f").renderOrder = 1;
+        __classPrivateFieldGet(this, _Card_mesh, "f").position.copy(position);
+        __classPrivateFieldGet(this, _Card_instances, "m", _Card_updateCanvas).call(this);
+    }
+    static async init() {
+        [
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imCorn); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imBlood); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imPaper); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imHungerFull); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imHungerEmpty); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imImpAdd); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imImpCorn); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imGrass); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imMouse); } }).value,
+            ({ set value(_b) { __classPrivateFieldSet(Card, _a, _b, "f", _Card_imFerret); } }).value
+        ] = await Promise.all([
+            loadImage('./res/cards/corn.png'),
+            loadImage('./res/cards/blood.png'),
+            loadImage('./res/cards/paper.png'),
+            loadImage('./res/cards/hunger_full.png'),
+            loadImage('./res/cards/hunger_empty.png'),
+            loadImage('./res/cards/imp_add.png'),
+            loadImage('./res/cards/imp_corn.png'),
+            loadImage('./res/cards/grass.png'),
+            loadImage('./res/cards/mouse.png'),
+            loadImage('./res/cards/ferret.png')
+        ]);
+        const indices = new Uint16Array([0, 2, 1, 0, 3, 2]);
+        const positions = new Float32Array([
+            -0.0297, 0, -0.045,
+            0.0297, 0, -0.045,
+            0.0297, 0, 0.045,
+            -0.0297, 0, 0.045
+        ]);
+        const normals = new Float32Array([
+            0, 1, 0,
+            0, 1, 0,
+            0, 1, 0,
+            0, 1, 0
+        ]);
+        const uvs = new Float32Array([
+            0, 1,
+            0.66, 1,
+            0.66, 0,
+            0, 0
+        ]);
+        const geometry = new three__WEBPACK_IMPORTED_MODULE_0__.BufferGeometry();
+        geometry.index = new three__WEBPACK_IMPORTED_MODULE_0__.BufferAttribute(indices, 1);
+        geometry.setAttribute('position', new three__WEBPACK_IMPORTED_MODULE_0__.BufferAttribute(positions, 3));
+        geometry.setAttribute('normal', new three__WEBPACK_IMPORTED_MODULE_0__.BufferAttribute(normals, 3));
+        geometry.setAttribute('uv', new three__WEBPACK_IMPORTED_MODULE_0__.BufferAttribute(uvs, 2));
+        __classPrivateFieldSet(Card, _a, geometry, "f", _Card_geometry);
+    }
+    get mesh() { return __classPrivateFieldGet(this, _Card_mesh, "f"); }
+    get maxHunger() { return __classPrivateFieldGet(this, _Card_maxHunger, "f"); }
+    get price() { return __classPrivateFieldGet(this, _Card_price, "f"); }
+    set price(value) {
+        __classPrivateFieldSet(this, _Card_price, value, "f");
+        __classPrivateFieldGet(this, _Card_instances, "m", _Card_updateCanvas).call(this);
+    }
+    get health() { return __classPrivateFieldGet(this, _Card_health, "f"); }
+    set health(value) {
+        __classPrivateFieldSet(this, _Card_health, value, "f");
+        __classPrivateFieldGet(this, _Card_instances, "m", _Card_updateCanvas).call(this);
+    }
+    get damage() { return __classPrivateFieldGet(this, _Card_damage, "f"); }
+    set damage(value) {
+        __classPrivateFieldSet(this, _Card_damage, value, "f");
+        __classPrivateFieldGet(this, _Card_instances, "m", _Card_updateCanvas).call(this);
+    }
+    get hunger() { return __classPrivateFieldGet(this, _Card_hunger, "f"); }
+    set hunger(value) {
+        __classPrivateFieldSet(this, _Card_hunger, value, "f");
+        __classPrivateFieldGet(this, _Card_instances, "m", _Card_updateCanvas).call(this);
+    }
+    update(dt) {
+        if (__classPrivateFieldGet(this, _Card_progress, "f") !== 1) {
+            __classPrivateFieldSet(this, _Card_time, __classPrivateFieldGet(this, _Card_time, "f") + dt, "f");
+            __classPrivateFieldSet(this, _Card_progress, Math.min(1, __classPrivateFieldGet(this, _Card_time, "f") / __classPrivateFieldGet(this, _Card_duration, "f")), "f");
+            if (__classPrivateFieldGet(this, _Card_animation, "f") === CardAnimation.ATTACK) {
+                this.mesh.position.z = __classPrivateFieldGet(this, _Card_initPosition, "f").z - 0.1 * (__classPrivateFieldGet(this, _Card_progress, "f") < 0.5 ? __classPrivateFieldGet(this, _Card_progress, "f") : 1 - __classPrivateFieldGet(this, _Card_progress, "f")) * __classPrivateFieldGet(this, _Card_initOrder, "f");
+                this.mesh.rotation.y = 0.3 * (__classPrivateFieldGet(this, _Card_progress, "f") < 0.5 ? __classPrivateFieldGet(this, _Card_progress, "f") : 1 - __classPrivateFieldGet(this, _Card_progress, "f"));
+            }
+            if (__classPrivateFieldGet(this, _Card_animation, "f") === CardAnimation.DEATH) {
+                this.mesh.scale.setScalar(1 - __classPrivateFieldGet(this, _Card_progress, "f"));
+            }
+        }
+    }
+    startAnimation(animation, duration = 0.2) {
+        if (__classPrivateFieldGet(this, _Card_progress, "f") !== 1) {
+            return;
+        }
+        __classPrivateFieldSet(this, _Card_progress, 0, "f");
+        __classPrivateFieldSet(this, _Card_animation, animation, "f");
+        __classPrivateFieldSet(this, _Card_duration, duration, "f");
+        __classPrivateFieldSet(this, _Card_time, 0, "f");
+    }
+}
+_a = Card, _Card_time = new WeakMap(), _Card_duration = new WeakMap(), _Card_progress = new WeakMap(), _Card_animation = new WeakMap(), _Card_initPosition = new WeakMap(), _Card_initOrder = new WeakMap(), _Card_ctx = new WeakMap(), _Card_canvas = new WeakMap(), _Card_name = new WeakMap(), _Card_price = new WeakMap(), _Card_health = new WeakMap(), _Card_damage = new WeakMap(), _Card_priceType = new WeakMap(), _Card_hunger = new WeakMap(), _Card_maxHunger = new WeakMap(), _Card_imps = new WeakMap(), _Card_mesh = new WeakMap(), _Card_material = new WeakMap(), _Card_instances = new WeakSet(), _Card_updateCanvas = function _Card_updateCanvas() {
+    const ctx = __classPrivateFieldGet(this, _Card_ctx, "f");
+    ctx.clearRect(0, 0, 1024, 1024);
+    ctx.globalCompositeOperation = 'source-over';
+    switch (__classPrivateFieldGet(this, _Card_name, "f")) {
+        case 'GRASS':
+            ctx.drawImage(__classPrivateFieldGet(Card, _a, "f", _Card_imGrass), 0, 0);
+            break;
+        case 'MOUSE':
+            ctx.drawImage(__classPrivateFieldGet(Card, _a, "f", _Card_imMouse), 0, 0);
+            break;
+        case 'FERRET':
+            ctx.drawImage(__classPrivateFieldGet(Card, _a, "f", _Card_imFerret), 0, 0);
+            break;
+        default: break;
+    }
+    switch (__classPrivateFieldGet(this, _Card_priceType, "f")) {
+        case CardPriceType.BLOOD:
+            ctx.drawImage(__classPrivateFieldGet(Card, _a, "f", _Card_imBlood), 306, 62);
+            break;
+        case CardPriceType.CORN:
+            ctx.drawImage(__classPrivateFieldGet(Card, _a, "f", _Card_imCorn), 306, 62);
+            break;
+        default: break;
+    }
+    const startXPos = 306 + (__classPrivateFieldGet(this, _Card_maxHunger, "f") + 1) * 20;
+    for (let i = 1; i <= __classPrivateFieldGet(this, _Card_maxHunger, "f"); i++) {
+        ctx.drawImage(i <= __classPrivateFieldGet(this, _Card_hunger, "f") ? __classPrivateFieldGet(Card, _a, "f", _Card_imHungerFull) : __classPrivateFieldGet(Card, _a, "f", _Card_imHungerEmpty), startXPos - 40 * i, 945);
+    }
+    const startPos = 274 - (__classPrivateFieldGet(this, _Card_imps, "f").length - 1) * 40;
+    for (let i = 0; i < __classPrivateFieldGet(this, _Card_imps, "f").length; i++) {
+        let image;
+        switch (__classPrivateFieldGet(this, _Card_imps, "f")[i]) {
+            case CardImp.CORN:
+                image = __classPrivateFieldGet(Card, _a, "f", _Card_imImpCorn);
+                break;
+            default:
+                image = __classPrivateFieldGet(Card, _a, "f", _Card_imImpAdd);
+                break;
+        }
+        ctx.drawImage(image, startPos + i * 80, 735);
+    }
+    ctx.fillStyle = '#ffffff';
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 3;
+    ctx.font = 'bold 70px consolas';
+    let text;
+    let xPos;
+    text = __classPrivateFieldGet(this, _Card_damage, "f").toString();
+    xPos = 188 - ctx.measureText(text).width * 0.5;
+    ctx.fillText(text, xPos, 55);
+    ctx.strokeText(text, xPos, 55);
+    text = __classPrivateFieldGet(this, _Card_price, "f").toString();
+    xPos = 338 - ctx.measureText(text).width * 0.5;
+    ctx.fillText(text, xPos, 55);
+    ctx.strokeText(text, xPos, 55);
+    text = __classPrivateFieldGet(this, _Card_health, "f").toString();
+    xPos = 488 - ctx.measureText(text).width * 0.5;
+    ctx.fillText(text, xPos, 55);
+    ctx.strokeText(text, xPos, 55);
+    ctx.fillStyle = '#000000';
+    ctx.font = '50px consolas';
+    text = __classPrivateFieldGet(this, _Card_name, "f");
+    xPos = 338 - ctx.measureText(text).width * 0.5;
+    ctx.fillText(text, xPos, 900);
+    ctx.globalCompositeOperation = 'multiply';
+    ctx.drawImage(__classPrivateFieldGet(Card, _a, "f", _Card_imPaper), 0, 0);
+    if (__classPrivateFieldGet(this, _Card_material, "f").map !== null) {
+        __classPrivateFieldGet(this, _Card_material, "f").map.needsUpdate = true;
+    }
+};
+_Card_imCorn = { value: void 0 };
+_Card_imBlood = { value: void 0 };
+_Card_imPaper = { value: void 0 };
+_Card_imHungerFull = { value: void 0 };
+_Card_imHungerEmpty = { value: void 0 };
+_Card_imImpAdd = { value: void 0 };
+_Card_imImpCorn = { value: void 0 };
+_Card_imGrass = { value: void 0 };
+_Card_imMouse = { value: void 0 };
+_Card_imFerret = { value: void 0 };
+_Card_geometry = { value: void 0 };
+_Card_data = { value: new Map([
+        ['grass', { name: 'GRASS', health: 1, damage: 0, price: 0, priceType: CardPriceType.NONE, hunger: 0, imps: [CardImp.ADD, CardImp.CORN] }],
+        ['mouse', { name: 'MOUSE', health: 1, damage: 0, price: 1, priceType: CardPriceType.CORN, hunger: 1, imps: [CardImp.ADD] }],
+        ['ferret', { name: 'FERRET', health: 2, damage: 1, price: 2, priceType: CardPriceType.BLOOD, hunger: 3, imps: [CardImp.ADD] }]
+    ]) };
+
+
+/***/ }),
+
 /***/ "./src/game.ts":
 /*!*********************!*\
   !*** ./src/game.ts ***!
@@ -50799,10 +51089,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Game": () => (/* binding */ Game)
 /* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var three_examples_jsm_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three/examples/jsm/loaders/GLTFLoader */ "./node_modules/three/examples/jsm/loaders/GLTFLoader.js");
-/* harmony import */ var _main_player_controller__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./main-player-controller */ "./src/main-player-controller.ts");
-/* harmony import */ var _player__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./player */ "./src/player.ts");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./card */ "./src/card.ts");
+/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table */ "./src/table.ts");
 var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
@@ -50814,527 +51103,186 @@ var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || 
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _Game_instances, _a, _Game_scene, _Game_camera, _Game_renderer, _Game_raycaster, _Game_time, _Game_width, _Game_height, _Game_players, _Game_activePlayer, _Game_mainPlayerController, _Game_raycastObjects, _Game_playAudio, _Game_server, _Game_serverIsOpened, _Game_roomModel, _Game_diskModel, _Game_resData, _Game_render, _Game_update, _Game_clickHandler, _Game_tempCreateScene, _Game_loadRes;
-
+var _Game_instances, _Game_scene, _Game_camera, _Game_renderer, _Game_time, _Game_table, _Game_width, _Game_height, _Game_render, _Game_update;
 
 
 
 class Game {
-    constructor(server = null) {
+    constructor() {
         _Game_instances.add(this);
-        _Game_scene.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.Scene());
-        _Game_camera.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000));
-        _Game_renderer.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.WebGLRenderer({ antialias: true }));
-        _Game_raycaster.set(this, new three__WEBPACK_IMPORTED_MODULE_3__.Raycaster());
+        _Game_scene.set(this, new three__WEBPACK_IMPORTED_MODULE_2__.Scene());
+        _Game_camera.set(this, new three__WEBPACK_IMPORTED_MODULE_2__.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000));
+        _Game_renderer.set(this, new three__WEBPACK_IMPORTED_MODULE_2__.WebGLRenderer());
         _Game_time.set(this, 0);
-        _Game_width.set(this, window.innerWidth * window.devicePixelRatio);
-        _Game_height.set(this, window.innerHeight * window.devicePixelRatio);
-        _Game_players.set(this, new Map());
-        _Game_activePlayer.set(this, null);
-        _Game_mainPlayerController.set(this, new _main_player_controller__WEBPACK_IMPORTED_MODULE_1__.MainPlayerController(__classPrivateFieldGet(this, _Game_players, "f"), __classPrivateFieldGet(this, _Game_camera, "f")));
-        _Game_raycastObjects.set(this, []);
-        _Game_playAudio.set(this, null);
-        _Game_server.set(this, null);
-        _Game_serverIsOpened.set(this, false);
+        _Game_table.set(this, new _table__WEBPACK_IMPORTED_MODULE_1__.Table(__classPrivateFieldGet(this, _Game_scene, "f"), __classPrivateFieldGet(this, _Game_camera, "f")));
+        _Game_width.set(this, window.innerWidth);
+        _Game_height.set(this, window.innerHeight);
         _Game_render.set(this, (time) => {
             __classPrivateFieldGet(this, _Game_instances, "m", _Game_update).call(this, (time - __classPrivateFieldGet(this, _Game_time, "f")) * 0.001);
             __classPrivateFieldSet(this, _Game_time, time, "f");
             __classPrivateFieldGet(this, _Game_renderer, "f").render(__classPrivateFieldGet(this, _Game_scene, "f"), __classPrivateFieldGet(this, _Game_camera, "f"));
             requestAnimationFrame(__classPrivateFieldGet(this, _Game_render, "f"));
         });
-        _Game_clickHandler.set(this, (e) => {
-            var _b, _c;
-            const ndc = new three__WEBPACK_IMPORTED_MODULE_3__.Vector2();
-            ndc.x = (e.clientX / window.innerWidth - 0.5) * 2;
-            ndc.y = (0.5 - e.clientY / window.innerHeight) * 2;
-            __classPrivateFieldGet(this, _Game_raycaster, "f").setFromCamera(ndc, __classPrivateFieldGet(this, _Game_camera, "f"));
-            const intersects = __classPrivateFieldGet(this, _Game_raycaster, "f").intersectObjects(__classPrivateFieldGet(this, _Game_raycastObjects, "f"), true);
-            if (intersects.length > 0) {
-                console.info(intersects[0].object.name);
-                if (intersects[0].object.userData.audio !== undefined) {
-                    if (__classPrivateFieldGet(this, _Game_playAudio, "f") === intersects[0].object.userData.audio) {
-                        if (__classPrivateFieldGet(this, _Game_playAudio, "f").paused) {
-                            __classPrivateFieldGet(this, _Game_playAudio, "f").play();
-                        }
-                        else {
-                            __classPrivateFieldGet(this, _Game_playAudio, "f").pause();
-                        }
-                    }
-                    else {
-                        (_b = __classPrivateFieldGet(this, _Game_playAudio, "f")) === null || _b === void 0 ? void 0 : _b.pause();
-                        __classPrivateFieldSet(this, _Game_playAudio, intersects[0].object.userData.audio, "f");
-                        __classPrivateFieldGet(this, _Game_playAudio, "f").currentTime = 0;
-                        __classPrivateFieldGet(this, _Game_playAudio, "f").play();
-                    }
-                    console.info((_c = __classPrivateFieldGet(this, _Game_playAudio, "f")) === null || _c === void 0 ? void 0 : _c.paused);
-                }
-            }
-        });
-        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"), false);
+        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"));
         document.body.appendChild(__classPrivateFieldGet(this, _Game_renderer, "f").domElement);
-        __classPrivateFieldGet(this, _Game_renderer, "f").domElement.style.width = '100%';
-        __classPrivateFieldGet(this, _Game_renderer, "f").domElement.style.height = '100%';
-        __classPrivateFieldGet(this, _Game_renderer, "f").outputEncoding = three__WEBPACK_IMPORTED_MODULE_3__.sRGBEncoding;
-        __classPrivateFieldGet(this, _Game_renderer, "f").toneMapping = three__WEBPACK_IMPORTED_MODULE_3__.ACESFilmicToneMapping;
-        __classPrivateFieldGet(this, _Game_renderer, "f").toneMappingExposure = 1;
-        new three__WEBPACK_IMPORTED_MODULE_3__.TextureLoader().load('./res/forest.jpg', (texture) => {
-            texture.mapping = three__WEBPACK_IMPORTED_MODULE_3__.EquirectangularReflectionMapping;
-            __classPrivateFieldGet(this, _Game_scene, "f").environment = texture;
-            __classPrivateFieldGet(this, _Game_scene, "f").background = texture;
-        });
-        __classPrivateFieldGet(this, _Game_scene, "f").add(__classPrivateFieldGet(Game, _a, "f", _Game_roomModel));
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_tempCreateScene).call(this);
-        document.body.addEventListener('click', __classPrivateFieldGet(this, _Game_clickHandler, "f"));
-        __classPrivateFieldGet(this, _Game_instances, "m", _Game_loadRes).call(this);
-        if (server !== null) {
-            __classPrivateFieldSet(this, _Game_server, new WebSocket(server), "f");
-            __classPrivateFieldGet(this, _Game_server, "f").addEventListener('open', (e) => {
-                console.info('OPEN:', e);
-                __classPrivateFieldSet(this, _Game_serverIsOpened, true, "f");
-            });
-            __classPrivateFieldGet(this, _Game_server, "f").addEventListener('close', () => {
-                __classPrivateFieldSet(this, _Game_serverIsOpened, false, "f");
-            });
-            __classPrivateFieldGet(this, _Game_server, "f").addEventListener('message', (message) => {
-                const json = JSON.parse(message.data);
-                if (json[0].angle === 1000 && __classPrivateFieldGet(this, _Game_activePlayer, "f") !== null) {
-                    __classPrivateFieldGet(this, _Game_activePlayer, "f").playerId = json[0].id;
-                    console.info('ActivePlayerID:', json[0].id);
-                }
-            });
-        }
+        __classPrivateFieldGet(this, _Game_renderer, "f").outputEncoding = three__WEBPACK_IMPORTED_MODULE_2__.sRGBEncoding;
+        const ambientLight = new three__WEBPACK_IMPORTED_MODULE_2__.AmbientLight(0xffffff, 0.6);
+        __classPrivateFieldGet(this, _Game_scene, "f").add(ambientLight);
+        const directionalLight = new three__WEBPACK_IMPORTED_MODULE_2__.DirectionalLight(0xffffff, 0.4);
+        __classPrivateFieldGet(this, _Game_scene, "f").add(directionalLight);
+        __classPrivateFieldGet(this, _Game_camera, "f").rotateX(-Math.PI * 0.35);
+        __classPrivateFieldGet(this, _Game_camera, "f").position.set(0, 0.18, 0.20);
         __classPrivateFieldSet(this, _Game_time, performance.now(), "f");
         requestAnimationFrame(__classPrivateFieldGet(this, _Game_render, "f"));
     }
-    static async create(server = null) {
-        document.oncontextmenu = () => false;
-        const response = await fetch('./res/res.json');
-        if (response.ok === false) {
-            throw new Error('Fatal error.');
-        }
-        __classPrivateFieldSet(Game, _a, await response.json(), "f", _Game_resData);
-        await _player__WEBPACK_IMPORTED_MODULE_2__.Player.init();
-        __classPrivateFieldSet(Game, _a, await Game.loadGLTF('./res/islands/model.gltf'), "f", _Game_roomModel);
-        __classPrivateFieldSet(Game, _a, await Game.loadGLTF('./res/disk/model.gltf'), "f", _Game_diskModel);
-        return new Game(server);
-    }
-    static async loadGLTF(url) {
-        return new Promise(resolve => {
-            const loader = new three_examples_jsm_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_0__.GLTFLoader();
-            loader.load(url, gltf => {
-                resolve(gltf.scene);
-            });
-        });
+    static async create() {
+        await _card__WEBPACK_IMPORTED_MODULE_0__.Card.init();
+        return new Game();
     }
 }
-_a = Game, _Game_scene = new WeakMap(), _Game_camera = new WeakMap(), _Game_renderer = new WeakMap(), _Game_raycaster = new WeakMap(), _Game_time = new WeakMap(), _Game_width = new WeakMap(), _Game_height = new WeakMap(), _Game_players = new WeakMap(), _Game_activePlayer = new WeakMap(), _Game_mainPlayerController = new WeakMap(), _Game_raycastObjects = new WeakMap(), _Game_playAudio = new WeakMap(), _Game_server = new WeakMap(), _Game_serverIsOpened = new WeakMap(), _Game_render = new WeakMap(), _Game_clickHandler = new WeakMap(), _Game_instances = new WeakSet(), _Game_update = function _Game_update(dt) {
-    var _b;
-    const pr = window.devicePixelRatio;
-    if (__classPrivateFieldGet(this, _Game_width, "f") !== window.innerWidth * pr || __classPrivateFieldGet(this, _Game_height, "f") !== window.innerHeight * pr) {
-        __classPrivateFieldSet(this, _Game_width, window.innerWidth * pr, "f");
-        __classPrivateFieldSet(this, _Game_height, window.innerHeight * pr, "f");
-        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"), false);
+_Game_scene = new WeakMap(), _Game_camera = new WeakMap(), _Game_renderer = new WeakMap(), _Game_time = new WeakMap(), _Game_table = new WeakMap(), _Game_width = new WeakMap(), _Game_height = new WeakMap(), _Game_render = new WeakMap(), _Game_instances = new WeakSet(), _Game_update = function _Game_update(dt) {
+    if (__classPrivateFieldGet(this, _Game_width, "f") !== window.innerWidth || __classPrivateFieldGet(this, _Game_height, "f") !== window.innerHeight) {
+        __classPrivateFieldSet(this, _Game_width, window.innerWidth, "f");
+        __classPrivateFieldSet(this, _Game_height, window.innerHeight, "f");
+        __classPrivateFieldGet(this, _Game_renderer, "f").setSize(__classPrivateFieldGet(this, _Game_width, "f"), __classPrivateFieldGet(this, _Game_height, "f"));
         __classPrivateFieldGet(this, _Game_camera, "f").aspect = __classPrivateFieldGet(this, _Game_width, "f") / __classPrivateFieldGet(this, _Game_height, "f");
         __classPrivateFieldGet(this, _Game_camera, "f").updateProjectionMatrix();
     }
-    __classPrivateFieldGet(this, _Game_mainPlayerController, "f").update(dt);
-    for (const player of __classPrivateFieldGet(this, _Game_players, "f").values()) {
-        player.update(dt);
-    }
-    if (__classPrivateFieldGet(this, _Game_serverIsOpened, "f") && __classPrivateFieldGet(this, _Game_activePlayer, "f") !== null) {
-        (_b = __classPrivateFieldGet(this, _Game_server, "f")) === null || _b === void 0 ? void 0 : _b.send(JSON.stringify({
-            id: __classPrivateFieldGet(this, _Game_activePlayer, "f").palyerId,
-            angle: __classPrivateFieldGet(this, _Game_activePlayer, "f").angle,
-            xPosition: __classPrivateFieldGet(this, _Game_activePlayer, "f").position.x,
-            yPosition: __classPrivateFieldGet(this, _Game_activePlayer, "f").position.z,
-            isWalking: __classPrivateFieldGet(this, _Game_activePlayer, "f").move
-        }));
-    }
-}, _Game_tempCreateScene = function _Game_tempCreateScene() {
-    const player = new _player__WEBPACK_IMPORTED_MODULE_2__.Player();
-    __classPrivateFieldGet(this, _Game_scene, "f").add(player);
-    __classPrivateFieldSet(this, _Game_activePlayer, player, "f");
-    __classPrivateFieldGet(this, _Game_players, "f").set(0, player);
-    const player2 = new _player__WEBPACK_IMPORTED_MODULE_2__.Player();
-    player2.position.x += 2;
-    __classPrivateFieldGet(this, _Game_scene, "f").add(player2);
-    __classPrivateFieldGet(this, _Game_players, "f").set(1, player2);
-}, _Game_loadRes = function _Game_loadRes() {
-    for (const res of __classPrivateFieldGet(Game, _a, "f", _Game_resData)) {
-        if (res.type === 'model') {
-            const geometry = new three__WEBPACK_IMPORTED_MODULE_3__.BoxBufferGeometry(0.5, 1, 0.5);
-            const material = new three__WEBPACK_IMPORTED_MODULE_3__.MeshStandardMaterial();
-            const mesh = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(geometry, material);
-            mesh.position.set(res.target.x, 0.5, res.target.y);
-            __classPrivateFieldGet(this, _Game_scene, "f").add(mesh);
-            Game.loadGLTF(res.url).then(mdl => {
-                __classPrivateFieldGet(this, _Game_raycastObjects, "f").push(mdl);
-                if (res.scale !== undefined) {
-                    mdl.scale.set(res.scale.x, res.scale.y, res.scale.z);
-                }
-                if (res.position !== undefined) {
-                    mdl.position.set(res.position.x, res.position.y, res.position.z);
-                }
-                if (res.orientation !== undefined) {
-                    mdl.quaternion.set(res.orientation.x, res.orientation.y, res.orientation.z, res.orientation.w);
-                }
-                mdl.position.x += res.target.x;
-                mdl.position.y += 1;
-                mdl.position.z += res.target.y;
-                __classPrivateFieldGet(this, _Game_scene, "f").add(mdl);
-                mdl.traverse(obj => {
-                    obj.name = res.name;
-                });
-            });
-        }
-        if (res.type === 'image') {
-            const geometry = new three__WEBPACK_IMPORTED_MODULE_3__.BoxBufferGeometry(1, 1, 0.06);
-            const material = new three__WEBPACK_IMPORTED_MODULE_3__.MeshStandardMaterial();
-            const mesh = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(geometry, material);
-            mesh.name = res.name;
-            mesh.position.set(res.target.x, 1.7, res.target.y);
-            mesh.rotateY(Math.PI * res.target.angle / 180);
-            __classPrivateFieldGet(this, _Game_scene, "f").add(mesh);
-            __classPrivateFieldGet(this, _Game_raycastObjects, "f").push(mesh);
-            const imGeometry = new three__WEBPACK_IMPORTED_MODULE_3__.PlaneBufferGeometry(0.9, 0.9);
-            const imMaterial = new three__WEBPACK_IMPORTED_MODULE_3__.MeshStandardMaterial({ color: '#000000' });
-            const imMesh = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(imGeometry, imMaterial);
-            imMesh.name = res.name;
-            imMesh.position.z += 0.031;
-            mesh.add(imMesh);
-            new three__WEBPACK_IMPORTED_MODULE_3__.TextureLoader().load(res.url, texture => {
-                imMaterial.map = texture;
-                imMaterial.color.set('#FFFFFF');
-                const { width, height } = texture.image;
-                if (width > height) {
-                    imMesh.scale.y = height / width;
-                }
-                else {
-                    imMesh.scale.x = width / height;
-                }
-            });
-        }
-        if (res.type === 'audio') {
-            const geometry = new three__WEBPACK_IMPORTED_MODULE_3__.BoxBufferGeometry(1, 1, 0.06);
-            const material = new three__WEBPACK_IMPORTED_MODULE_3__.MeshStandardMaterial();
-            const mesh = new three__WEBPACK_IMPORTED_MODULE_3__.Mesh(geometry, material);
-            mesh.name = res.name;
-            mesh.position.set(res.target.x, 1.7, res.target.y);
-            mesh.rotateY(Math.PI * res.target.angle / 180);
-            __classPrivateFieldGet(this, _Game_scene, "f").add(mesh);
-            __classPrivateFieldGet(this, _Game_raycastObjects, "f").push(mesh);
-            const disk = __classPrivateFieldGet(Game, _a, "f", _Game_diskModel).clone();
-            disk.rotateX(Math.PI / 2);
-            disk.scale.set(0.5, 0.5, 0.5);
-            disk.position.z += 0.03;
-            mesh.add(disk);
-            const audio = new Audio(res.url);
-            audio.volume = 0.5;
-            mesh.traverse(obj => {
-                obj.name = res.name;
-                obj.userData.audio = audio;
-            });
-        }
-    }
-};
-_Game_roomModel = { value: void 0 };
-_Game_diskModel = { value: void 0 };
-_Game_resData = { value: void 0 };
-
-
-/***/ }),
-
-/***/ "./src/main-player-controller.ts":
-/*!***************************************!*\
-  !*** ./src/main-player-controller.ts ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MainPlayerController": () => (/* binding */ MainPlayerController)
-/* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-};
-var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-var _MainPlayerController_instances, _MainPlayerController_camera, _MainPlayerController_players, _MainPlayerController_mainPlayer, _MainPlayerController_xAngle, _MainPlayerController_yAngle, _MainPlayerController_front, _MainPlayerController_back, _MainPlayerController_left, _MainPlayerController_right, _MainPlayerController_rotate, _MainPlayerController_walkAxis, _MainPlayerController_rotateAxis, _MainPlayerController_cameraControl, _MainPlayerController_mouseMoveHandler, _MainPlayerController_keyDownHandler, _MainPlayerController_keyUpHandler, _MainPlayerController_addControls;
-
-const CAMERA_DISTANCE = 1.8;
-class MainPlayerController {
-    constructor(players, camera) {
-        _MainPlayerController_instances.add(this);
-        _MainPlayerController_camera.set(this, void 0);
-        _MainPlayerController_players.set(this, void 0);
-        _MainPlayerController_mainPlayer.set(this, null);
-        _MainPlayerController_xAngle.set(this, -0.1);
-        _MainPlayerController_yAngle.set(this, 0);
-        _MainPlayerController_front.set(this, false);
-        _MainPlayerController_back.set(this, false);
-        _MainPlayerController_left.set(this, false);
-        _MainPlayerController_right.set(this, false);
-        _MainPlayerController_rotate.set(this, 0);
-        _MainPlayerController_walkAxis.set(this, 0);
-        _MainPlayerController_rotateAxis.set(this, 0);
-        _MainPlayerController_cameraControl.set(this, void 0);
-        _MainPlayerController_mouseMoveHandler.set(this, (e) => {
-            if ((e.buttons & 1) !== 0) {
-                __classPrivateFieldSet(this, _MainPlayerController_yAngle, __classPrivateFieldGet(this, _MainPlayerController_yAngle, "f") - e.movementX * 0.01, "f");
-                __classPrivateFieldSet(this, _MainPlayerController_xAngle, __classPrivateFieldGet(this, _MainPlayerController_xAngle, "f") - e.movementY * 0.01, "f");
-                __classPrivateFieldSet(this, _MainPlayerController_xAngle, Math.min(0.5, Math.max(-Math.PI * 0.5, __classPrivateFieldGet(this, _MainPlayerController_xAngle, "f"))), "f");
-            }
-        });
-        _MainPlayerController_keyDownHandler.set(this, (e) => {
-            switch (e.code) {
-                case 'KeyW':
-                case 'ArrowUp':
-                    __classPrivateFieldSet(this, _MainPlayerController_front, true, "f");
-                    break;
-                case 'KeyS':
-                case 'ArrowDown':
-                    __classPrivateFieldSet(this, _MainPlayerController_back, true, "f");
-                    break;
-                case 'KeyA':
-                case 'ArrowLeft':
-                    __classPrivateFieldSet(this, _MainPlayerController_left, true, "f");
-                    break;
-                case 'KeyD':
-                case 'ArrowRight':
-                    __classPrivateFieldSet(this, _MainPlayerController_right, true, "f");
-                    break;
-                default: break;
-            }
-        });
-        _MainPlayerController_keyUpHandler.set(this, (e) => {
-            switch (e.code) {
-                case 'KeyW':
-                case 'ArrowUp':
-                    __classPrivateFieldSet(this, _MainPlayerController_front, false, "f");
-                    break;
-                case 'KeyS':
-                case 'ArrowDown':
-                    __classPrivateFieldSet(this, _MainPlayerController_back, false, "f");
-                    break;
-                case 'KeyA':
-                case 'ArrowLeft':
-                    __classPrivateFieldSet(this, _MainPlayerController_left, false, "f");
-                    break;
-                case 'KeyD':
-                case 'ArrowRight':
-                    __classPrivateFieldSet(this, _MainPlayerController_right, false, "f");
-                    break;
-                default: break;
-            }
-        });
-        __classPrivateFieldSet(this, _MainPlayerController_camera, camera, "f");
-        __classPrivateFieldSet(this, _MainPlayerController_players, players, "f");
-        if (navigator.maxTouchPoints > 0) {
-            __classPrivateFieldGet(this, _MainPlayerController_instances, "m", _MainPlayerController_addControls).call(this);
-        }
-        else {
-            document.body.addEventListener('keydown', __classPrivateFieldGet(this, _MainPlayerController_keyDownHandler, "f"));
-            document.body.addEventListener('keyup', __classPrivateFieldGet(this, _MainPlayerController_keyUpHandler, "f"));
-        }
-    }
-    update(dt) {
-        if (__classPrivateFieldGet(this, _MainPlayerController_mainPlayer, "f") === null) {
-            const mainPlayer = __classPrivateFieldGet(this, _MainPlayerController_players, "f").get(0);
-            if (mainPlayer === undefined) {
-                return;
-            }
-            __classPrivateFieldSet(this, _MainPlayerController_mainPlayer, mainPlayer, "f");
-        }
-        __classPrivateFieldSet(this, _MainPlayerController_walkAxis, 0, "f");
-        __classPrivateFieldSet(this, _MainPlayerController_walkAxis, __classPrivateFieldGet(this, _MainPlayerController_walkAxis, "f") + (__classPrivateFieldGet(this, _MainPlayerController_front, "f") ? 1 : 0), "f");
-        __classPrivateFieldSet(this, _MainPlayerController_walkAxis, __classPrivateFieldGet(this, _MainPlayerController_walkAxis, "f") - (__classPrivateFieldGet(this, _MainPlayerController_back, "f") ? 1 : 0), "f");
-        __classPrivateFieldSet(this, _MainPlayerController_rotateAxis, 0, "f");
-        __classPrivateFieldSet(this, _MainPlayerController_rotateAxis, __classPrivateFieldGet(this, _MainPlayerController_rotateAxis, "f") + (__classPrivateFieldGet(this, _MainPlayerController_left, "f") ? 1 : 0), "f");
-        __classPrivateFieldSet(this, _MainPlayerController_rotateAxis, __classPrivateFieldGet(this, _MainPlayerController_rotateAxis, "f") - (__classPrivateFieldGet(this, _MainPlayerController_right, "f") ? 1 : 0), "f");
-        if (navigator.maxTouchPoints > 0) {
-            __classPrivateFieldSet(this, _MainPlayerController_rotateAxis, __classPrivateFieldGet(this, _MainPlayerController_rotate, "f"), "f");
-        }
-        __classPrivateFieldGet(this, _MainPlayerController_camera, "f").rotation.set(0, 0, 0);
-        __classPrivateFieldSet(this, _MainPlayerController_yAngle, __classPrivateFieldGet(this, _MainPlayerController_yAngle, "f") + __classPrivateFieldGet(this, _MainPlayerController_rotateAxis, "f") * dt, "f");
-        __classPrivateFieldGet(this, _MainPlayerController_camera, "f").rotation.set(0, 0, 0);
-        __classPrivateFieldGet(this, _MainPlayerController_camera, "f").rotateY(__classPrivateFieldGet(this, _MainPlayerController_yAngle, "f"));
-        __classPrivateFieldGet(this, _MainPlayerController_camera, "f").rotateX(__classPrivateFieldGet(this, _MainPlayerController_xAngle, "f"));
-        const position = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3();
-        const direction = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(0, 0, CAMERA_DISTANCE);
-        direction.applyQuaternion(__classPrivateFieldGet(this, _MainPlayerController_camera, "f").quaternion);
-        if (__classPrivateFieldGet(this, _MainPlayerController_mainPlayer, "f") !== null) {
-            __classPrivateFieldGet(this, _MainPlayerController_mainPlayer, "f").rotation.set(0, 0, 0);
-            __classPrivateFieldGet(this, _MainPlayerController_mainPlayer, "f").rotateY(__classPrivateFieldGet(this, _MainPlayerController_yAngle, "f"));
-            __classPrivateFieldGet(this, _MainPlayerController_mainPlayer, "f").move = __classPrivateFieldGet(this, _MainPlayerController_walkAxis, "f") > 0;
-            position.copy(__classPrivateFieldGet(this, _MainPlayerController_mainPlayer, "f").position);
-        }
-        position.add(direction);
-        position.y += 1.7;
-        __classPrivateFieldGet(this, _MainPlayerController_camera, "f").position.copy(position);
-    }
-}
-_MainPlayerController_camera = new WeakMap(), _MainPlayerController_players = new WeakMap(), _MainPlayerController_mainPlayer = new WeakMap(), _MainPlayerController_xAngle = new WeakMap(), _MainPlayerController_yAngle = new WeakMap(), _MainPlayerController_front = new WeakMap(), _MainPlayerController_back = new WeakMap(), _MainPlayerController_left = new WeakMap(), _MainPlayerController_right = new WeakMap(), _MainPlayerController_rotate = new WeakMap(), _MainPlayerController_walkAxis = new WeakMap(), _MainPlayerController_rotateAxis = new WeakMap(), _MainPlayerController_cameraControl = new WeakMap(), _MainPlayerController_mouseMoveHandler = new WeakMap(), _MainPlayerController_keyDownHandler = new WeakMap(), _MainPlayerController_keyUpHandler = new WeakMap(), _MainPlayerController_instances = new WeakSet(), _MainPlayerController_addControls = function _MainPlayerController_addControls() {
-    __classPrivateFieldSet(this, _MainPlayerController_cameraControl, document.createElement('canvas'), "f");
-    __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").id = 'camera-control';
-    __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").width = 512;
-    __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").height = 512;
-    __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").draggable = false;
-    const ctx = __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").getContext('2d');
-    if (ctx === null) {
-        throw new Error('Fatal error.');
-    }
-    document.body.appendChild(__classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f"));
-    ctx.fillStyle = '#FFFFFF80';
-    ctx.strokeStyle = '#FFFFFF';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.ellipse(256, 256, 130, 130, 0, 0, Math.PI * 2);
-    ctx.moveTo(2, 256);
-    ctx.lineTo(80, 196);
-    ctx.lineTo(80, 316);
-    ctx.moveTo(510, 256);
-    ctx.lineTo(432, 316);
-    ctx.lineTo(432, 196);
-    ctx.moveTo(256, 2);
-    ctx.lineTo(196, 80);
-    ctx.lineTo(316, 80);
-    ctx.moveTo(256, 510);
-    ctx.lineTo(316, 432);
-    ctx.lineTo(196, 432);
-    ctx.fill();
-    const handler = (e) => {
-        const domRect = __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").getBoundingClientRect();
-        let rAxis = (e.clientX - domRect.left) / domRect.width;
-        rAxis = (Math.min(1, Math.max(0, rAxis)) - 0.5) * 2;
-        __classPrivateFieldSet(this, _MainPlayerController_rotate, -rAxis, "f");
-        let wAxis = (e.clientY - domRect.top) / domRect.height;
-        wAxis = -(Math.min(1, Math.max(0, wAxis)) - 0.5) * 2;
-        if (wAxis >= 0) {
-            __classPrivateFieldSet(this, _MainPlayerController_front, true, "f");
-            __classPrivateFieldSet(this, _MainPlayerController_back, false, "f");
-        }
-        if (wAxis < 0) {
-            __classPrivateFieldSet(this, _MainPlayerController_front, false, "f");
-            __classPrivateFieldSet(this, _MainPlayerController_back, true, "f");
-        }
-    };
-    __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").addEventListener('pointerout', () => {
-        __classPrivateFieldSet(this, _MainPlayerController_rotate, 0, "f");
-        __classPrivateFieldSet(this, _MainPlayerController_front, false, "f");
-        __classPrivateFieldSet(this, _MainPlayerController_back, false, "f");
-    });
-    __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").addEventListener('pointerenter', handler);
-    __classPrivateFieldGet(this, _MainPlayerController_cameraControl, "f").addEventListener('pointermove', handler);
+    __classPrivateFieldGet(this, _Game_table, "f").update(dt);
 };
 
 
 /***/ }),
 
-/***/ "./src/player.ts":
-/*!***********************!*\
-  !*** ./src/player.ts ***!
-  \***********************/
+/***/ "./src/table.ts":
+/*!**********************!*\
+  !*** ./src/table.ts ***!
+  \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Player": () => (/* binding */ Player)
+/* harmony export */   "Table": () => (/* binding */ Table)
 /* harmony export */ });
+/* harmony import */ var three_examples_jsm_loaders_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three/examples/jsm/loaders/GLTFLoader.js */ "./node_modules/three/examples/jsm/loaders/GLTFLoader.js");
 /* harmony import */ var three__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-/* harmony import */ var three_examples_jsm_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three/examples/jsm/loaders/GLTFLoader */ "./node_modules/three/examples/jsm/loaders/GLTFLoader.js");
-/* harmony import */ var three_examples_jsm_utils_SkeletonUtils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/utils/SkeletonUtils */ "./node_modules/three/examples/jsm/utils/SkeletonUtils.js");
-var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
+/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./card */ "./src/card.ts");
 var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _a, _Player_id, _Player_mixer, _Player_idleAction, _Player_walkingAction, _Player_walking, _Player_walkingFlag, _Player_model, _Player_animations;
+var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Table_instances, _Table_cards, _Table_raycaster, _Table_raycastCards, _Table_camera, _Table_scene, _Table_tempCardName, _Table_tempOrder, _Table_clearDeadCards, _Table_loadResources;
 
 
 
-class Player extends three__WEBPACK_IMPORTED_MODULE_2__.Object3D {
-    constructor() {
-        super();
-        _Player_id.set(this, 0);
-        _Player_mixer.set(this, void 0);
-        _Player_idleAction.set(this, void 0);
-        _Player_walkingAction.set(this, void 0);
-        _Player_walking.set(this, false);
-        _Player_walkingFlag.set(this, false);
-        const model = (0,three_examples_jsm_utils_SkeletonUtils__WEBPACK_IMPORTED_MODULE_1__.clone)(__classPrivateFieldGet(Player, _a, "f", _Player_model));
-        this.add(model);
-        __classPrivateFieldSet(this, _Player_mixer, new three__WEBPACK_IMPORTED_MODULE_2__.AnimationMixer(model), "f");
-        __classPrivateFieldSet(this, _Player_idleAction, __classPrivateFieldGet(this, _Player_mixer, "f").clipAction(__classPrivateFieldGet(Player, _a, "f", _Player_animations)[0]), "f");
-        __classPrivateFieldSet(this, _Player_walkingAction, __classPrivateFieldGet(this, _Player_mixer, "f").clipAction(__classPrivateFieldGet(Player, _a, "f", _Player_animations)[1]), "f");
-        __classPrivateFieldGet(this, _Player_idleAction, "f").play();
-    }
-    get angle() {
-        return Math.atan2(this.quaternion.w, this.quaternion.y);
-    }
-    get palyerId() { return __classPrivateFieldGet(this, _Player_id, "f"); }
-    set playerId(value) { __classPrivateFieldSet(this, _Player_id, value, "f"); }
-    get move() { return __classPrivateFieldGet(this, _Player_walking, "f"); }
-    set move(value) {
-        if (__classPrivateFieldGet(this, _Player_walking, "f") !== value) {
-            __classPrivateFieldSet(this, _Player_walkingFlag, true, "f");
-        }
-        __classPrivateFieldSet(this, _Player_walking, value, "f");
-    }
-    update(dt) {
-        __classPrivateFieldGet(this, _Player_mixer, "f").update(dt);
-        if (__classPrivateFieldGet(this, _Player_walking, "f")) {
-            const direction = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3(0, 0, -dt * 2);
-            direction.applyQuaternion(this.quaternion);
-            this.position.add(direction);
-            this.position.min(new three__WEBPACK_IMPORTED_MODULE_2__.Vector3().setScalar(14));
-            this.position.max(new three__WEBPACK_IMPORTED_MODULE_2__.Vector3().setScalar(-14));
-            if (__classPrivateFieldGet(this, _Player_walkingFlag, "f")) {
-                __classPrivateFieldSet(this, _Player_walkingFlag, false, "f");
-                __classPrivateFieldGet(this, _Player_walkingAction, "f").stop();
-                __classPrivateFieldGet(this, _Player_walkingAction, "f").play();
-                __classPrivateFieldGet(this, _Player_idleAction, "f").crossFadeTo(__classPrivateFieldGet(this, _Player_walkingAction, "f"), 0.25, false);
+class Table {
+    constructor(scene, camera) {
+        _Table_instances.add(this);
+        _Table_cards.set(this, [[null, null, null, null, null], [null, null, null, null, null]]);
+        _Table_raycaster.set(this, new three__WEBPACK_IMPORTED_MODULE_2__.Raycaster());
+        _Table_raycastCards.set(this, []);
+        _Table_camera.set(this, void 0);
+        _Table_scene.set(this, void 0);
+        _Table_tempCardName.set(this, 'grass');
+        _Table_tempOrder.set(this, 0);
+        __classPrivateFieldSet(this, _Table_scene, scene, "f");
+        __classPrivateFieldSet(this, _Table_camera, camera, "f");
+        __classPrivateFieldGet(this, _Table_instances, "m", _Table_loadResources).call(this);
+        document.body.addEventListener('mouseup', e => {
+            __classPrivateFieldGet(this, _Table_instances, "m", _Table_clearDeadCards).call(this);
+            const ndc = new three__WEBPACK_IMPORTED_MODULE_2__.Vector2();
+            ndc.x = (e.clientX / window.innerWidth - 0.5) * 2;
+            ndc.y = (0.5 - e.clientY / window.innerHeight) * 2;
+            __classPrivateFieldGet(this, _Table_raycaster, "f").setFromCamera(ndc, __classPrivateFieldGet(this, _Table_camera, "f"));
+            const intersects = __classPrivateFieldGet(this, _Table_raycaster, "f").intersectObjects(__classPrivateFieldGet(this, _Table_raycastCards, "f"), true);
+            if (intersects.length > 0) {
+                const name = intersects[0].object.name;
+                if (name.length === 7) {
+                    const row = parseInt(name[5], 10);
+                    const col = parseInt(name[6], 10);
+                    const cardsElement = __classPrivateFieldGet(this, _Table_cards, "f")[row][col];
+                    if (cardsElement === null) {
+                        const position = new three__WEBPACK_IMPORTED_MODULE_2__.Vector3();
+                        position.copy(intersects[0].object.position);
+                        position.y += 0.001;
+                        const el = new _card__WEBPACK_IMPORTED_MODULE_1__.Card(__classPrivateFieldGet(this, _Table_tempCardName, "f"), position, row === 0);
+                        __classPrivateFieldGet(this, _Table_cards, "f")[row][col] = el;
+                        __classPrivateFieldGet(this, _Table_scene, "f").add(el.mesh);
+                    }
+                    else {
+                        __classPrivateFieldGet(this, _Table_cards, "f")[row][col] = null;
+                        __classPrivateFieldGet(this, _Table_scene, "f").remove(cardsElement.mesh);
+                    }
+                }
+                if (name === 'card_animals2') {
+                    __classPrivateFieldSet(this, _Table_tempCardName, 'mouse', "f");
+                }
+                if (name === 'card_animals') {
+                    __classPrivateFieldSet(this, _Table_tempCardName, 'ferret', "f");
+                }
+                if (name === 'card_plants') {
+                    __classPrivateFieldSet(this, _Table_tempCardName, 'grass', "f");
+                }
+                if (name === 'button') {
+                    const first = __classPrivateFieldGet(this, _Table_cards, "f")[__classPrivateFieldGet(this, _Table_tempOrder, "f")];
+                    __classPrivateFieldSet(this, _Table_tempOrder, (__classPrivateFieldGet(this, _Table_tempOrder, "f") + 1) % 2, "f");
+                    const second = __classPrivateFieldGet(this, _Table_cards, "f")[__classPrivateFieldGet(this, _Table_tempOrder, "f")];
+                    for (let i = 0; i < 5; i++) {
+                        const card = first[i];
+                        const card2 = second[i];
+                        if (card === null) {
+                            continue;
+                        }
+                        if (card.damage !== 0) {
+                            card.startAnimation(_card__WEBPACK_IMPORTED_MODULE_1__.CardAnimation.ATTACK, 0.2 + Math.random() * 0.1);
+                            if (card2 !== null) {
+                                card2.health = Math.max(card2.health - card.damage);
+                                if (card2.health === 0) {
+                                    card2.startAnimation(_card__WEBPACK_IMPORTED_MODULE_1__.CardAnimation.DEATH, 0.4 + Math.random() * 0.2);
+                                }
+                            }
+                        }
+                    }
+                }
             }
-        }
-        else {
-            if (__classPrivateFieldGet(this, _Player_walkingFlag, "f")) {
-                __classPrivateFieldSet(this, _Player_walkingFlag, false, "f");
-                __classPrivateFieldGet(this, _Player_idleAction, "f").stop();
-                __classPrivateFieldGet(this, _Player_idleAction, "f").play();
-                __classPrivateFieldGet(this, _Player_walkingAction, "f").crossFadeTo(__classPrivateFieldGet(this, _Player_idleAction, "f"), 0.25, false);
-            }
-        }
-    }
-    static async init() {
-        return new Promise(resolve => {
-            const loader = new three_examples_jsm_loaders_GLTFLoader__WEBPACK_IMPORTED_MODULE_0__.GLTFLoader();
-            loader.load('./res/player/player.gltf', gltf => {
-                __classPrivateFieldSet(Player, _a, gltf.scene, "f", _Player_model);
-                __classPrivateFieldGet(Player, _a, "f", _Player_model).rotateY(Math.PI);
-                __classPrivateFieldGet(Player, _a, "f", _Player_model).traverse(obj => {
-                    obj.frustumCulled = false;
-                });
-                __classPrivateFieldSet(Player, _a, gltf.animations, "f", _Player_animations);
-                resolve();
-            });
         });
     }
+    update(dt) {
+        for (const row of __classPrivateFieldGet(this, _Table_cards, "f")) {
+            for (const element of row) {
+                element === null || element === void 0 ? void 0 : element.update(dt);
+            }
+        }
+    }
 }
-_a = Player, _Player_id = new WeakMap(), _Player_mixer = new WeakMap(), _Player_idleAction = new WeakMap(), _Player_walkingAction = new WeakMap(), _Player_walking = new WeakMap(), _Player_walkingFlag = new WeakMap();
-_Player_model = { value: void 0 };
-_Player_animations = { value: void 0 };
+_Table_cards = new WeakMap(), _Table_raycaster = new WeakMap(), _Table_raycastCards = new WeakMap(), _Table_camera = new WeakMap(), _Table_scene = new WeakMap(), _Table_tempCardName = new WeakMap(), _Table_tempOrder = new WeakMap(), _Table_instances = new WeakSet(), _Table_clearDeadCards = function _Table_clearDeadCards() {
+    for (let row = 0; row < 2; row++) {
+        for (let col = 0; col < 5; col++) {
+            const card = __classPrivateFieldGet(this, _Table_cards, "f")[row][col];
+            if (card !== null && card.health === 0) {
+                __classPrivateFieldGet(this, _Table_scene, "f").remove(card.mesh);
+                __classPrivateFieldGet(this, _Table_cards, "f")[row][col] = null;
+            }
+        }
+    }
+}, _Table_loadResources = function _Table_loadResources() {
+    const loader = new three_examples_jsm_loaders_GLTFLoader_js__WEBPACK_IMPORTED_MODULE_0__.GLTFLoader();
+    loader.load('./res/table.gltf', (gltf) => {
+        __classPrivateFieldGet(this, _Table_scene, "f").add(gltf.scene);
+        for (const obj of gltf.scene.children) {
+            if (obj.name.includes('card_') || obj.name === 'button') {
+                __classPrivateFieldGet(this, _Table_raycastCards, "f").push(obj);
+            }
+        }
+    });
+};
 
 
 /***/ }),
@@ -55637,604 +55585,6 @@ function toTrianglesDrawMode( geometry, drawMode ) {
 
 
 
-/***/ }),
-
-/***/ "./node_modules/three/examples/jsm/utils/SkeletonUtils.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/three/examples/jsm/utils/SkeletonUtils.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "retarget": () => (/* binding */ retarget),
-/* harmony export */   "retargetClip": () => (/* binding */ retargetClip),
-/* harmony export */   "getHelperFromSkeleton": () => (/* binding */ getHelperFromSkeleton),
-/* harmony export */   "getSkeletonOffsets": () => (/* binding */ getSkeletonOffsets),
-/* harmony export */   "renameBones": () => (/* binding */ renameBones),
-/* harmony export */   "getBones": () => (/* binding */ getBones),
-/* harmony export */   "getBoneByName": () => (/* binding */ getBoneByName),
-/* harmony export */   "getNearestBone": () => (/* binding */ getNearestBone),
-/* harmony export */   "findBoneTrackData": () => (/* binding */ findBoneTrackData),
-/* harmony export */   "getEqualsBonesNames": () => (/* binding */ getEqualsBonesNames),
-/* harmony export */   "clone": () => (/* binding */ clone)
-/* harmony export */ });
-/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
-
-
-
-function retarget( target, source, options = {} ) {
-
-	const pos = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(),
-		quat = new three__WEBPACK_IMPORTED_MODULE_0__.Quaternion(),
-		scale = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(),
-		bindBoneMatrix = new three__WEBPACK_IMPORTED_MODULE_0__.Matrix4(),
-		relativeMatrix = new three__WEBPACK_IMPORTED_MODULE_0__.Matrix4(),
-		globalMatrix = new three__WEBPACK_IMPORTED_MODULE_0__.Matrix4();
-
-	options.preserveMatrix = options.preserveMatrix !== undefined ? options.preserveMatrix : true;
-	options.preservePosition = options.preservePosition !== undefined ? options.preservePosition : true;
-	options.preserveHipPosition = options.preserveHipPosition !== undefined ? options.preserveHipPosition : false;
-	options.useTargetMatrix = options.useTargetMatrix !== undefined ? options.useTargetMatrix : false;
-	options.hip = options.hip !== undefined ? options.hip : 'hip';
-	options.names = options.names || {};
-
-	const sourceBones = source.isObject3D ? source.skeleton.bones : getBones( source ),
-		bones = target.isObject3D ? target.skeleton.bones : getBones( target );
-
-	let bindBones,
-		bone, name, boneTo,
-		bonesPosition;
-
-	// reset bones
-
-	if ( target.isObject3D ) {
-
-		target.skeleton.pose();
-
-	} else {
-
-		options.useTargetMatrix = true;
-		options.preserveMatrix = false;
-
-	}
-
-	if ( options.preservePosition ) {
-
-		bonesPosition = [];
-
-		for ( let i = 0; i < bones.length; i ++ ) {
-
-			bonesPosition.push( bones[ i ].position.clone() );
-
-		}
-
-	}
-
-	if ( options.preserveMatrix ) {
-
-		// reset matrix
-
-		target.updateMatrixWorld();
-
-		target.matrixWorld.identity();
-
-		// reset children matrix
-
-		for ( let i = 0; i < target.children.length; ++ i ) {
-
-			target.children[ i ].updateMatrixWorld( true );
-
-		}
-
-	}
-
-	if ( options.offsets ) {
-
-		bindBones = [];
-
-		for ( let i = 0; i < bones.length; ++ i ) {
-
-			bone = bones[ i ];
-			name = options.names[ bone.name ] || bone.name;
-
-			if ( options.offsets && options.offsets[ name ] ) {
-
-				bone.matrix.multiply( options.offsets[ name ] );
-
-				bone.matrix.decompose( bone.position, bone.quaternion, bone.scale );
-
-				bone.updateMatrixWorld();
-
-			}
-
-			bindBones.push( bone.matrixWorld.clone() );
-
-		}
-
-	}
-
-	for ( let i = 0; i < bones.length; ++ i ) {
-
-		bone = bones[ i ];
-		name = options.names[ bone.name ] || bone.name;
-
-		boneTo = getBoneByName( name, sourceBones );
-
-		globalMatrix.copy( bone.matrixWorld );
-
-		if ( boneTo ) {
-
-			boneTo.updateMatrixWorld();
-
-			if ( options.useTargetMatrix ) {
-
-				relativeMatrix.copy( boneTo.matrixWorld );
-
-			} else {
-
-				relativeMatrix.copy( target.matrixWorld ).invert();
-				relativeMatrix.multiply( boneTo.matrixWorld );
-
-			}
-
-			// ignore scale to extract rotation
-
-			scale.setFromMatrixScale( relativeMatrix );
-			relativeMatrix.scale( scale.set( 1 / scale.x, 1 / scale.y, 1 / scale.z ) );
-
-			// apply to global matrix
-
-			globalMatrix.makeRotationFromQuaternion( quat.setFromRotationMatrix( relativeMatrix ) );
-
-			if ( target.isObject3D ) {
-
-				const boneIndex = bones.indexOf( bone ),
-					wBindMatrix = bindBones ? bindBones[ boneIndex ] : bindBoneMatrix.copy( target.skeleton.boneInverses[ boneIndex ] ).invert();
-
-				globalMatrix.multiply( wBindMatrix );
-
-			}
-
-			globalMatrix.copyPosition( relativeMatrix );
-
-		}
-
-		if ( bone.parent && bone.parent.isBone ) {
-
-			bone.matrix.copy( bone.parent.matrixWorld ).invert();
-			bone.matrix.multiply( globalMatrix );
-
-		} else {
-
-			bone.matrix.copy( globalMatrix );
-
-		}
-
-		if ( options.preserveHipPosition && name === options.hip ) {
-
-			bone.matrix.setPosition( pos.set( 0, bone.position.y, 0 ) );
-
-		}
-
-		bone.matrix.decompose( bone.position, bone.quaternion, bone.scale );
-
-		bone.updateMatrixWorld();
-
-	}
-
-	if ( options.preservePosition ) {
-
-		for ( let i = 0; i < bones.length; ++ i ) {
-
-			bone = bones[ i ];
-			name = options.names[ bone.name ] || bone.name;
-
-			if ( name !== options.hip ) {
-
-				bone.position.copy( bonesPosition[ i ] );
-
-			}
-
-		}
-
-	}
-
-	if ( options.preserveMatrix ) {
-
-		// restore matrix
-
-		target.updateMatrixWorld( true );
-
-	}
-
-}
-
-function retargetClip( target, source, clip, options = {} ) {
-
-	options.useFirstFramePosition = options.useFirstFramePosition !== undefined ? options.useFirstFramePosition : false;
-	options.fps = options.fps !== undefined ? options.fps : 30;
-	options.names = options.names || [];
-
-	if ( ! source.isObject3D ) {
-
-		source = getHelperFromSkeleton( source );
-
-	}
-
-	const numFrames = Math.round( clip.duration * ( options.fps / 1000 ) * 1000 ),
-		delta = 1 / options.fps,
-		convertedTracks = [],
-		mixer = new three__WEBPACK_IMPORTED_MODULE_0__.AnimationMixer( source ),
-		bones = getBones( target.skeleton ),
-		boneDatas = [];
-	let positionOffset,
-		bone, boneTo, boneData,
-		name;
-
-	mixer.clipAction( clip ).play();
-	mixer.update( 0 );
-
-	source.updateMatrixWorld();
-
-	for ( let i = 0; i < numFrames; ++ i ) {
-
-		const time = i * delta;
-
-		retarget( target, source, options );
-
-		for ( let j = 0; j < bones.length; ++ j ) {
-
-			name = options.names[ bones[ j ].name ] || bones[ j ].name;
-
-			boneTo = getBoneByName( name, source.skeleton );
-
-			if ( boneTo ) {
-
-				bone = bones[ j ];
-				boneData = boneDatas[ j ] = boneDatas[ j ] || { bone: bone };
-
-				if ( options.hip === name ) {
-
-					if ( ! boneData.pos ) {
-
-						boneData.pos = {
-							times: new Float32Array( numFrames ),
-							values: new Float32Array( numFrames * 3 )
-						};
-
-					}
-
-					if ( options.useFirstFramePosition ) {
-
-						if ( i === 0 ) {
-
-							positionOffset = bone.position.clone();
-
-						}
-
-						bone.position.sub( positionOffset );
-
-					}
-
-					boneData.pos.times[ i ] = time;
-
-					bone.position.toArray( boneData.pos.values, i * 3 );
-
-				}
-
-				if ( ! boneData.quat ) {
-
-					boneData.quat = {
-						times: new Float32Array( numFrames ),
-						values: new Float32Array( numFrames * 4 )
-					};
-
-				}
-
-				boneData.quat.times[ i ] = time;
-
-				bone.quaternion.toArray( boneData.quat.values, i * 4 );
-
-			}
-
-		}
-
-		mixer.update( delta );
-
-		source.updateMatrixWorld();
-
-	}
-
-	for ( let i = 0; i < boneDatas.length; ++ i ) {
-
-		boneData = boneDatas[ i ];
-
-		if ( boneData ) {
-
-			if ( boneData.pos ) {
-
-				convertedTracks.push( new three__WEBPACK_IMPORTED_MODULE_0__.VectorKeyframeTrack(
-					'.bones[' + boneData.bone.name + '].position',
-					boneData.pos.times,
-					boneData.pos.values
-				) );
-
-			}
-
-			convertedTracks.push( new three__WEBPACK_IMPORTED_MODULE_0__.QuaternionKeyframeTrack(
-				'.bones[' + boneData.bone.name + '].quaternion',
-				boneData.quat.times,
-				boneData.quat.values
-			) );
-
-		}
-
-	}
-
-	mixer.uncacheAction( clip );
-
-	return new three__WEBPACK_IMPORTED_MODULE_0__.AnimationClip( clip.name, - 1, convertedTracks );
-
-}
-
-function getHelperFromSkeleton( skeleton ) {
-
-	const source = new three__WEBPACK_IMPORTED_MODULE_0__.SkeletonHelper( skeleton.bones[ 0 ] );
-	source.skeleton = skeleton;
-
-	return source;
-
-}
-
-function getSkeletonOffsets( target, source, options = {} ) {
-
-	const targetParentPos = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(),
-		targetPos = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(),
-		sourceParentPos = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(),
-		sourcePos = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3(),
-		targetDir = new three__WEBPACK_IMPORTED_MODULE_0__.Vector2(),
-		sourceDir = new three__WEBPACK_IMPORTED_MODULE_0__.Vector2();
-
-	options.hip = options.hip !== undefined ? options.hip : 'hip';
-	options.names = options.names || {};
-
-	if ( ! source.isObject3D ) {
-
-		source = getHelperFromSkeleton( source );
-
-	}
-
-	const nameKeys = Object.keys( options.names ),
-		nameValues = Object.values( options.names ),
-		sourceBones = source.isObject3D ? source.skeleton.bones : getBones( source ),
-		bones = target.isObject3D ? target.skeleton.bones : getBones( target ),
-		offsets = [];
-
-	let bone, boneTo,
-		name, i;
-
-	target.skeleton.pose();
-
-	for ( i = 0; i < bones.length; ++ i ) {
-
-		bone = bones[ i ];
-		name = options.names[ bone.name ] || bone.name;
-
-		boneTo = getBoneByName( name, sourceBones );
-
-		if ( boneTo && name !== options.hip ) {
-
-			const boneParent = getNearestBone( bone.parent, nameKeys ),
-				boneToParent = getNearestBone( boneTo.parent, nameValues );
-
-			boneParent.updateMatrixWorld();
-			boneToParent.updateMatrixWorld();
-
-			targetParentPos.setFromMatrixPosition( boneParent.matrixWorld );
-			targetPos.setFromMatrixPosition( bone.matrixWorld );
-
-			sourceParentPos.setFromMatrixPosition( boneToParent.matrixWorld );
-			sourcePos.setFromMatrixPosition( boneTo.matrixWorld );
-
-			targetDir.subVectors(
-				new three__WEBPACK_IMPORTED_MODULE_0__.Vector2( targetPos.x, targetPos.y ),
-				new three__WEBPACK_IMPORTED_MODULE_0__.Vector2( targetParentPos.x, targetParentPos.y )
-			).normalize();
-
-			sourceDir.subVectors(
-				new three__WEBPACK_IMPORTED_MODULE_0__.Vector2( sourcePos.x, sourcePos.y ),
-				new three__WEBPACK_IMPORTED_MODULE_0__.Vector2( sourceParentPos.x, sourceParentPos.y )
-			).normalize();
-
-			const laterialAngle = targetDir.angle() - sourceDir.angle();
-
-			const offset = new three__WEBPACK_IMPORTED_MODULE_0__.Matrix4().makeRotationFromEuler(
-				new three__WEBPACK_IMPORTED_MODULE_0__.Euler(
-					0,
-					0,
-					laterialAngle
-				)
-			);
-
-			bone.matrix.multiply( offset );
-
-			bone.matrix.decompose( bone.position, bone.quaternion, bone.scale );
-
-			bone.updateMatrixWorld();
-
-			offsets[ name ] = offset;
-
-		}
-
-	}
-
-	return offsets;
-
-}
-
-function renameBones( skeleton, names ) {
-
-	const bones = getBones( skeleton );
-
-	for ( let i = 0; i < bones.length; ++ i ) {
-
-		const bone = bones[ i ];
-
-		if ( names[ bone.name ] ) {
-
-			bone.name = names[ bone.name ];
-
-		}
-
-	}
-
-	return this;
-
-}
-
-function getBones( skeleton ) {
-
-	return Array.isArray( skeleton ) ? skeleton : skeleton.bones;
-
-}
-
-function getBoneByName( name, skeleton ) {
-
-	for ( let i = 0, bones = getBones( skeleton ); i < bones.length; i ++ ) {
-
-		if ( name === bones[ i ].name )
-
-			return bones[ i ];
-
-	}
-
-}
-
-function getNearestBone( bone, names ) {
-
-	while ( bone.isBone ) {
-
-		if ( names.indexOf( bone.name ) !== - 1 ) {
-
-			return bone;
-
-		}
-
-		bone = bone.parent;
-
-	}
-
-}
-
-function findBoneTrackData( name, tracks ) {
-
-	const regexp = /\[(.*)\]\.(.*)/,
-		result = { name: name };
-
-	for ( let i = 0; i < tracks.length; ++ i ) {
-
-		// 1 is track name
-		// 2 is track type
-		const trackData = regexp.exec( tracks[ i ].name );
-
-		if ( trackData && name === trackData[ 1 ] ) {
-
-			result[ trackData[ 2 ] ] = i;
-
-		}
-
-	}
-
-	return result;
-
-}
-
-function getEqualsBonesNames( skeleton, targetSkeleton ) {
-
-	const sourceBones = getBones( skeleton ),
-		targetBones = getBones( targetSkeleton ),
-		bones = [];
-
-	search : for ( let i = 0; i < sourceBones.length; i ++ ) {
-
-		const boneName = sourceBones[ i ].name;
-
-		for ( let j = 0; j < targetBones.length; j ++ ) {
-
-			if ( boneName === targetBones[ j ].name ) {
-
-				bones.push( boneName );
-
-				continue search;
-
-			}
-
-		}
-
-	}
-
-	return bones;
-
-}
-
-function clone( source ) {
-
-	const sourceLookup = new Map();
-	const cloneLookup = new Map();
-
-	const clone = source.clone();
-
-	parallelTraverse( source, clone, function ( sourceNode, clonedNode ) {
-
-		sourceLookup.set( clonedNode, sourceNode );
-		cloneLookup.set( sourceNode, clonedNode );
-
-	} );
-
-	clone.traverse( function ( node ) {
-
-		if ( ! node.isSkinnedMesh ) return;
-
-		const clonedMesh = node;
-		const sourceMesh = sourceLookup.get( node );
-		const sourceBones = sourceMesh.skeleton.bones;
-
-		clonedMesh.skeleton = sourceMesh.skeleton.clone();
-		clonedMesh.bindMatrix.copy( sourceMesh.bindMatrix );
-
-		clonedMesh.skeleton.bones = sourceBones.map( function ( bone ) {
-
-			return cloneLookup.get( bone );
-
-		} );
-
-		clonedMesh.bind( clonedMesh.skeleton, clonedMesh.bindMatrix );
-
-	} );
-
-	return clone;
-
-}
-
-
-
-
-function parallelTraverse( a, b, callback ) {
-
-	callback( a, b );
-
-	for ( let i = 0; i < a.children.length; i ++ ) {
-
-		parallelTraverse( a.children[ i ], b.children[ i ], callback );
-
-	}
-
-}
-
-
-
-
 /***/ })
 
 /******/ 	});
@@ -56303,9 +55653,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./game */ "./src/game.ts");
 
 window.onload = () => {
-    const url = new URL(window.location.href);
-    const server = url.searchParams.get('server');
-    _game__WEBPACK_IMPORTED_MODULE_0__.Game.create(server);
+    _game__WEBPACK_IMPORTED_MODULE_0__.Game.create();
 };
 
 })();
