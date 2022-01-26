@@ -1,0 +1,123 @@
+:root {
+    --background-dark: #353438;
+    --background-middle: #666569;
+    --background-light: #e9e9e9;
+
+    --color-light: #dddddd;
+    --color-middle: #888888;
+    --color-dark: #333333;
+  }
+
+body, div {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+body {
+    background: var(--background-middle);
+}
+
+p {
+    margin: 0px;
+    padding: 3px 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+hr {
+    margin-top: 20px;
+    border: none;
+    height: 1px;
+}
+
+.photo {
+    padding-bottom: 60px;
+    width: 100%;
+}
+
+.font-big {
+    padding: 20px 0px;
+    font-size: 28px;
+}
+
+.font-title {
+    padding: 20px 0px;
+    font-size: 18px;
+}
+
+.font-small {
+    font-size: 12px;
+}
+
+.color-light { color: var(--color-light); }
+.color-middle { color: var(--color-middle); }
+.color-dark { color: var(--color-dark); }
+
+.bg-light { background: var(--color-light); }
+.bg-middle { background: var(--color-middle); }
+.bg-dark { background: var(--color-dark); }
+
+.double-card {
+    padding: 10px 0px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-gap: 0px;
+}
+
+.list1:after {
+    position: absolute;
+    right: 20px;
+    content: '\25A0\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1';
+    color: var(--color-middle);
+    text-align: right;
+}
+
+.list3:after {
+    position: absolute;
+    right: 20px;
+    content: '\25A0\25A0\25A0\25A1\25A1\25A1\25A1\25A1\25A1\25A1';
+    color: var(--color-middle);
+    text-align: right;
+}
+
+.list9:after {
+    position: absolute;
+    right: 20px;
+    content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A1';
+    color: var(--color-middle);
+    text-align: right;
+}
+
+.list10:after {
+    position: absolute;
+    right: 20px;
+    content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0';
+    color: var(--color-middle);
+    text-align: right;
+}
+
+#main-grid {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 0px;
+    margin: 20px auto;
+    width: 900px;
+    height: auto;
+    box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+#left-col {
+    grid-column: 1;
+    background: var(--background-dark);
+    padding: 20px;
+}
+
+#right-col {
+    grid-column: 2;
+    background: var(--background-light);
+    padding: 20px;
+}
