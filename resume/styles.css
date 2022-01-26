@@ -27,10 +27,19 @@ p {
     font-size: 14px;
 }
 
-hr {
-    margin-top: 20px;
-    border: none;
-    height: 1px;
+.line { overflow: hidden; }
+.line::after {
+    content: '';
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    top: -2px;
+    width: 100%;
+    height: 0px;
+    /* background: black; */
+    border: solid 1px;
+    left: 10px;
+    margin-right: -50%;
 }
 
 .photo {
@@ -56,9 +65,10 @@ hr {
 .color-middle { color: var(--color-middle); }
 .color-dark { color: var(--color-dark); }
 
-.bg-light { background: var(--color-light); }
-.bg-middle { background: var(--color-middle); }
-.bg-dark { background: var(--color-dark); }
+.border-right {
+    margin-right: 10px;
+    border-right: solid 1px;
+}
 
 .double-card {
     padding: 10px 0px;
@@ -67,37 +77,17 @@ hr {
     grid-gap: 0px;
 }
 
-.list1:after {
-    position: absolute;
-    right: 20px;
-    content: '\25A0\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1';
-    color: var(--color-middle);
-    text-align: right;
-}
-
-.list3:after {
-    position: absolute;
-    right: 20px;
-    content: '\25A0\25A0\25A0\25A1\25A1\25A1\25A1\25A1\25A1\25A1';
-    color: var(--color-middle);
-    text-align: right;
-}
-
-.list9:after {
-    position: absolute;
-    right: 20px;
-    content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A1';
-    color: var(--color-middle);
-    text-align: right;
-}
-
-.list10:after {
-    position: absolute;
-    right: 20px;
-    content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0';
-    color: var(--color-middle);
-    text-align: right;
-}
+.list0:after { position: absolute; right: 20px; text-align: right; content: '\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1'; }
+.list1:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1'; }
+.list2:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A1\25A1\25A1\25A1\25A1\25A1\25A1\25A1'; }
+.list3:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A1\25A1\25A1\25A1\25A1\25A1\25A1'; }
+.list4:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A0\25A1\25A1\25A1\25A1\25A1\25A1'; }
+.list5:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A0\25A0\25A1\25A1\25A1\25A1\25A1'; }
+.list6:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A1\25A1\25A1\25A1'; }
+.list7:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A1\25A1\25A1'; }
+.list8:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A1\25A1'; }
+.list9:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A1'; }
+.list10:after { position: absolute; right: 20px; text-align: right; content: '\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0\25A0'; }
 
 #main-grid {
     overflow: hidden;
