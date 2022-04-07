@@ -201,8 +201,6 @@ class App {
             this.scene.add(gltf.scene);
 
             for (const obj of this.nodes.values()) {
-                if (obj.name === 'NAUO1') { continue; }
-
                 const color = Math.random() * 0.3 + 0.7;
                 switch (obj.state) {
                     case State.PENDING:
