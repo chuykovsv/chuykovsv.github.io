@@ -1,0 +1,97 @@
+body {
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+	width: 100vw;
+	height: 100vh;
+	user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
+	background: radial-gradient(#a5a5a5, #5a5a5a);
+	font-family: 'Arial';
+}
+
+#switcher {
+	overflow: hidden;
+	position: fixed;
+	padding: 0px;
+	margin: 0px;
+	top: 90vh;
+	left: 5vw;
+	width: 90vw;
+	height: 10vh;
+	text-align: center;
+	line-height: 10vh;
+	background: #494949;
+	box-shadow: 0px 0px 2vh white;
+	color: #ffffff;
+	font-size: 5vh;
+}
+
+#name {
+	overflow: hidden;
+	position: fixed;
+	padding: 0px;
+	margin: 0px;
+	top: 0vh;
+	left: 5vw;
+	width: 90vw;
+	height: 10vh;
+	text-align: center;
+	line-height: 10vh;
+	color: #ffffff;
+	font-size: 5vh;
+}
+
+#loading {
+	overflow: hidden;
+	position: fixed;
+	padding: 0px;
+	margin: 0px;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	line-height: 100vh;
+	background: #5a5a5a;
+	color: #ffffff;
+	font-size: 5vh;
+}
+
+#roles {
+	overflow: hidden;
+	position: fixed;
+	padding: 0px;
+	margin: 0px;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	line-height: 30vh;
+	background: #5a5a5a;
+	color: #ffffff;
+	font-size: 5vh;
+}
+
+.role-button {
+	position: relative;
+	margin: 2vh;
+	left: calc(10vw - 2vh);
+	width: 80vw;
+	height: 20vh;
+	/* border: solid 1px white; */
+	box-shadow: 0px 0px 2vh white;
+	line-height: 20vh;
+	background: #494949;
+}
+
+.switcher-button {
+	position: absolute;
+	top: 0px;
+	width: 30vw;
+	height: 10vh;
+	font-size: 5vw;
+	display: none;
+}
