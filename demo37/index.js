@@ -138,11 +138,6 @@ class App {
         nameDiv.innerText = '';
         document.body.appendChild(nameDiv);
 
-        const loadingDiv = document.createElement('div');
-        loadingDiv.id = 'loading';
-        loadingDiv.innerText = 'Loading...';
-        document.body.appendChild(loadingDiv);
-
         const rolesDiv = document.createElement('div');
         rolesDiv.id = 'roles';
         rolesDiv.innerText = 'Select role';
@@ -167,6 +162,11 @@ class App {
             this.role = 2;
             document.getElementById('roles').style.display = 'none';
         }
+
+        const loadingDiv = document.createElement('div');
+        loadingDiv.id = 'loading';
+        loadingDiv.innerText = 'Loading...';
+        document.body.appendChild(loadingDiv);
     }
 
     async load(url) {
