@@ -1,7 +1,7 @@
 const State = {
-    PENDING: 'pending',
-    READY: 'ready',
-    BROKEN: 'broken'
+    PENDING: 'оплачено',
+    READY: 'доставлено',
+    BROKEN: 'смонтированно'
 };
 
 class App {
@@ -44,26 +44,7 @@ class App {
             this.raycaster.setFromCamera(this.ndc, this.camera);
             const intersects = this.raycaster.intersectObjects(this.scene.children);
 
-            document.getElementById('name').innerText = '';
-            if (this.selectObj !== null) {
-                const color = Math.random() * 0.3 + 0.7;
-                switch (this.selectObj.state) {
-                    case State.PENDING:
-                        this.selectObj.material.color.setScalar(color);
-                        break;
-                    case State.READY:
-                        this.selectObj.material.color.setRGB(0, color, 0);
-                        break;
-                    case State.BROKEN:
-                        this.selectObj.material.color.setRGB(color, 0, 0);
-                        break;
-                }
-                this.selectObj = null;
-            }
-
-            for (const el of document.getElementsByClassName('switcher-button')) {
-                el.style.display = 'none';
-            }
+            this._unselect();
 
             if (intersects.length > 0) {
                 const obj = this.nodes.get(intersects[0].object.parent.name);
@@ -75,7 +56,7 @@ class App {
                     }
                     obj.material.color.setRGB(0, 0, 0);
                     this.selectObj = obj;
-                    document.getElementById('name').innerText = intersects[0].object.parent.name + ' [' + obj.state + ']';
+                    document.getElementById('name').innerHTML = intersects[0].object.parent.name + '<br>[' + obj.state + ']';
                 }
             }
         });
@@ -91,46 +72,72 @@ class App {
         requestAnimationFrame(loop);
     }
 
+    _unselect() {
+        document.getElementById('name').innerText = '';
+        if (this.selectObj !== null) {
+            const color = Math.random() * 0.3 + 0.7;
+            switch (this.selectObj.state) {
+                case State.PENDING:
+                    this.selectObj.material.color.setScalar(color);
+                    break;
+                case State.READY:
+                    this.selectObj.material.color.setRGB(color, color, 0);
+                    break;
+                case State.BROKEN:
+                    this.selectObj.material.color.setRGB(0, color, 0);
+                    break;
+            }
+            this.selectObj = null;
+        }
+
+        for (const el of document.getElementsByClassName('switcher-button')) {
+            el.style.display = 'none';
+        }
+    }
+
     _createUI() {
         const switcherDiv = document.createElement('div');
         switcherDiv.id = 'switcher';
-        switcherDiv.innerText = 'Click on element';
+        switcherDiv.innerText = 'Выберите деталь';
         document.body.appendChild(switcherDiv);
 
         const switcherPendingDiv = document.createElement('div');
         switcherPendingDiv.className = 'switcher-button';
-        switcherPendingDiv.innerText = 'Pending';
+        switcherPendingDiv.innerText = 'Оплачено';
         switcherPendingDiv.style.background = '#aeaeae';
         switcherPendingDiv.style.left = '0vw';
         switcherDiv.appendChild(switcherPendingDiv);
         switcherPendingDiv.addEventListener('click', (event) => {
             event.stopPropagation();
             this.selectObj.state = State.PENDING;
-            document.getElementById('name').innerText = this.selectObj.name + ' [' + this.selectObj.state + ']';
+            document.getElementById('name').innerHTML = this.selectObj.name + '<br>[' + this.selectObj.state + ']';
+            this._unselect();
         });
 
         const switcherReadyDiv = document.createElement('div');
         switcherReadyDiv.className = 'switcher-button';
-        switcherReadyDiv.innerText = 'Ready';
-        switcherReadyDiv.style.background = '#00ae00';
+        switcherReadyDiv.innerText = 'Доставлено';
+        switcherReadyDiv.style.background = '#aeae00';
         switcherReadyDiv.style.left = '30vw';
         switcherDiv.appendChild(switcherReadyDiv);
         switcherReadyDiv.addEventListener('click', (event) => {
             event.stopPropagation();
             this.selectObj.state = State.READY;
-            document.getElementById('name').innerText = this.selectObj.name + ' [' + this.selectObj.state + ']';
+            document.getElementById('name').innerHTML = this.selectObj.name + '<br>[' + this.selectObj.state + ']';
+            this._unselect();
         });
 
         const switcherBrokenDiv = document.createElement('div');
         switcherBrokenDiv.className = 'switcher-button';
-        switcherBrokenDiv.innerText = 'Broken';
-        switcherBrokenDiv.style.background = '#ae0000';
+        switcherBrokenDiv.innerText = 'Смонтированно';
+        switcherBrokenDiv.style.background = '#00ae00';
         switcherBrokenDiv.style.left = '60vw';
         switcherDiv.appendChild(switcherBrokenDiv);
         switcherBrokenDiv.addEventListener('click', (event) => {
             event.stopPropagation();
             this.selectObj.state = State.BROKEN;
-            document.getElementById('name').innerText = this.selectObj.name + ' [' + this.selectObj.state + ']';
+            document.getElementById('name').innerHTML = this.selectObj.name + '<br>[' + this.selectObj.state + ']';
+            this._unselect();
         });
 
         const nameDiv = document.createElement('div');
@@ -140,12 +147,12 @@ class App {
 
         const rolesDiv = document.createElement('div');
         rolesDiv.id = 'roles';
-        rolesDiv.innerText = 'Select role';
+        rolesDiv.innerText = 'Выберите роль';
         document.body.appendChild(rolesDiv);
 
         const editDiv = document.createElement('div');
         editDiv.className = 'role-button';
-        editDiv.innerText = 'Edit'
+        editDiv.innerHTML = 'Строитель<br>(редактирование)'
         rolesDiv.appendChild(editDiv);
         editDiv.onclick = (event) => {
             event.stopPropagation();
@@ -155,7 +162,7 @@ class App {
 
         const viewDiv = document.createElement('div');
         viewDiv.className = 'role-button';
-        viewDiv.innerText = 'View'
+        viewDiv.innerHTML = 'Снабженец<br>(просмотр)'
         rolesDiv.appendChild(viewDiv);
         viewDiv.onclick = (event) => {
             event.stopPropagation();
@@ -165,7 +172,7 @@ class App {
 
         const loadingDiv = document.createElement('div');
         loadingDiv.id = 'loading';
-        loadingDiv.innerText = 'Loading...';
+        loadingDiv.innerText = 'Загрузка...';
         document.body.appendChild(loadingDiv);
     }
 
@@ -207,10 +214,10 @@ class App {
                         obj.material.color.setScalar(color);
                         break;
                     case State.READY:
-                        obj.material.color.setRGB(0, color, 0);
+                        obj.material.color.setRGB(color, color, 0);
                         break;
                     case State.BROKEN:
-                        obj.material.color.setRGB(color, 0, 0);
+                        obj.material.color.setRGB(0, color, 0);
                         break;
                 }
             }
