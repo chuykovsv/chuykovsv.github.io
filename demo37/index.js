@@ -12,6 +12,7 @@ class App {
         this.renderer.outputEncoding = THREE.sRGBEncoding;
         this.renderer.toneMapping = THREE.LinearToneMapping
         this.renderer.toneMappingExposure = 0.1;
+        this.renderer.setPixelRatio(window.devicePixelRatio);
         document.body.appendChild(this.renderer.domElement);
 
         this.scene = new THREE.Scene();
