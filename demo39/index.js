@@ -2900,7 +2900,7 @@ __webpack_require__.r(__webpack_exports__);
 class LookOrbitSystem {
     static onStart$128() {
         const pointer = [..._input_system__WEBPACK_IMPORTED_MODULE_2__.InputSystem.pointers.values()][0];
-        if (pointer !== undefined && pointer.type === 'mouse' && (pointer.state & 1) === 1) {
+        if (pointer !== undefined && (pointer.state & 1) === 1) {
             LookOrbitSystem.polar += pointer.dy * 0.01;
             LookOrbitSystem.azimuthal += pointer.dx * 0.01;
         }
@@ -3096,7 +3096,7 @@ module.exports = "#version 300 es\nprecision highp float;\n\nuniform vec4 c4_col
   \********************************************/
 /***/ ((module) => {
 
-module.exports = "#version 300 es\n\nlayout(location = 0) in vec3 position;\nlayout(location = 1) in vec3 normal;\n\nlayout(location = 15) in int instances;\n\nlayout(std140) uniform tn_camera { mat4 tn_pm; mat4 tn_vm; } ol;\n\nuniform sampler2D sr_instances;\n\nout vec3 v_nor;\nout vec3 v_cam;\nout vec3 v_pos;\n\nmat4 getMatrix() {\n    int x = (instances * 4) % 1024;\n    int y = (instances * 4) / 1024;\n    vec4 xAxis = texelFetch(sr_instances, ivec2(x + 0, y), 0);\n    vec4 yAxis = texelFetch(sr_instances, ivec2(x + 1, y), 0);\n    vec4 zAxis = texelFetch(sr_instances, ivec2(x + 2, y), 0);\n    vec4 wAxis = texelFetch(sr_instances, ivec2(x + 3, y), 0);\n    return mat4(xAxis, yAxis, zAxis, wAxis);\n}\n\nvoid main() {\n    mat4 objectMatrix = getMatrix();\n    mat3 normalMatrix = transpose(inverse(mat3(objectMatrix)));\n    mat4 tmp = ol.tn_vm; // TODO fix for mobile\n    v_cam = inverse(tmp)[3].xyz;\n    v_pos = vec3(objectMatrix * vec4(position, 1.0));\n    v_nor = normalMatrix * normal;\n    gl_Position = ol.tn_pm * ol.tn_vm * objectMatrix * vec4(position, 1.0);\n}\n"
+module.exports = "#version 300 es\n\nlayout(location = 0) in vec3 position;\nlayout(location = 1) in vec3 normal;\n\nlayout(location = 15) in int instances;\n\nlayout(std140) uniform tn_camera { mat4 tn_pm; mat4 tn_vm; } ol;\n\nuniform sampler2D sr_instances;\n\nout vec3 v_nor;\nout vec3 v_cam;\nout vec3 v_pos;\n\nmat4 getMatrix() {\n    int x = (instances * 4) % 1024;\n    int y = (instances * 4) / 1024;\n    vec4 xAxis = texelFetch(sr_instances, ivec2(x + 0, y), 0);\n    vec4 yAxis = texelFetch(sr_instances, ivec2(x + 1, y), 0);\n    vec4 zAxis = texelFetch(sr_instances, ivec2(x + 2, y), 0);\n    vec4 wAxis = texelFetch(sr_instances, ivec2(x + 3, y), 0);\n    mat4 rot = mat4(vec4(1.0, 0.0, 0.0, 0.0), vec4(0.0, 0.0, 1.0, 0.0), vec4(0.0, -1.0, 0.0, 0.0), vec4(0.0, 0.0, 0.0, 1.0));\n return rot*mat4(xAxis, yAxis, zAxis, wAxis);\n}\n\nvoid main() {\n    mat4 objectMatrix = getMatrix();\n    mat3 normalMatrix = transpose(inverse(mat3(objectMatrix)));\n    mat4 tmp = ol.tn_vm; // TODO fix for mobile\n    v_cam = inverse(tmp)[3].xyz;\n    v_pos = vec3(objectMatrix * vec4(position, 1.0));\n    v_nor = normalMatrix * normal;\n    gl_Position = ol.tn_pm * ol.tn_vm * objectMatrix * vec4(position, 1.0);\n}\n"
 
 /***/ })
 
@@ -3104,7 +3104,7 @@ module.exports = "#version 300 es\n\nlayout(location = 0) in vec3 position;\nlay
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -3118,14 +3118,14 @@ module.exports = "#version 300 es\n\nlayout(location = 0) in vec3 position;\nlay
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -3138,7 +3138,7 @@ module.exports = "#version 300 es\n\nlayout(location = 0) in vec3 position;\nlay
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -3150,12 +3150,12 @@ module.exports = "#version 300 es\n\nlayout(location = 0) in vec3 position;\nlay
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -3166,7 +3166,7 @@ module.exports = "#version 300 es\n\nlayout(location = 0) in vec3 position;\nlay
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -3286,7 +3286,8 @@ _src__WEBPACK_IMPORTED_MODULE_0__.Core.init(document.body, [
     _src__WEBPACK_IMPORTED_MODULE_0__.MeshSystem,
     MySystem
 ]).then(async () => {
-    _src__WEBPACK_IMPORTED_MODULE_0__.LookOrbitSystem.distance = 15;
+    _src__WEBPACK_IMPORTED_MODULE_0__.LookOrbitSystem.distance = 100;
+    _src__WEBPACK_IMPORTED_MODULE_0__.LookOrbitSystem.target.y = 50;
     const look = new _src__WEBPACK_IMPORTED_MODULE_0__.Look();
     const gltf = await _src__WEBPACK_IMPORTED_MODULE_0__.GltfLoader.load('./resources/Stones.gltf');
     const scene = gltf.scenes[0];
