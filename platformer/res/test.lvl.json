@@ -1,0 +1,33 @@
+{
+    "name": "test",
+    "respawn": { "x": 0, "y": -4 },
+    "bgs": [
+        { "name": "gb1", "url": "./res/bg1.png", "x": -8, "y": 0, "w": 16, "h": 16 },
+        { "name": "gb2", "url": "./res/bg2.png", "x": 8, "y": 0, "w": 16, "h": 16 }
+    ],
+    "nodes": [
+        { "name": "ground", "cx": 0, "cy": 0 }
+    ],
+    "aabbs": [
+        { "name": "bedrock", "node": "ground", "ox": 0, "oy": -10, "sx": 160, "sy": 4 },
+        { "name": "down", "node": "ground", "ox": 0, "oy": -7, "sx": 36, "sy": 2 },
+
+        { "name": "left", "node": "ground", "ox": -16, "oy": -0.25, "sx": 4, "sy": 11.5 },
+        { "name": "ld", "node": "ground", "ox": -11.5, "oy": -5, "sx": 5, "sy": 2 },
+        { "name": "lld", "node": "ground", "ox": -13.5, "oy": -2.5, "sx": 1, "sy": 3 },
+        { "name": "ldd", "node": "ground", "ox": -7, "oy": -5.75, "sx": 4, "sy": 0.5 },
+
+        { "name": "right", "node": "ground", "ox": 16, "oy": -0.25, "sx": 4, "sy": 11.5 },
+        { "name": "rd", "node": "ground", "ox": 11.5, "oy": -5, "sx": 5, "sy": 2 },
+        { "name": "rrd", "node": "ground", "ox": 13.5, "oy": -2.5, "sx": 1, "sy": 3 },
+        { "name": "rdd", "node": "ground", "ox": 7, "oy": -5.75, "sx": 4, "sy": 0.5 },
+
+        { "name": "cp", "node": "ground", "ox": 0, "oy": 2.5, "sx": 3, "sy": 1 },
+        { "name": "lp1", "node": "ground", "ox": -7.5, "oy": -1, "sx": 4, "sy": 1 },
+        { "name": "lp2", "node": "ground", "ox": -9.25, "oy": 2.5, "sx": 3.5, "sy": 1 },
+        { "name": "rp1", "node": "ground", "ox": 7.5, "oy": -1, "sx": 4, "sy": 1 },
+        { "name": "rp2", "node": "ground", "ox": 9.25, "oy": 2.5, "sx": 3.5, "sy": 1 }
+    ],
+    "circles": [],
+    "walkers": []
+}

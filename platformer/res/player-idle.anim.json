@@ -1,0 +1,10 @@
+{
+    "name": "player-idle",
+    "duration": 0.8,
+    "frames": [
+        "./res/player-idle/f0.png",
+        "./res/player-idle/f1.png",
+        "./res/player-idle/f2.png",
+        "./res/player-idle/f3.png"
+    ]
+}

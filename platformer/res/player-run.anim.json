@@ -1,0 +1,10 @@
+{
+    "name": "player-run",
+    "duration": 0.5,
+    "frames": [
+        "./res/player-run/f0.png",
+        "./res/player-run/f1.png",
+        "./res/player-run/f2.png",
+        "./res/player-run/f3.png"
+    ]
+}

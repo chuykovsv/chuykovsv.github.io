@@ -1,0 +1,8 @@
+{
+    "name": "walker-walk",
+    "duration": 0.5,
+    "frames": [
+        "./res/walker-walk/f0.png",
+        "./res/walker-walk/f1.png"
+    ]
+}

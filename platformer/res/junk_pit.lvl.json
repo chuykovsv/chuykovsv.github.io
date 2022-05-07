@@ -1,0 +1,69 @@
+{
+    "name": "junk pit",
+    "respawn": { "x": -70.5, "y": -26 },
+    "bgs": [
+        { "name": "gb", "url": "./res/lvl_1_grid.png", "x": 0, "y": 0, "w": 256, "h": 128 },
+        { "name": "p17", "url": "./res/lvl_1_p17.png", "x": -80, "y": -16, "w": 32, "h": 32 },
+        { "name": "p18", "url": "./res/lvl_1_p18.png", "x": -48, "y": -16, "w": 32, "h": 32 }
+    ],
+    "nodes": [
+        { "name": "ground", "cx": 0, "cy": 0 },
+        { "name": "trap", "cx": 0, "cy": 0 }
+    ],
+    "aabbs": [
+        { "name": "up", "node": "ground", "ox": 0, "oy": 56, "sx": 256, "sy": 16 },
+        { "name": "down", "node": "ground", "ox": 0, "oy": -56, "sx": 256, "sy": 16 },
+        { "name": "left", "node": "ground", "ox": -120, "oy": 0, "sx": 16, "sy": 96 },
+        { "name": "right", "node": "ground", "ox": 120, "oy": 0, "sx": 16, "sy": 96 },
+
+        { "name": "g0", "node": "ground", "ox": -100.5, "oy": -20.5, "sx": 23, "sy": 13 },
+        { "name": "g1", "node": "ground", "ox": -89, "oy": -32.5, "sx": 46, "sy": 11 },
+        { "name": "g2", "node": "ground", "ox": -58.5, "oy": -33.5, "sx": 15, "sy": 9 },
+        { "name": "g3", "node": "ground", "ox": -47, "oy": -34, "sx": 8, "sy": 8 },
+        { "name": "g4", "node": "ground", "ox": -39.5, "oy": -40.5, "sx": 7, "sy": 15 },
+        { "name": "g5", "node": "ground", "ox": -29, "oy": -47, "sx": 14, "sy": 2 },
+        { "name": "g6", "node": "ground", "ox": -13.5, "oy": -46.5, "sx": 17, "sy": 3 },
+        { "name": "g7", "node": "ground", "ox": 3, "oy": -44.5, "sx": 16, "sy": 7 },
+        { "name": "g8", "node": "ground", "ox": 18, "oy": -47.5, "sx": 14, "sy": 1 },
+        { "name": "g9", "node": "ground", "ox": 27.5, "oy": -46.5, "sx": 5, "sy": 3 },
+        { "name": "g10", "node": "ground", "ox": 31.5, "oy": -47, "sx": 3, "sy": 2 },
+        { "name": "g11", "node": "ground", "ox": 34, "oy": -47.5, "sx": 2, "sy": 1 },
+        { "name": "g12", "node": "ground", "ox": -110.5, "oy": -13.5, "sx": 3, "sy": 1 },
+        { "name": "g13", "node": "ground", "ox": -88.5, "oy": -15, "sx": 1, "sy": 2 },
+        { "name": "g14", "node": "ground", "ox": -88.5, "oy": -24.5, "sx": 1, "sy": 5 },
+        { "name": "g15", "node": "ground", "ox": -84, "oy": -26, "sx": 2, "sy": 2 },
+        { "name": "g16", "node": "ground", "ox": -81, "oy": -26.75, "sx": 4, "sy": 0.5 },
+        { "name": "g17", "node": "ground", "ox": -64.5, "oy": -28.5, "sx": 3, "sy": 1 },
+        { "name": "g18", "node": "ground", "ox": -54, "oy": -28.5, "sx": 2, "sy": 1 },
+        { "name": "g19", "node": "ground", "ox": -42, "oy": -32, "sx": 2, "sy": 2 },
+        { "name": "g20", "node": "ground", "ox": -40.5, "oy": -32.5, "sx": 1, "sy": 1 },
+        { "name": "g21", "node": "ground", "ox": -35.5, "oy": -44.5, "sx": 1, "sy": 3 },
+        { "name": "g22", "node": "ground", "ox": -3, "oy": -40, "sx": 4, "sy": 2 },
+        { "name": "g23", "node": "ground", "ox": 1, "oy": -40.5, "sx": 4, "sy": 1 },
+        { "name": "g24", "node": "ground", "ox": 8.5, "oy": -40.5, "sx": 5, "sy": 1 },
+
+        { "name": "p0", "node": "ground", "ox": -85.5, "oy": -19, "sx": 3, "sy": 2 },
+        { "name": "p1", "node": "ground", "ox": -79, "oy": -22.5, "sx": 4, "sy": 1 },
+        { "name": "p2", "node": "ground", "ox": -84, "oy": -14, "sx": 2, "sy": 2 },
+        { "name": "p3", "node": "ground", "ox": -80, "oy": -16.5, "sx": 2, "sy": 1 },
+        { "name": "p4", "node": "ground", "ox": -74.5, "oy": -19.5, "sx": 3, "sy": 1 },
+        { "name": "p5", "node": "ground", "ox": -32.5, "oy": -36.5, "sx": 3, "sy": 3 },
+        { "name": "p6", "node": "ground", "ox": -30, "oy": -42, "sx": 4, "sy": 2 },
+        { "name": "p7", "node": "ground", "ox": -28, "oy": -38.5, "sx": 2, "sy": 1 },
+        { "name": "p8", "node": "ground", "ox": -22, "oy": -40.5, "sx": 4, "sy": 1 },
+        { "name": "p9", "node": "ground", "ox": -26, "oy": -33.5, "sx": 4, "sy": 1 },
+        { "name": "p10", "node": "ground", "ox": -17.5, "oy": -35.5, "sx": 3, "sy": 1 },
+        { "name": "p11", "node": "ground", "ox": -14.5, "oy": -39.5, "sx": 3, "sy": 1 },
+        { "name": "p12", "node": "ground", "ox": -9, "oy": -40, "sx": 2, "sy": 2 },
+        { "name": "p13", "node": "ground", "ox": 15.5, "oy": -41, "sx": 3, "sy": 2 },
+        { "name": "p14", "node": "ground", "ox": 21.5, "oy": -42.5, "sx": 3, "sy": 1 },
+
+        { "name": "trap0", "node": "trap", "ox": -86.5, "oy": -26.25, "sx": 3, "sy": 1.5, "conf": 1 },
+        { "name": "trap1", "node": "trap", "ox": 4.5, "oy": -40.75, "sx": 3, "sy": 0.5, "conf": 1 },
+        { "name": "trap2", "node": "trap", "ox": 18, "oy": -46.5, "sx": 14, "sy": 1, "conf": 1 }
+    ],
+    "circles": [],
+    "walkers": [
+        { "x": -57.5, "y": -28.5 }
+    ]
+}
