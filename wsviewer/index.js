@@ -36,7 +36,7 @@ var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || 
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _WSViewer_instances, _WSViewer_ndc, _WSViewer_root, _WSViewer_scene, _WSViewer_camera, _WSViewer_colors, _WSViewer_renderer, _WSViewer_controls, _WSViewer_elements, _WSViewer_material, _WSViewer_raycaster, _WSViewer_renderables, _WSViewer_raf, _WSViewer_width, _WSViewer_height, _WSViewer_updateSize;
+var _WSViewer_instances, _WSViewer_ndc, _WSViewer_root, _WSViewer_scene, _WSViewer_camera, _WSViewer_colors, _WSViewer_renderer, _WSViewer_controls, _WSViewer_elements, _WSViewer_material, _WSViewer_raycaster, _WSViewer_renderables, _WSViewer_pr, _WSViewer_raf, _WSViewer_width, _WSViewer_height, _WSViewer_updateSize;
 
 
 var WSElementColor;
@@ -72,6 +72,7 @@ class WSViewer {
         _WSViewer_material.set(this, void 0);
         _WSViewer_raycaster.set(this, void 0);
         _WSViewer_renderables.set(this, void 0);
+        _WSViewer_pr.set(this, window.devicePixelRatio);
         _WSViewer_raf.set(this, 0);
         _WSViewer_width.set(this, 1);
         _WSViewer_height.set(this, 1);
@@ -204,16 +205,96 @@ class WSViewer {
         this.clear = error;
     }
 }
-_WSViewer_ndc = new WeakMap(), _WSViewer_root = new WeakMap(), _WSViewer_scene = new WeakMap(), _WSViewer_camera = new WeakMap(), _WSViewer_colors = new WeakMap(), _WSViewer_renderer = new WeakMap(), _WSViewer_controls = new WeakMap(), _WSViewer_elements = new WeakMap(), _WSViewer_material = new WeakMap(), _WSViewer_raycaster = new WeakMap(), _WSViewer_renderables = new WeakMap(), _WSViewer_raf = new WeakMap(), _WSViewer_width = new WeakMap(), _WSViewer_height = new WeakMap(), _WSViewer_instances = new WeakSet(), _WSViewer_updateSize = function _WSViewer_updateSize() {
+_WSViewer_ndc = new WeakMap(), _WSViewer_root = new WeakMap(), _WSViewer_scene = new WeakMap(), _WSViewer_camera = new WeakMap(), _WSViewer_colors = new WeakMap(), _WSViewer_renderer = new WeakMap(), _WSViewer_controls = new WeakMap(), _WSViewer_elements = new WeakMap(), _WSViewer_material = new WeakMap(), _WSViewer_raycaster = new WeakMap(), _WSViewer_renderables = new WeakMap(), _WSViewer_pr = new WeakMap(), _WSViewer_raf = new WeakMap(), _WSViewer_width = new WeakMap(), _WSViewer_height = new WeakMap(), _WSViewer_instances = new WeakSet(), _WSViewer_updateSize = function _WSViewer_updateSize() {
+    const pr = window.devicePixelRatio;
     const width = __classPrivateFieldGet(this, _WSViewer_root, "f").clientWidth;
     const height = __classPrivateFieldGet(this, _WSViewer_root, "f").clientHeight;
-    if (width !== __classPrivateFieldGet(this, _WSViewer_width, "f") || height !== __classPrivateFieldGet(this, _WSViewer_height, "f")) {
-        __classPrivateFieldGet(this, _WSViewer_renderer, "f").setSize(width, height, false);
+    if (width !== __classPrivateFieldGet(this, _WSViewer_width, "f") || height !== __classPrivateFieldGet(this, _WSViewer_height, "f") || pr !== __classPrivateFieldGet(this, _WSViewer_pr, "f")) {
+        __classPrivateFieldGet(this, _WSViewer_renderer, "f").setSize(width * pr, height * pr, false);
+        __classPrivateFieldSet(this, _WSViewer_pr, pr, "f");
         __classPrivateFieldSet(this, _WSViewer_width, width, "f");
         __classPrivateFieldSet(this, _WSViewer_height, height, "f");
         __classPrivateFieldGet(this, _WSViewer_camera, "f").aspect = width / height;
         __classPrivateFieldGet(this, _WSViewer_camera, "f").updateProjectionMatrix();
     }
+};
+
+
+/***/ }),
+
+/***/ "./test/ui.ts":
+/*!********************!*\
+  !*** ./test/ui.ts ***!
+  \********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UI": () => (/* binding */ UI)
+/* harmony export */ });
+var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _UI_instances, _UI_root, _UI_main, _UI_labelBg, _UI_nameLabel, _UI_developerLabel, _UI_statusLabel, _UI_createLabel;
+class UI {
+    constructor(options) {
+        _UI_instances.add(this);
+        _UI_root.set(this, void 0);
+        _UI_main.set(this, void 0);
+        _UI_labelBg.set(this, void 0);
+        _UI_nameLabel.set(this, void 0);
+        _UI_developerLabel.set(this, void 0);
+        _UI_statusLabel.set(this, void 0);
+        const { root } = options;
+        __classPrivateFieldSet(this, _UI_root, root, "f");
+        __classPrivateFieldSet(this, _UI_main, document.createElement('div'), "f");
+        __classPrivateFieldGet(this, _UI_root, "f").appendChild(__classPrivateFieldGet(this, _UI_main, "f"));
+        const mainStype = __classPrivateFieldGet(this, _UI_main, "f").style;
+        mainStype.position = 'fixed';
+        mainStype.top = '0px';
+        mainStype.left = '0px';
+        mainStype.width = '100%';
+        mainStype.height = '100%';
+        __classPrivateFieldSet(this, _UI_labelBg, document.createElement('div'), "f");
+        __classPrivateFieldGet(this, _UI_main, "f").appendChild(__classPrivateFieldGet(this, _UI_labelBg, "f"));
+        const labelStyleBg = __classPrivateFieldGet(this, _UI_labelBg, "f").style;
+        labelStyleBg.position = 'absolute';
+        labelStyleBg.top = '0px';
+        labelStyleBg.left = '0px';
+        labelStyleBg.width = '100vw';
+        labelStyleBg.height = '10vh';
+        labelStyleBg.background = 'linear-gradient(var(--bg-dark), var(--bg-dark), #33333300)';
+        __classPrivateFieldSet(this, _UI_nameLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '0vh', '4vh'), "f");
+        __classPrivateFieldSet(this, _UI_developerLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '4vh', '3vh'), "f");
+        __classPrivateFieldSet(this, _UI_statusLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '7vh', '3vh'), "f");
+    }
+    setLabelText(name, developer, status) {
+        __classPrivateFieldGet(this, _UI_nameLabel, "f").innerHTML = name ?? '';
+        __classPrivateFieldGet(this, _UI_developerLabel, "f").innerHTML = developer ? `\u251C developer: ${developer}` : '';
+        __classPrivateFieldGet(this, _UI_statusLabel, "f").innerHTML = status ? `\u2514 status: ${status}` : '';
+    }
+}
+_UI_root = new WeakMap(), _UI_main = new WeakMap(), _UI_labelBg = new WeakMap(), _UI_nameLabel = new WeakMap(), _UI_developerLabel = new WeakMap(), _UI_statusLabel = new WeakMap(), _UI_instances = new WeakSet(), _UI_createLabel = function _UI_createLabel(root, top, size) {
+    const label = document.createElement('div');
+    root.appendChild(label);
+    const { style } = label;
+    style.position = 'absolute';
+    style.left = '8vw';
+    style.top = top;
+    style.color = 'white';
+    style.textAlign = 'left';
+    style.fontSize = size;
+    style.height = size;
+    style.width = '92vw';
+    return label;
 };
 
 
@@ -50886,19 +50967,44 @@ var __webpack_exports__ = {};
   \***********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
+/* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./test/ui.ts");
+
 
 (async () => {
     const viewer = new _src_index__WEBPACK_IMPORTED_MODULE_0__.WSViewer({
         root: document.body,
         colors: [
-            { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1, r: 1, g: 0, b: 0 },
+            { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_0, r: 0.8, g: 0.9, b: 1 },
+            { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1, r: 1, g: 1, b: 1 },
             { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_2, r: 1, g: 1, b: 0 }
         ]
     });
-    await viewer.load('./models/stones.wsmdl');
-    viewer.setElementColor(0, _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1);
+    const ui = new _ui__WEBPACK_IMPORTED_MODULE_1__.UI({
+        root: document.body
+    });
+    await viewer.load('./models/demo.wsmdl');
+    const response = await fetch('./models/demo.json');
+    if (response.ok === false) {
+        throw new Error('ID file not found.');
+    }
+    const ids = await response.json();
+    const idsMap = new Map();
+    ids.forEach(e => { idsMap.set(e.id, e.name); });
+    let selectedId = null;
     window.addEventListener('click', e => {
-        console.info(viewer.raycast(e.clientX, e.clientY));
+        const id = viewer.raycast(e.clientX, e.clientY);
+        if (selectedId !== null) {
+            viewer.setElementColor(selectedId, _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_0);
+        }
+        if (id !== null) {
+            const name = idsMap.get(id);
+            ui.setLabelText(name, 'first', 'ready');
+            selectedId = id;
+            viewer.setElementColor(id, _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1);
+        }
+        else {
+            ui.setLabelText();
+        }
     });
     window.viewer = viewer;
 })();
