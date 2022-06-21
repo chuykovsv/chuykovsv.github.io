@@ -88,7 +88,7 @@ class WSViewer {
         __classPrivateFieldSet(this, _WSViewer_material, new three__WEBPACK_IMPORTED_MODULE_1__.MeshStandardMaterial(), "f");
         __classPrivateFieldSet(this, _WSViewer_raycaster, new three__WEBPACK_IMPORTED_MODULE_1__.Raycaster(), "f");
         __classPrivateFieldSet(this, _WSViewer_renderables, new Map(), "f");
-        __classPrivateFieldGet(this, _WSViewer_camera, "f").position.z = 50;
+        __classPrivateFieldGet(this, _WSViewer_camera, "f").position.z = 20;
         for (const color of colors) {
             const { target, r, g, b } = color;
             __classPrivateFieldGet(this, _WSViewer_colors, "f")[target].setRGB(r, g, b);
@@ -243,7 +243,7 @@ var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || 
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
     return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
 };
-var _UI_instances, _UI_root, _UI_main, _UI_labelBg, _UI_nameLabel, _UI_developerLabel, _UI_statusLabel, _UI_createLabel;
+var _UI_instances, _UI_root, _UI_main, _UI_labelBg, _UI_nameLabel, _UI_developerLabel, _UI_createLabel;
 class UI {
     constructor(options) {
         _UI_instances.add(this);
@@ -252,7 +252,6 @@ class UI {
         _UI_labelBg.set(this, void 0);
         _UI_nameLabel.set(this, void 0);
         _UI_developerLabel.set(this, void 0);
-        _UI_statusLabel.set(this, void 0);
         const { root } = options;
         __classPrivateFieldSet(this, _UI_root, root, "f");
         __classPrivateFieldSet(this, _UI_main, document.createElement('div'), "f");
@@ -271,18 +270,16 @@ class UI {
         labelStyleBg.left = '0px';
         labelStyleBg.width = '100vw';
         labelStyleBg.height = '10vh';
-        labelStyleBg.background = 'linear-gradient(var(--bg-dark), var(--bg-dark), #33333300)';
-        __classPrivateFieldSet(this, _UI_nameLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '0vh', '4vh'), "f");
-        __classPrivateFieldSet(this, _UI_developerLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '4vh', '3vh'), "f");
-        __classPrivateFieldSet(this, _UI_statusLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '7vh', '3vh'), "f");
+        labelStyleBg.background = 'var(--bg-dark)';
+        __classPrivateFieldSet(this, _UI_nameLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '1vh', '4vh'), "f");
+        __classPrivateFieldSet(this, _UI_developerLabel, __classPrivateFieldGet(this, _UI_instances, "m", _UI_createLabel).call(this, __classPrivateFieldGet(this, _UI_main, "f"), '5vh', '3vh'), "f");
     }
-    setLabelText(name, developer, status) {
+    setLabelText(name, developer) {
         __classPrivateFieldGet(this, _UI_nameLabel, "f").innerHTML = name ?? '';
-        __classPrivateFieldGet(this, _UI_developerLabel, "f").innerHTML = developer ? `\u251C developer: ${developer}` : '';
-        __classPrivateFieldGet(this, _UI_statusLabel, "f").innerHTML = status ? `\u2514 status: ${status}` : '';
+        __classPrivateFieldGet(this, _UI_developerLabel, "f").innerHTML = developer ? `[${developer}]` : '';
     }
 }
-_UI_root = new WeakMap(), _UI_main = new WeakMap(), _UI_labelBg = new WeakMap(), _UI_nameLabel = new WeakMap(), _UI_developerLabel = new WeakMap(), _UI_statusLabel = new WeakMap(), _UI_instances = new WeakSet(), _UI_createLabel = function _UI_createLabel(root, top, size) {
+_UI_root = new WeakMap(), _UI_main = new WeakMap(), _UI_labelBg = new WeakMap(), _UI_nameLabel = new WeakMap(), _UI_developerLabel = new WeakMap(), _UI_instances = new WeakSet(), _UI_createLabel = function _UI_createLabel(root, top, size) {
     const label = document.createElement('div');
     root.appendChild(label);
     const { style } = label;
@@ -50968,46 +50965,102 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
 /* harmony import */ var _ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui */ "./test/ui.ts");
+var __classPrivateFieldSet = (undefined && undefined.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (undefined && undefined.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _App_viewer, _App_ids, _App_ui;
 
 
-(async () => {
-    const viewer = new _src_index__WEBPACK_IMPORTED_MODULE_0__.WSViewer({
-        root: document.body,
-        colors: [
-            { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_0, r: 0.8, g: 0.9, b: 1 },
-            { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1, r: 1, g: 1, b: 1 },
-            { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_2, r: 1, g: 1, b: 0 }
-        ]
-    });
-    const ui = new _ui__WEBPACK_IMPORTED_MODULE_1__.UI({
-        root: document.body
-    });
-    await viewer.load('./models/demo.wsmdl');
-    const response = await fetch('./models/demo.json');
-    if (response.ok === false) {
-        throw new Error('ID file not found.');
+const colorToColor = {
+    Default: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_0,
+    Branco_Real: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_2,
+    Branco_Lusitania: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_3,
+    Rosal_Real: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_4,
+    Rosal_Dunas: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_5
+};
+class App {
+    constructor() {
+        _App_viewer.set(this, void 0);
+        _App_ids.set(this, void 0);
+        _App_ui.set(this, void 0);
+        __classPrivateFieldSet(this, _App_viewer, new _src_index__WEBPACK_IMPORTED_MODULE_0__.WSViewer({
+            root: document.body,
+            colors: [
+                { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_0, r: 0.8, g: 0.8, b: 0.8 },
+                { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1, r: 1, g: 1, b: 1 },
+                { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_2, r: 0, g: 0, b: 1 },
+                { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_3, r: 1, g: 0, b: 1 },
+                { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_4, r: 1, g: 0, b: 0 },
+                { target: _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_5, r: 0, g: 1, b: 0 }
+            ]
+        }), "f");
+        __classPrivateFieldSet(this, _App_ui, new _ui__WEBPACK_IMPORTED_MODULE_1__.UI({
+            root: document.body
+        }), "f");
+        __classPrivateFieldSet(this, _App_ids, new Map(), "f");
+        let selectedId = null;
+        window.addEventListener('click', e => {
+            const id = __classPrivateFieldGet(this, _App_viewer, "f").raycast(e.clientX, e.clientY);
+            if (selectedId !== null) {
+                const obj = __classPrivateFieldGet(this, _App_ids, "f").get(selectedId);
+                if (obj !== undefined) {
+                    __classPrivateFieldGet(this, _App_viewer, "f").setElementColor(obj.id, colorToColor[obj.color]);
+                }
+            }
+            if (id !== null) {
+                const obj = __classPrivateFieldGet(this, _App_ids, "f").get(id);
+                const color = obj?.color === 'Default' ? undefined : obj?.color ?? undefined;
+                __classPrivateFieldGet(this, _App_ui, "f").setLabelText(obj?.name, color);
+                selectedId = id;
+                __classPrivateFieldGet(this, _App_viewer, "f").setElementColor(id, _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1);
+            }
+            else {
+                __classPrivateFieldGet(this, _App_ui, "f").setLabelText();
+            }
+        });
     }
-    const ids = await response.json();
-    const idsMap = new Map();
-    ids.forEach(e => { idsMap.set(e.id, e.name); });
-    let selectedId = null;
-    window.addEventListener('click', e => {
-        const id = viewer.raycast(e.clientX, e.clientY);
-        if (selectedId !== null) {
-            viewer.setElementColor(selectedId, _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_0);
+    async load() {
+        await __classPrivateFieldGet(this, _App_viewer, "f").load('./models/demo.wsmdl');
+        let response = await fetch('./models/demo.json');
+        if (response.ok === false) {
+            throw new Error('ID file not found.');
         }
-        if (id !== null) {
-            const name = idsMap.get(id);
-            ui.setLabelText(name, 'first', 'ready');
-            selectedId = id;
-            viewer.setElementColor(id, _src_index__WEBPACK_IMPORTED_MODULE_0__.WSElementColor.COLOR_1);
+        const ids = await response.json();
+        ids.forEach(e => {
+            const obj = {
+                id: e.id,
+                name: e.name,
+                color: 'Default'
+            };
+            __classPrivateFieldGet(this, _App_ids, "f").set(e.id, obj);
+            __classPrivateFieldGet(this, _App_ids, "f").set(e.name, obj);
+        });
+        response = await fetch('./models/demo.csv');
+        if (response.ok === false) {
+            throw new Error('CSV file not found.');
         }
-        else {
-            ui.setLabelText();
+        const colorString = await response.text();
+        const colors = colorString.split(/[\s]+/).slice(1).map(e => e.split(','));
+        for (let i = 0; i < colors.length; i++) {
+            const obj = __classPrivateFieldGet(this, _App_ids, "f").get(colors[i][0]);
+            if (obj !== undefined) {
+                obj.color = colors[i][1];
+                __classPrivateFieldGet(this, _App_viewer, "f").setElementColor(obj.id, colorToColor[obj.color]);
+            }
         }
-    });
-    window.viewer = viewer;
-})();
+    }
+}
+_App_viewer = new WeakMap(), _App_ids = new WeakMap(), _App_ui = new WeakMap();
+const app = new App();
+app.load();
 
 })();
 

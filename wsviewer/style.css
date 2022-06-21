@@ -2,7 +2,7 @@
 
 :root {
 	--bg-dark: rgb(31, 44, 82);
-	--bg-light: rgb(84, 115, 156);
+	--bg-light: rgb(230, 230, 230);
 }
 
 html, body {
@@ -11,6 +11,6 @@ html, body {
 	margin: 0px;
 	width: 100%;
 	height: 100%;
-	background: radial-gradient(circle 50vh, var(--bg-light), var(--bg-dark));
+	background: var(--bg-light);
 	font-family: 'Roboto';
 }
