@@ -49,7 +49,6 @@ class Viewer {
         this.camera = new three__WEBPACK_IMPORTED_MODULE_0__.PerspectiveCamera(75, 1, 0.1, 10000);
         this.renderer = new three__WEBPACK_IMPORTED_MODULE_0__.WebGLRenderer({ antialias: true, alpha: true });
         this.controls = new three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__.OrbitControls(this.camera, document.body);
-        this.camera.position.set(0, 0, 10);
         this.renderer.domElement.style.width = '100%';
         this.renderer.domElement.style.height = '100%';
         this.renderer.setClearColor(new three__WEBPACK_IMPORTED_MODULE_0__.Color(0, 0, 0));
@@ -65,6 +64,11 @@ class Viewer {
             const aLight = new three__WEBPACK_IMPORTED_MODULE_0__.AmbientLight();
             aLight.intensity = 2;
             this.scene.add(aLight);
+            const bbox = new three__WEBPACK_IMPORTED_MODULE_0__.Box3().setFromObject(gltf.scene);
+            const center = new three__WEBPACK_IMPORTED_MODULE_0__.Vector3();
+            center.copy(bbox.min).add(bbox.max).divideScalar(2);
+            this.camera.position.set(center.x, center.y, center.z + 100);
+            this.controls.target.copy(center);
         });
     }
 }
