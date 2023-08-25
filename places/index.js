@@ -59331,7 +59331,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const model = window.location.href.split('?')[1] ?? '';
 const viewer = new _viewer__WEBPACK_IMPORTED_MODULE_0__.Viewer();
-viewer.load(`/models/${model}`);
+viewer.load(`./models/${model}`);
 
 })();
 
