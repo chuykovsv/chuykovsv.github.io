@@ -57,9 +57,10 @@ class Viewer {
         this.renderer.setClearAlpha(0);
         document.body.appendChild(this.renderer.domElement);
         document.body.style.cssText = 'position:absolute;margin:0;padding:0;width:100%;height:100%;touch-action:none;background:#e0f0ff;';
-        const envmap = new three_examples_jsm_loaders_RGBELoader__WEBPACK_IMPORTED_MODULE_2__.RGBELoader().load('./models/spree_bank_2k.hdr');
-        envmap.mapping = three__WEBPACK_IMPORTED_MODULE_0__.EquirectangularReflectionMapping;
-        this.scene.environment = envmap;
+        new three_examples_jsm_loaders_RGBELoader__WEBPACK_IMPORTED_MODULE_2__.RGBELoader().load('./models/spree_bank_2k.hdr', (envmap) => {
+            envmap.mapping = three__WEBPACK_IMPORTED_MODULE_0__.EquirectangularReflectionMapping;
+            this.scene.environment = envmap;
+        });
         requestAnimationFrame(__classPrivateFieldGet(this, _Viewer_draw, "f"));
     }
     async load(url) {
