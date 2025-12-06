@@ -1,56 +1,56 @@
-var H = Object.defineProperty;
-var g = (i) => {
+var g = Object.defineProperty;
+var S = (i) => {
   throw TypeError(i);
 };
-var v = (i, e, t) => e in i ? H(i, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : i[e] = t;
-var u = (i, e, t) => v(i, typeof e != "symbol" ? e + "" : e, t), A = (i, e, t) => e.has(i) || g("Cannot " + t);
-var n = (i, e, t) => (A(i, e, "read from private field"), t ? t.call(i) : e.get(i)), a = (i, e, t) => e.has(i) ? g("Cannot add the same private member more than once") : e instanceof WeakSet ? e.add(i) : e.set(i, t), c = (i, e, t, o) => (A(i, e, "write to private field"), o ? o.call(i, t) : e.set(i, t), t), f = (i, e, t) => (A(i, e, "access private method"), t);
-var s = /* @__PURE__ */ ((i) => (i[i.EMPTY = 0] = "EMPTY", i[i.FLAT = 1] = "FLAT", i[i.SHARP = 2] = "SHARP", i[i.NATURAL = 3] = "NATURAL", i))(s || {});
-const x = new Map([
-  { midi: 57, line: -8, key: s.EMPTY },
-  { midi: 58, line: -8, key: s.SHARP },
-  { midi: 59, line: -7, key: s.EMPTY },
-  { midi: 60, line: -6, key: s.EMPTY },
-  { midi: 61, line: -6, key: s.SHARP },
-  { midi: 62, line: -5, key: s.EMPTY },
-  { midi: 63, line: -5, key: s.SHARP },
-  { midi: 64, line: -4, key: s.EMPTY },
-  { midi: 65, line: -3, key: s.EMPTY },
-  { midi: 66, line: -3, key: s.SHARP },
-  { midi: 67, line: -2, key: s.EMPTY },
-  { midi: 68, line: -2, key: s.SHARP },
-  { midi: 69, line: -1, key: s.EMPTY },
-  { midi: 70, line: -1, key: s.SHARP },
-  { midi: 71, line: 0, key: s.EMPTY },
-  { midi: 72, line: 1, key: s.EMPTY },
-  { midi: 73, line: 1, key: s.SHARP },
-  { midi: 74, line: 2, key: s.EMPTY },
-  { midi: 75, line: 2, key: s.SHARP },
-  { midi: 76, line: 3, key: s.EMPTY },
-  { midi: 77, line: 4, key: s.EMPTY },
-  { midi: 78, line: 4, key: s.SHARP },
-  { midi: 79, line: 5, key: s.EMPTY },
-  { midi: 80, line: 5, key: s.SHARP },
-  { midi: 81, line: 6, key: s.EMPTY },
-  { midi: 82, line: 6, key: s.SHARP },
-  { midi: 83, line: 7, key: s.EMPTY },
-  { midi: 84, line: 8, key: s.EMPTY },
-  { midi: 85, line: 8, key: s.SHARP }
+var H = (i, t, e) => t in i ? g(i, t, { enumerable: !0, configurable: !0, writable: !0, value: e }) : i[t] = e;
+var u = (i, t, e) => H(i, typeof t != "symbol" ? t + "" : t, e), x = (i, t, e) => t.has(i) || S("Cannot " + e);
+var s = (i, t, e) => (x(i, t, "read from private field"), e ? e.call(i) : t.get(i)), r = (i, t, e) => t.has(i) ? S("Cannot add the same private member more than once") : t instanceof WeakSet ? t.add(i) : t.set(i, e), m = (i, t, e, o) => (x(i, t, "write to private field"), o ? o.call(i, e) : t.set(i, e), e), A = (i, t, e) => (x(i, t, "access private method"), e);
+var n = /* @__PURE__ */ ((i) => (i[i.EMPTY = 0] = "EMPTY", i[i.FLAT = 1] = "FLAT", i[i.SHARP = 2] = "SHARP", i[i.NATURAL = 3] = "NATURAL", i))(n || {});
+const v = new Map([
+  { midi: 57, line: -8, key: n.EMPTY },
+  { midi: 58, line: -8, key: n.SHARP },
+  { midi: 59, line: -7, key: n.EMPTY },
+  { midi: 60, line: -6, key: n.EMPTY },
+  { midi: 61, line: -6, key: n.SHARP },
+  { midi: 62, line: -5, key: n.EMPTY },
+  { midi: 63, line: -5, key: n.SHARP },
+  { midi: 64, line: -4, key: n.EMPTY },
+  { midi: 65, line: -3, key: n.EMPTY },
+  { midi: 66, line: -3, key: n.SHARP },
+  { midi: 67, line: -2, key: n.EMPTY },
+  { midi: 68, line: -2, key: n.SHARP },
+  { midi: 69, line: -1, key: n.EMPTY },
+  { midi: 70, line: -1, key: n.SHARP },
+  { midi: 71, line: 0, key: n.EMPTY },
+  { midi: 72, line: 1, key: n.EMPTY },
+  { midi: 73, line: 1, key: n.SHARP },
+  { midi: 74, line: 2, key: n.EMPTY },
+  { midi: 75, line: 2, key: n.SHARP },
+  { midi: 76, line: 3, key: n.EMPTY },
+  { midi: 77, line: 4, key: n.EMPTY },
+  { midi: 78, line: 4, key: n.SHARP },
+  { midi: 79, line: 5, key: n.EMPTY },
+  { midi: 80, line: 5, key: n.SHARP },
+  { midi: 81, line: 6, key: n.EMPTY },
+  { midi: 82, line: 6, key: n.SHARP },
+  { midi: 83, line: 7, key: n.EMPTY },
+  { midi: 84, line: 8, key: n.EMPTY },
+  { midi: 85, line: 8, key: n.SHARP }
 ].map((i) => [i.midi, i]));
-var M;
+var w;
 class L {
   constructor() {
-    a(this, M, x);
+    r(this, w, v);
   }
-  midiToNoteView(e) {
-    return n(this, M).get(e) ?? { midi: e, line: -100, key: s.EMPTY };
+  midiToNoteView(t) {
+    return s(this, w).get(t) ?? { midi: t, line: -100, key: n.EMPTY };
   }
 }
-M = new WeakMap();
+w = new WeakMap();
 class N {
-  constructor(e) {
+  constructor(t) {
     u(this, "ctx");
-    this.ctx = e;
+    this.ctx = t;
   }
   start() {
     throw new Error("Needs implement start method");
@@ -59,96 +59,96 @@ class N {
     throw new Error("Needs implement stop method");
   }
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  step(e, t) {
+  step(t, e) {
     throw new Error("Needs implement step method");
   }
 }
 const b = [
   [-0.4, 0.1],
   [-0.3, 0.1],
-  [-0.2, 0.9],
-  [-0.1, 0.9],
-  [-0, 0.9],
-  [0.1, 0.9],
-  [0.2, 0.9],
+  [-0.2, 1.1],
+  [-0.1, 1.1],
+  [-0, 1.1],
+  [0.1, 1.1],
+  [0.2, 1.1],
   [0.3, 0.1],
   [0.4, 0.1]
 ];
-var p, h, m, k, Y;
-class R extends N {
+var p, h, T, P, R;
+class Y extends N {
   constructor() {
     super(...arguments);
-    a(this, k);
-    a(this, p, new L());
-    a(this, h, 0);
-    a(this, m, 0);
+    r(this, P);
+    r(this, p, new L());
+    r(this, h, 0);
+    r(this, T, 0);
   }
   start() {
-    f(this, k, Y).call(this);
+    A(this, P, R).call(this);
   }
   stop() {
   }
-  step(t, o) {
-    c(this, h, t), o !== 0 ? c(this, h, t) : (c(this, m, Math.floor(Math.random() * 28) + 57), c(this, h, -100)), f(this, k, Y).call(this);
+  step(e, o) {
+    m(this, h, e), o !== 0 ? m(this, h, e) : (m(this, T, Math.floor(Math.random() * 28) + 57), m(this, h, -100)), A(this, P, R).call(this);
   }
 }
-p = new WeakMap(), h = new WeakMap(), m = new WeakMap(), k = new WeakSet(), Y = function() {
-  const t = this.ctx, o = t.canvas.width, d = t.canvas.height;
-  t.setTransform(1, 0, 0, 1, 0, 0), t.clearRect(0, 0, o, d), t.lineWidth = 2e-3, t.strokeStyle = "#000000", t.setTransform(d * 0.5, 0, 0, -d * 0.5, o * 0.5, d * 0.5), t.beginPath();
+p = new WeakMap(), h = new WeakMap(), T = new WeakMap(), P = new WeakSet(), R = function() {
+  const e = this.ctx, o = e.canvas.width, a = e.canvas.height;
+  e.setTransform(1, 0, 0, 1, 0, 0), e.clearRect(0, 0, o, a), e.lineWidth = 2e-3, e.strokeStyle = "#000000", e.setTransform(a * 0.5, 0, 0, -a * 0.5, o * 0.5, a * 0.5), e.beginPath();
   for (const E of b)
-    t.moveTo(-E[1], E[0]), t.lineTo(E[1], E[0]);
-  t.stroke();
-  const P = n(this, p).midiToNoteView(n(this, h)), S = n(this, p).midiToNoteView(n(this, m));
-  t.strokeStyle = "#0000ff", t.beginPath(), t.ellipse(0, S.line * 0.05, 0.04, 0.04, 0, 0, Math.PI * 2), t.stroke(), t.fillStyle = n(this, h) === n(this, m) ? "#008000" : "#800000", t.beginPath(), t.ellipse(0, P.line * 0.05, 0.03, 0.03, 0, 0, Math.PI * 2), t.fill();
-}, u(R, "name", "staff");
-var r, y, l, T, w;
+    e.moveTo(-E[1], E[0]), e.lineTo(E[1], E[0]);
+  e.stroke(), e.setTransform(a * 0.5, 0, 0, a * 0.5, o * 0.5, a * 0.5), e.fillStyle = "black", e.font = "0.6px serif", e.fillText("𝄞", -1.1, 0.195);
+  const c = s(this, p).midiToNoteView(s(this, h)), M = s(this, p).midiToNoteView(s(this, T));
+  e.fillStyle = "#0000ff", e.font = "0.12px serif", e.fillText(`${M.key === n.EMPTY ? "" : "♯"}`, -0.1, -M.line * 0.05 + 0.03), e.font = "0.3px serif", e.fillText("𝅝", -0.05, -M.line * 0.05 + 0.03), e.fillStyle = s(this, h) === s(this, T) ? "#008000" : "#800000", e.font = "0.12px serif", e.fillText(`${c.key === n.EMPTY ? "" : "♯"}`, 0.15, -c.line * 0.05 + 0.03), e.font = "0.3px serif", e.fillText("𝅝", 0.2, -c.line * 0.05 + 0.03);
+}, u(Y, "name", "staff");
+var l, y, d, f, k;
 class I {
   constructor() {
-    a(this, r);
-    a(this, y, /* @__PURE__ */ new Map());
-    a(this, l, null);
-    a(this, T, () => {
-      const e = window.devicePixelRatio, t = Math.round(window.innerWidth * e), o = Math.round(window.innerHeight * e);
-      n(this, r).canvas.width = t, n(this, r).canvas.height = o;
+    r(this, l);
+    r(this, y, /* @__PURE__ */ new Map());
+    r(this, d, null);
+    r(this, f, () => {
+      const t = window.devicePixelRatio, e = Math.round(window.innerWidth * t), o = Math.round(window.innerHeight * t);
+      s(this, l).canvas.width = e, s(this, l).canvas.height = o;
     });
-    a(this, w, (e) => {
-      const t = e.data ? e.data[0] ?? 0 : 0, o = e.data ? e.data[1] ?? 0 : 0, d = e.data ? e.data[2] ?? 0 : 0;
-      switch (t & 240) {
+    r(this, k, (t) => {
+      const e = t.data ? t.data[0] ?? 0 : 0, o = t.data ? t.data[1] ?? 0 : 0, a = t.data ? t.data[2] ?? 0 : 0;
+      switch (e & 240) {
         case 144:
-          n(this, l)?.step(o, d);
+          s(this, d)?.step(o, a);
           break;
         case 128:
-          n(this, l)?.step(o, 0);
+          s(this, d)?.step(o, 0);
           break;
       }
     });
-    const e = document.createElement("canvas"), t = e.getContext("2d");
-    if (t === null)
+    const t = document.createElement("canvas"), e = t.getContext("2d");
+    if (e === null)
       throw new Error("ctx");
-    document.body.style.overflow = "hidden", e.style.cssText = "position:absolute;width:100%;height:100%;top:0px;right:0px;", e.oncontextmenu = () => !1, document.body.appendChild(e), window.addEventListener("resize", n(this, T)), navigator.requestMIDIAccess({
+    document.body.style.overflow = "hidden", t.style.cssText = "position:absolute;width:100%;height:100%;top:0px;right:0px;", t.oncontextmenu = () => !1, document.body.appendChild(t), window.addEventListener("resize", s(this, f)), navigator.requestMIDIAccess({
       sysex: !0,
       software: !0
     }).then((o) => {
-      o.inputs.forEach((d) => {
-        d.addEventListener("midimessage", n(this, w));
-      }), o.addEventListener("statechange", (d) => {
-        const P = d.port;
-        P instanceof MIDIInput && P?.state === "connected" && P.addEventListener("midimessage", n(this, w));
+      o.inputs.forEach((a) => {
+        a.addEventListener("midimessage", s(this, k));
+      }), o.addEventListener("statechange", (a) => {
+        const c = a.port;
+        c instanceof MIDIInput && c?.state === "connected" && c.addEventListener("midimessage", s(this, k));
       });
-    }), c(this, r, t), n(this, T).call(this);
+    }), m(this, l, e), s(this, f).call(this);
   }
-  regLesson(e) {
-    n(this, y).set(e.name, new e(n(this, r)));
+  regLesson(t) {
+    s(this, y).set(t.name, new t(s(this, l)));
   }
-  startLesson(e) {
-    n(this, l) && n(this, l).stop(), n(this, r).clearRect(0, 0, n(this, r).canvas.width, n(this, r).canvas.height), c(this, l, n(this, y).get(e) ?? null), n(this, l)?.start();
+  startLesson(t) {
+    s(this, d) && s(this, d).stop(), s(this, l).clearRect(0, 0, s(this, l).canvas.width, s(this, l).canvas.height), m(this, d, s(this, y).get(t) ?? null), s(this, d)?.start();
   }
 }
-r = new WeakMap(), y = new WeakMap(), l = new WeakMap(), T = new WeakMap(), w = new WeakMap();
+l = new WeakMap(), y = new WeakMap(), d = new WeakMap(), f = new WeakMap(), k = new WeakMap();
 try {
   const i = new I();
-  i.regLesson(R), i.startLesson(R.name);
+  i.regLesson(Y), i.startLesson(Y.name);
 } catch (i) {
-  const e = document.createElement("div");
-  e.innerText = `${i}`, e.style.color = "red", document.body.appendChild(e);
+  const t = document.createElement("div");
+  t.innerText = `${i}`, t.style.color = "red", document.body.appendChild(t);
 }
